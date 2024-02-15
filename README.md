@@ -1,5 +1,5 @@
 # TheOffchainResolver.sol
-The Universal Offchain (ENS+DNS) Resolver
+A trustless universal offchain (ENS+DNS) resolver contract and protocol.
 
 *Under construction: currently only the DNS functionality is deployed.*
 
@@ -26,4 +26,4 @@ Example: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/`
 * *"I have a DNS name"* → `TXT` = `ENS1 0xa4407E257Aa158C737292ac95317a29b4C90729D ${CONTEXT}`
 * *"I have an ENS name"* → [PublicResolver](https://etherscan.io/address/resolver.ens.eth)`.setText("ccip.context", CONTEXT)`
 
-That's it! 🎉️ 
+That's it! 🎉️
