@@ -12,7 +12,7 @@ import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils
 
 error OffchainLookup(address sender, string[] urls, bytes callData, bytes4 callbackFunction, bytes extraData);
 
-contract TheOffchainResolverMini is IERC165, IExtendedDNSResolver {
+contract TheOffchainDNSResolver is IERC165, IExtendedDNSResolver {
 	using BytesUtils for bytes;
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
