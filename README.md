@@ -8,7 +8,7 @@
 		* [`sepolia:0x179Be112b24Ad4cFC392eF8924DfA08C20Ad8583`](https://sepolia.etherscan.io/address/0xedb18cd8d9d6af54c4ac1fbdbf2e098f413c3fe9#code)
 	* [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
 		* ⚠️ not yet deployed on Mainnet
-		* [`goerli:0x0AfA0F88dFd9beA00d110f04c562b97e68CC5111`](https://goerli.etherscan.io/address/0x0AfA0F88dFd9beA00d110f04c562b97e68CC5111#code)
+		* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
 * Protocol
 	* Implementation: [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js)
 	* [Signing Logic](https://github.com/adraffy/ezccip.js/blob/4f05546110185e8016708ad65db8b96e259f8148/src/index.js#L40)

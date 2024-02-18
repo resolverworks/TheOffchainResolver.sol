@@ -34,13 +34,6 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 			|| x == type(IMulticallable).interfaceId;
 	}
 
-	constructor() {
-		setTiny(
-			uint256(keccak256(abi.encodeCall(ITextResolver.text, (0x16a1b5518247c7f4ca69fa9ff6eb3bec6dc84d9c5ae739a29d236bca9262ad17, "ccip.context")))), 
-			bytes("0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://home.antistupid.com/ezccip/")
-		);
-	}
-
 	// utils
 	function requireOperator(bytes32 node) internal view {
 		address owner = ENS(ENS_REGISTRY).owner(node);
