@@ -218,7 +218,7 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 	// [00000001_XX000000000000000000000000000000000000000000000000000000] // 1 byte (1 slot)
 	// [0000001C_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] // 28 bytes (1 slot
 	// [0000001D_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX][XX000000...] // 29 bytes (2 slots)
-	function tinySlots(uint256 size) public pure returns (uint256) {
+	function tinySlots(uint256 size) internal pure returns (uint256) {
 		unchecked {
 			return size > 0 ? (size + 35) >> 5 : 0;
 		}
