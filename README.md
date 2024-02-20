@@ -23,11 +23,6 @@
 	* `bytes signature` = **signature** of `signedHash` with private key
 	* `bytes data` = **abi.encoded** `(signature, expires, hash)`
 	* reply with `data`
-* Examples
-	* **DNS**: [`ezccip.raffy.xyz`](https://adraffy.github.io/ens-normalize.js/test/resolver.html#ezccip.raffy.xyz)
-		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/dns`
-	* **ENS**: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli&debug=%7B%22records%22%3A%5B%22ccip.context%22%5D%7D#ezccip.eth)
-		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/ens-goerli`
 
 ## Context Format
 
@@ -41,9 +36,13 @@
 
 * *"I have a DNS name"*
 	* **DNS TXT** = `ENS1 ${address of TheOffchainDNSResolver} ${CONTEXT}`
-		* For full wildcard coverage, set for `@` (basename) and `*` (descendents)
+		* Example: [`ezccip.raffy.xyz`](https://adraffy.github.io/ens-normalize.js/test/resolver.html#ezccip.raffy.xyz)
+		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/dns`
+		* For full wildcard coverage, set `@` (basename) and `*` (descendents)
 * *"I have an ENS name"*
 	* **ENS.setResolver()** = `address of TheOffchainENSResolver`
 	* **setText("ccip.context")** = `CONTEXT`
+		* Example: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli&debug=%7B%22records%22%3A%5B%22ccip.context%22%5D%7D#ezccip.eth)
+		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/ens-goerli`
 
-That's it! 🎉️
+#### That's it! 🎉️
