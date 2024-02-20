@@ -10,7 +10,7 @@
 		* ⚠️ not yet deployed on Mainnet
 		* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
 * Protocol
-	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Implementation](https://github.com/adraffy/ezccip.js/blob/4f05546110185e8016708ad65db8b96e259f8148/src/index.js#L40)
+	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Implementation](https://github.com/resolverworks/ezccip.js/blob/main/test/server.js)
 	* `bytes requestData` = calldata from CCIP-Read
 	* `bytes responseData` = the answer to that request
 	* `bytes32 requestHash` = **keccak256** of `requestData`
