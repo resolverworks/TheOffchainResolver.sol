@@ -9,6 +9,7 @@
 	* [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
 		* ⚠️ not yet deployed on Mainnet
 		* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
+		* [`sepolia:0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36](https://sepolia.etherscan.io/address/0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36#code)
 * Protocol
 	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Implementation](https://github.com/resolverworks/ezccip.js/blob/main/test/server.js)
 	* `bytes requestData` = calldata from CCIP-Read
