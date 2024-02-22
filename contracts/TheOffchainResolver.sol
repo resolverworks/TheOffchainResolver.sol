@@ -6,6 +6,7 @@ import {ECDSA} from "@openzeppelin/contracts@4.8.2/utils/cryptography/ECDSA.sol"
 import {IERC165} from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import {ENS} from "@ensdomains/ens-contracts/contracts/registry/ENS.sol";
 import {IExtendedResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IExtendedResolver.sol";
+import {IExtendedDNSResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IExtendedDNSResolver.sol";
 import {IAddrResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IAddrResolver.sol";
 import {IAddressResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IAddressResolver.sol";
 import {ITextResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/ITextResolver.sol";
@@ -17,9 +18,15 @@ import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
 
 error OffchainLookup(address from, string[] urls, bytes request, bytes4 callback, bytes carry);
 
-contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, IExtendedResolver, IMulticallable {
+contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, IMulticallable, IExtendedResolver, IExtendedDNSResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
+
+	error Unauthorized();   // not operator of node
+	error InvalidContext(); // context too short or invalid signer
+	error Baseless();       // could not find self in registry
+	error Expired();        // ccip response is stale
+	error Untrusted();      // ccip response doesn't match signer
 
 	address constant ENS_REGISTRY = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
  
@@ -30,54 +37,62 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 			|| x == type(IAddressResolver).interfaceId
 			|| x == type(IPubkeyResolver).interfaceId
 			|| x == type(IContentHashResolver).interfaceId
-			|| x == type(IExtendedResolver).interfaceId
 			|| x == type(IMulticallable).interfaceId
+			|| x == type(IExtendedResolver).interfaceId
+			|| x == type(IExtendedDNSResolver).interfaceId
 			|| x == 0x73302a25;
 	}
 
 	// utils
-	function requireOperator(bytes32 node) internal view {
+	modifier requireOperator(bytes32 node) {
 		address owner = ENS(ENS_REGISTRY).owner(node);
-		require(owner == msg.sender || ENS(ENS_REGISTRY).isApprovedForAll(owner, msg.sender), "approval");
+		if (owner != msg.sender && !ENS(ENS_REGISTRY).isApprovedForAll(owner, msg.sender)) revert Unauthorized();
+		_;
 	}
 	function slotForCoin(bytes32 node, uint256 cty) internal pure returns (uint256) {
 		return uint256(keccak256(abi.encodeWithSelector(IAddressResolver.addr.selector, node, cty)));
 	}
+	function slotForText(bytes32 node, string memory key) internal pure returns (uint256) {
+		return uint256(keccak256(abi.encodeCall(ITextResolver.text, (node, key))));
+	}
+	function slotForOnchain(bytes32 node) internal pure returns (uint256) {
+		return uint256(keccak256(abi.encodeCall(this.toggleOnchainOnly, (node))));
+	}
 
 	// getters
 	function addr(bytes32 node) external view returns (address payable) {
-		(, bytes memory v) = getTiny(slotForCoin(node, 60));
+		bytes memory v = getTiny(slotForCoin(node, 60));
 		return payable(v.length == 20 ? address(bytes20(v)) : address(0));
 	}
-	function addr(bytes32, uint256) external view returns (bytes memory) { 
-		return getTinyFromCall(); 
+	function addr(bytes32 node, uint256 ct) external view returns (bytes memory) { 
+		return getTiny(slotForCoin(node, ct)); 
 	}
-	function text(bytes32, string calldata) external view returns (string memory) { 
-		return string(getTinyFromCall());	
+	function text(bytes32 node, string calldata key) external view returns (string memory) { 
+		return string(getTiny(slotForText(node, key)));	
 	}
-	function contenthash(bytes32) external view returns (bytes memory) { 
-		return getTinyFromCall(); 
+	function contenthash(bytes32 node) external view returns (bytes memory) { 
+		return getTiny(uint256(keccak256(abi.encodeCall(IContentHashResolver.contenthash, (node)))));
 	}
-	function pubkey(bytes32) external view returns (bytes32 x, bytes32 y) { 
-		return abi.decode(getTinyFromCall(), (bytes32, bytes32)); 
+	function pubkey(bytes32 node) external view returns (bytes32 x, bytes32 y) { 
+		return abi.decode(getTiny(uint256(keccak256(abi.encodeCall(IPubkeyResolver.pubkey, (node))))), (bytes32, bytes32)); 
 	}
 	
 	// TOR helpers
-	uint256 constant MIN_CONTEXT = 43;
+	uint256 constant MIN_CONTEXT = 51;
 	function ccipContext(bytes32 node) public view returns (string[] memory urls, address signer, bool valid) {
 		// {SIGNER} {ENDPOINT}
 		// "0x51050ec063d393217B436747617aD1C2285Aeeee " = 43 bytes (2 + 40 + 1)
-		(, bytes memory v) = getTiny(uint256(keccak256(abi.encodeCall(ITextResolver.text, (node, "ccip.context")))));
-		if (v.length > MIN_CONTEXT) { // TODO: decide to revert
-			(signer, valid) = v.hexToAddress(2, 42); // unchecked 0x-prefix
-			assembly {
-				let size := mload(v)
-				v := add(v, MIN_CONTEXT) // drop address
-				mstore(v, sub(size, MIN_CONTEXT))
-			}
-			urls = new string[](1); // TODO: support multiple URLs
-			urls[0] = string(v);
+		bytes memory v = getTiny(slotForText(node, "ccip.context"));
+		if (v.length < MIN_CONTEXT) revert InvalidContext();
+		(signer, valid) = v.hexToAddress(2, 42); // unchecked 0x-prefix
+		if (!valid) revert InvalidContext();
+		assembly {
+			let size := mload(v)
+			v := add(v, 43) // drop address
+			mstore(v, sub(size, 43))
 		}
+		urls = new string[](1); // TODO: support multiple URLs
+		urls[0] = string(v);
 	}
 	function findBasename(bytes memory name) public view returns (bytes32 node, uint256 offset) {
 		unchecked {
@@ -85,47 +100,65 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 				node = name.namehash(offset);
 				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
 				uint256 size = uint256(uint8(name[offset]));
-				require(size > 0, "base");
+				if(size == 0) revert Baseless();
 				offset += 1 + size;
 			}
 		}
 	}
+	function verify(bytes calldata ccip, bytes calldata carry) internal view returns (bytes memory, bytes memory) {
+		(bytes memory sig, uint64 expires, bytes memory response) = abi.decode(ccip, (bytes, uint64, bytes));
+		if (expires < block.timestamp) revert Expired();
+		(bytes memory request, address signer) = abi.decode(carry, (bytes, address));
+		bytes32 hash = keccak256(abi.encodePacked(address(this), expires, keccak256(request), keccak256(response)));
+		address signed = ECDSA.recover(hash, sig);
+		if (signed != signer) revert Untrusted();
+		return (request, response);
+	}
 
-	// wildcard support
+	// IExtendedDNSResolver
+	function resolve(bytes calldata name, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
+		if (bytes(context).length < MIN_CONTEXT) revert InvalidContext();
+		address signer = address(bytes20(parseHex(bytes(context)[2:42])));
+		string memory endpoint = string(context[43:]);
+		string[] memory urls = new string[](1);
+		urls[0] = endpoint;
+		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
+		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer), address(this)));
+	}
+	function buggedCallback(bytes calldata response, bytes calldata buggedExtraData) external view returns (bytes memory) {
+		return verify(response, abi.decode(buggedExtraData, (bytes)));
+	}
+
+	// IExtendedResolver
 	function resolve(bytes calldata name, bytes calldata data) external view returns (bytes memory result) {
 		unchecked {
-			(bool empty, bytes memory v) = getTiny(uint256(keccak256(data)));
-			if (v.length > 0 || empty) return abi.encode(v);
-			(bytes32 node, ) = findBasename(name);
+			bytes memory v = getTiny(uint256(keccak256(data)));
+			if (v.length > 0) return abi.encode(v);
+			bytes32 node = name.namehash(0);
+			if (getTiny(slotForOnchain(node)).length > 0) {
+				return address(this).staticcall(data);
+			}
 			if (bytes4(data) == IMulticallable.multicall.selector) {
 				bytes[] memory a = abi.decode(data[4:], (bytes[]));
 				bytes[] memory b = new bytes[](a.length);
 				bool off;
 				for (uint256 i = 0; i < a.length; i += 1) {
-					(empty, v) = getTiny(uint256(keccak256(a[i])));
-					if (v.length == 0 && !empty) {
+					v = getTiny(uint256(keccak256(a[i])));
+					if (v.length == 0) {
 						off = true;
 						break;
 					}
 					b[i] = abi.encode(v);
 				}
 				if (!off) return abi.encode(b);
-			}
-			(string[] memory urls, address signer, ) = ccipContext(node);
+			}  
+			(bytes32 basenode, ) = findBasename(name); // throws
+			(string[] memory urls, address signer) = ccipContext(basenode); // throws
 			bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
-			revert OffchainLookup(address(this), urls, request, this.resolveCallback.selector, abi.encode(request, signer));
+			revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer));
 		}
 	}
-	function verify(bytes calldata ccip, bytes calldata carry) internal view returns (bytes memory, bytes memory) {
-		(bytes memory sig, uint64 expires, bytes memory response) = abi.decode(ccip, (bytes, uint64, bytes));
-		require(expires > block.timestamp, "expired");
-		(bytes memory request, address signer) = abi.decode(carry, (bytes, address));
-		bytes32 hash = keccak256(abi.encodePacked(address(this), expires, keccak256(request), keccak256(response)));
-		address signed = ECDSA.recover(hash, sig);
-		require(signed == signer, "untrusted");
-		return (request, response);
-	}
-	function resolveCallback(bytes calldata ccip, bytes calldata carry) external view returns (bytes memory) {
+	function ensCallback(bytes calldata ccip, bytes calldata carry) external view returns (bytes memory) {
 		unchecked {
 			(bytes memory request, bytes memory response) = verify(ccip, carry);
 			assembly {
@@ -142,8 +175,8 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 				bytes[] memory b = abi.decode(response, (bytes[]));
 				require(a.length == b.length, "diff");
 				for (uint256 i = 0; i < a.length; i += 1) {
-					(bool empty, bytes memory v) = getTiny(uint256(keccak256(a[i])));
-					if (v.length > 0 || empty) b[i] = abi.encode(v);
+					bytes memory v = getTiny(uint256(keccak256(a[i])));
+					if (v.length > 0) b[i] = abi.encode(v); // replace off-chain values with on-chain if they exist
 				}
 				response = abi.encode(b);
 			}
@@ -162,7 +195,7 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 	function _multicall(bytes32 node, bytes[] calldata calls) internal returns (bytes[] memory answers) {
 		unchecked {
 			answers = new bytes[](calls.length);
-			for (uint256 i = 0; i < calls.length; i += 1) {       
+			for (uint256 i = 0; i < calls.length; i += 1) {
 				require(node == 0 || bytes32(calls[i][4:36]) == node, "node");
 				(bool ok, bytes memory v) = address(this).delegatecall(calls[i]);
 				require(ok);
@@ -172,42 +205,34 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 	}
 
 	// setters
-	function setText(bytes32 node, string calldata key, string calldata s) external {
-		requireOperator(node);
-		setTiny(uint256(keccak256(abi.encodeWithSelector(this.text.selector, node, key))), bytes(s));
-		emit TextChanged(node, key, key, s);
-	}
-	function setAddr(bytes32 node, uint256 cty, bytes calldata v) external {
-		requireOperator(node);
-		setTiny(slotForCoin(node, cty), v);
-		emit AddressChanged(node, cty, v);
-	}
 	// function setAddr(bytes32 node, address a) external {
 	//     requireOperator(node);
 	//     setTiny(slotForCoin(node, 60), a == address(0) ? bytes('') : abi.encodePacked(a));
 	// }
-	function setContenthash(bytes32 node, bytes calldata v) external {
-		requireOperator(node);
-		setTiny(uint256(keccak256(abi.encodeCall(this.contenthash, (node)))), v);
+	function setAddr(bytes32 node, uint256 cty, bytes calldata v) requireOperator(node) external {
+		setTiny(slotForCoin(node, cty), v);
+		emit AddressChanged(node, cty, v);
+	}
+	function setText(bytes32 node, string calldata key, string calldata s) requireOperator(node) external {
+		setTiny(slotForText(node, key), bytes(s));
+		emit TextChanged(node, key, key, s);
+	}
+	function setContenthash(bytes32 node, bytes calldata v) requireOperator(node) external {
+		setTiny(uint256(keccak256(abi.encodeCall(IContentHashResolver.contenthash, (node)))), v);
 		emit ContenthashChanged(node, v);
 	}
-	function setPubkey(bytes32 node, bytes32 x, bytes32 y) external {
-		requireOperator(node);
-		setTiny(uint256(keccak256(abi.encodeCall(this.pubkey, (node)))), abi.encode(x, y));
+	function setPubkey(bytes32 node, bytes32 x, bytes32 y) requireOperator(node)  external {
+		setTiny(uint256(keccak256(abi.encodeCall(IPubkeyResolver.pubkey, (node)))), abi.encode(x, y));
 		emit PubkeyChanged(node, x, y);
 	}
 
-	// on-chain null
-	function toggleNull(bytes calldata request) external {
-		require(request.length >= 36, "bad"); // bytes4(selector) + bytes32(node) + ...
-		requireOperator(bytes32(request[4:36]));
-		uint256 slot = uint256(keccak256(request));
-		(bool empty, bytes memory v) = getTiny(slot);
-		require(v.length == 0, "!null");
-		assembly { sstore(slot, not(empty)) }
+	// on-chain
+	function toggleOnchain(bytes32 node) requireOperator(node) external {
+		uint256 slot = slotForOnchain(node);
+		assembly { sstore(slot, xor(sload(slot), 0x0000000100000000000000000000000000000000000000000000000000000000))) }
 	}
-	function isNull(bytes calldata request) view external returns (bool empty) {
-		(empty, ) = getTiny(uint256(keccak256(request)));
+	function isOnchain(bytes32 node) external view returns (bool) {
+		return getTiny(slotForOnchain(node)).length > 0;
 	}
 
 	// ************************************************************
@@ -221,7 +246,7 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 	// [0000001D_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX][XX000000...] // 29 bytes (2 slots)
 	function tinySlots(uint256 size) internal pure returns (uint256) {
 		unchecked {
-			return size > 0 ? (size + 35) >> 5 : 0;
+			return size > 0 ? (size + 35) >> 5 : 0; // ceil((4 + size) / 32)
 		}
 	}
 	function setTiny(uint256 slot, bytes memory v) internal {
@@ -249,7 +274,7 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 			}
 		}
 	}
-	function getTiny(uint256 slot) internal view returns (bool empty, bytes memory v) {
+	function getTiny(uint256 slot) internal view returns (bytes memory v) {
 		unchecked {
 			uint256 head;
 			assembly { head := sload(slot) }
@@ -267,21 +292,8 @@ contract TheOffchainENSResolver is IERC165, ITextResolver, IAddrResolver, IAddre
 						i := add(i, 1)
 					}
 				}
-			} else {
-				empty = head > 0;
 			}
 		}
-	}
-	function getTinyFromCall() internal view returns (bytes memory) {
-		uint256 slot;
-		assembly {
-			let p := mload(0x40)
-			let n := calldatasize()
-			calldatacopy(p, 0, n)
-			slot := keccak256(p, n)
-		}
-		(, bytes memory v) = getTiny(slot);
-		return v;
 	}
 	
 }

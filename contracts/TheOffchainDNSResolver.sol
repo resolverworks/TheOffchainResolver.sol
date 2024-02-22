@@ -18,7 +18,7 @@ contract TheOffchainDNSResolver is IERC165, IExtendedDNSResolver {
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId
 			|| x == type(IExtendedDNSResolver).interfaceId
-			|| x == 0xb3fb17f9; 
+			|| x == 0x73302a25; 
 	}
 
 	function resolve(bytes calldata name, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
