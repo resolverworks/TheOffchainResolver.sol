@@ -68,8 +68,8 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		bytes memory v = getTiny(slotForCoin(node, 60));
 		return payable(v.length == 20 ? address(bytes20(v)) : address(0));
 	}
-	function addr(bytes32 node, uint256 ct) external view returns (bytes memory) {
-		return getTiny(slotForCoin(node, ct));
+	function addr(bytes32 node, uint256 cty) external view returns (bytes memory) {
+		return getTiny(slotForCoin(node, cty));
 	}
 	function text(bytes32 node, string calldata key) external view returns (string memory) {
 		return string(getTiny(slotForText(node, key)));
