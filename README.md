@@ -3,13 +3,15 @@
 
 * Deployments
 	* Only one deployment needed per chain!
-	* [**TheOffchainDNSResolver.sol**](./contracts/TheOffchainDNSResolver.sol)
-		* [`mainnet:0xa4407E257Aa158C737292ac95317a29b4C90729D`](https://etherscan.io/address/0xa4407E257Aa158C737292ac95317a29b4C90729D#code)
-		* [`sepolia:0x179Be112b24Ad4cFC392eF8924DfA08C20Ad8583`](https://sepolia.etherscan.io/address/0xedb18cd8d9d6af54c4ac1fbdbf2e098f413c3fe9#code)
-	* [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
-		* ⚠️ not yet deployed on Mainnet
-		* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
-		* [`sepolia:0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36](https://sepolia.etherscan.io/address/0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36#code)
+	* [**TheOffchainResolver.sol**](./contracts/TheOffchainResolver.sol)
+	* Development:
+		* [**TheOffchainDNSResolver.sol**](./contracts/TheOffchainDNSResolver.sol)
+			* [`mainnet:0xa4407E257Aa158C737292ac95317a29b4C90729D`](https://etherscan.io/address/0xa4407E257Aa158C737292ac95317a29b4C90729D#code)
+			* [`sepolia:0x179Be112b24Ad4cFC392eF8924DfA08C20Ad8583`](https://sepolia.etherscan.io/address/0xedb18cd8d9d6af54c4ac1fbdbf2e098f413c3fe9#code)
+		* [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
+			* ⚠️ not yet deployed on Mainnet
+			* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
+			* [`sepolia:0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36](https://sepolia.etherscan.io/address/0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36#code)
 * Protocol
 	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Implementation](https://github.com/resolverworks/ezccip.js/blob/main/test/server.js)
 	* `bytes requestData` = calldata from CCIP-Read
