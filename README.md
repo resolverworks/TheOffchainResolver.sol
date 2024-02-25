@@ -2,16 +2,16 @@
 **TOR**  — a trustless universal offchain ENS and DNS resolver contract and protocol.
 
 * Deployments
-	* Only one deployment needed per chain!
-	* [**TheOffchainResolver.sol**](./contracts/TheOffchainResolver.sol)
-	* Development:
-		* [**TheOffchainDNSResolver.sol**](./contracts/TheOffchainDNSResolver.sol)
-			* [`mainnet:0xa4407E257Aa158C737292ac95317a29b4C90729D`](https://etherscan.io/address/0xa4407E257Aa158C737292ac95317a29b4C90729D#code)
-			* [`sepolia:0x179Be112b24Ad4cFC392eF8924DfA08C20Ad8583`](https://sepolia.etherscan.io/address/0xedb18cd8d9d6af54c4ac1fbdbf2e098f413c3fe9#code)
-		* [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
-			* ⚠️ not yet deployed on Mainnet
-			* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
-			* [`sepolia:0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36](https://sepolia.etherscan.io/address/0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36#code)
+	* Only one deployment per chain!
+	* ⭐️ [**TheOffchainResolver.sol**](./contracts/TheOffchainResolver.sol)
+		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
+		* [`sepolia:0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39`](https://sepolia.etherscan.io/address/0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39#code)
+	* 🛠️ DNS Only: [**TheOffchainDNSResolver.sol**](./contracts/TheOffchainDNSResolver.sol)
+		* [`mainnet:0xa4407E257Aa158C737292ac95317a29b4C90729D`](https://etherscan.io/address/0xa4407E257Aa158C737292ac95317a29b4C90729D#code)
+		* [`sepolia:0x179Be112b24Ad4cFC392eF8924DfA08C20Ad8583`](https://sepolia.etherscan.io/address/0xedb18cd8d9d6af54c4ac1fbdbf2e098f413c3fe9#code)
+	* 🛠️ ENS Only: [**TheOffchainENSResolver.sol**](./contracts/TheOffchainENSResolver.sol)
+		* [`goerli:0x2e513399b2c5337E82A0a71992cBD09b78170843`](https://goerli.etherscan.io/address/0x2e513399b2c5337E82A0a71992cBD09b78170843#code)
+		* [`sepolia:0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36`](https://sepolia.etherscan.io/address/0x981294Ee3F2b0dd1734f18E379f8b513Ac991D36#code)
 * Protocol
 	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Implementation](https://github.com/resolverworks/ezccip.js/blob/main/test/server.js)
 	* `bytes requestData` = calldata from CCIP-Read
