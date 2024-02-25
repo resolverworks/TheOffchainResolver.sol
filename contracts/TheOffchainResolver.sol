@@ -31,7 +31,8 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	error InvalidContext(bytes context); // context too short or invalid signer
 	error Baseless(bytes name); // could not find self in registry
 	error Expired(uint256 t); // ccip response is stale
-	error Untrusted(address recv, address expect); // no match
+	error Untrusted(address recv, address expect);
+	error NodeCheckFailure(bytes32 check, bytes32 expect);
 
 	ENS constant ens = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
 	uint256 constant COIN_TYPE_ETH = 60;
@@ -197,7 +198,10 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		unchecked {
 			answers = new bytes[](calls.length);
 			for (uint256 i; i < calls.length; i += 1) {
-				require(node == 0 || bytes32(calls[i][4:36]) == node, "node");
+				if (node != 0) {
+					bytes32 check = bytes32(calls[i][4:36]);
+					if (check != node) revert NodeCheckFailure(check, node);
+				}
 				(bool ok, bytes memory v) = address(this).delegatecall(calls[i]);
 				require(ok);
 				answers[i] = v;
