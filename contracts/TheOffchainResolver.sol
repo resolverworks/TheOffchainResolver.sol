@@ -29,10 +29,10 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 
 	error Unauthorized(address owner); // not operator of node
 	error InvalidContext(bytes context); // context too short or invalid signer
-	error Baseless(bytes name); // could not find self in registry
+	error Baseless(); // could not find self in registry
 	error Expired(uint256 t); // ccip response is stale
-	error Untrusted(address recv, address expect);
-	error NodeCheckFailure(bytes32 check, bytes32 expect);
+	error Untrusted(address signed, address expect);
+	error NodeCheck(bytes32 node);
 
 	ENS constant ens = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
 	uint256 constant COIN_TYPE_ETH = 60;
@@ -153,7 +153,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 				node0 = name.namehash(offset);
 				if (ens.resolver(node0) == address(this)) break; // find our name
 				uint256 size = uint256(uint8(name[offset]));
-				if(size == 0) revert Baseless(name);
+				if(size == 0) revert Baseless();
 				offset += 1 + size;
 			}
 			(string[] memory urls, address signer) = parseContext(getTiny(slotForText(node0, "ccip.context")));
@@ -200,7 +200,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			for (uint256 i; i < calls.length; i += 1) {
 				if (node != 0) {
 					bytes32 check = bytes32(calls[i][4:36]);
-					if (check != node) revert NodeCheckFailure(check, node);
+					if (check != node) revert NodeCheck(check);
 				}
 				(bool ok, bytes memory v) = address(this).delegatecall(calls[i]);
 				require(ok);
