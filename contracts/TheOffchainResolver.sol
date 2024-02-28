@@ -23,10 +23,6 @@ interface IOnchainResolver {
 	event OnchainChanged(bytes32 indexed node, bool on);
 }
 
-interface IHybridResolver {
-	function hybridize(bytes calldata request, uint256 style);
-}
-
 contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, IMulticallable, IExtendedResolver, IExtendedDNSResolver, IOnchainResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
@@ -41,6 +37,12 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	address constant ENS_REGISTRY = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
 	uint256 constant COIN_TYPE_ETH = 60;
 	uint256 constant COIN_TYPE_FALLBACK = 0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010; // https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8
+	bool constant REPLACE_WITH_ONCHAIN = true;
+	bool constant OFFCHAIN_ONLY = false;
+	bool constant CALL_NULL_NODE = true;
+	bool constant CALL_UNMODIFIED = false;
+	bytes4 constant PREFIX_ONLY_OFF = 0x000000FF;
+	bytes4 constant PREFIX_ONLY_ON = ~PREFIX_ONLY_OFF;
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId
@@ -145,90 +147,129 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			}
 		}
 	}
-	function verify(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory, bytes memory) {
-		(bytes memory sig, uint64 expires, bytes memory response) = abi.decode(ccip, (bytes, uint64, bytes));
+	function verify(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory request, bytes memory response, bool replace) {
+		bytes memory sig;
+		uint64 expires;
+		(sig, expires, response) = abi.decode(ccip, (bytes, uint64, bytes));
 		if (expires < block.timestamp) revert CCIPReadExpired(expires);
-		(bytes memory request, address signer) = abi.decode(carry, (bytes, address));
+		address signer;
+		(request, signer, replace) = abi.decode(carry, (bytes, address, bool));
 		bytes32 hash = keccak256(abi.encodePacked(address(this), expires, keccak256(request), keccak256(response)));
 		address signed = ECDSA.recover(hash, sig);
 		if (signed != signer) revert CCIPReadUntrusted(signed, signer);
-		return (request, response);
 	}
 
 	// IExtendedDNSResolver
 	function resolve(bytes calldata name, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
 		(string[] memory urls, address signer) = parseContext(context);
 		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
-		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer), address(this)));
+		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer, false), address(this)));
 	}
 	function buggedCallback(bytes calldata response, bytes calldata buggedExtraData) external view returns (bytes memory v) {
-		(, v) = verify(response, abi.decode(buggedExtraData, (bytes)));
+		(, v, ) = verify(response, abi.decode(buggedExtraData, (bytes)));
 	}
 
 	// IExtendedResolver
-	function resolve(bytes calldata name, bytes calldata data) external view returns (bytes memory result) {
+	function resolve(bytes calldata name, bytes calldata data) external view returns (bytes memory) {
 		unchecked {
 			bytes32 node = name.namehash(0);
-			if (bytes4(data) == IMulticallable.multicall.selector) {
-				bytes[] memory a = abi.decode(data[4:], (bytes[]));
-				bytes[] memory b = new bytes[](a.length);
-				bool off;
-				for (uint256 i = 0; i < a.length; i += 1) {
-					bytes memory v = getEncodedFallbackValue(a[i]);
-					if (v.length == 0) {
-						off = true; // one record is missing, go offchain
-						break;
-					}
-					b[i] = v;
+			if (bytes4(data) == PREFIX_ONLY_ON) {
+				return resolveOnchain(data[4:], CALL_UNMODIFIED);
+			} else if (bytes4(data) == PREFIX_ONLY_OFF) {
+				if (onchain(node)) {
+					return resolveOnchain(data[4:], CALL_NULL_NODE);
+				} else {
+					resolveOffchain(name, data[4:], OFFCHAIN_ONLY);
 				}
-				if (!off || onchain(node)) return abi.encode(b);
-			} else {
-				bytes memory v = getEncodedFallbackValue(data);
-				if (v.length > 0 || onchain(node)) return v;
+			} else if (onchain(node)) { // manditory on-chain
+				return resolveOnchain(data, CALL_UNMODIFIED);
+			} else { // off-chain then replace with on-chain
+				if (bytes4(data) == IMulticallable.multicall.selector) {
+					bytes[] memory a = abi.decode(data[4:], (bytes[]));
+					bytes[] memory b = new bytes[](a.length);
+					bool off;
+					for (uint256 i; i < a.length; i += 1) {
+						bytes memory v = getEncodedFallbackValue(a[i]);
+						if (v.length == 0) {
+							off = true; // one record is missing, go off-chain
+							break;
+						}
+						b[i] = v;
+					}
+					if (!off) return abi.encode(b); // multi-answerable on-chain
+				} else {
+					bytes memory v = getEncodedFallbackValue(data);
+					if (v.length > 0) return v; // answerable on-chain
+				}
+				resolveOffchain(name, data, REPLACE_WITH_ONCHAIN);
 			}
-			(bytes32 node0, ) = findSelf(name);
-			(string[] memory urls, address signer) = parseContext(getTiny(slotForText(node0, "ccip.context")));
-			bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
-			revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer));
 		}
+	}
+	function resolveOnchain(bytes calldata data, bool clear) internal view returns (bytes memory result) {
+		if (bytes4(data) == IMulticallable.multicall.selector) {
+			bytes[] memory a = abi.decode(data[4:], (bytes[]));
+			for (uint256 i; i < a.length; i += 1) {
+				bytes memory v = a[i];
+				if (clear) assembly { mstore(add(v, 36), 0) } // clear the node
+				(, a[i]) = address(this).staticcall(v);
+			}
+			result = abi.encode(a);
+		} else {
+			bytes memory v = data;
+			if (clear) assembly { mstore(add(v, 36), 0) } // clear the node
+			(, result) = address(this).staticcall(v);
+		}
+	}
+	function resolveOffchain(bytes calldata name, bytes calldata data, bool replace) internal view {
+		(bytes32 node0, ) = findSelf(name);
+		(string[] memory urls, address signer) = parseContext(getTiny(slotForText(node0, "ccip.context")));
+		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
+		revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer, replace));
 	}
 	function ensCallback(bytes calldata ccip, bytes calldata carry) external view returns (bytes memory) {
 		unchecked {
-			(bytes memory request, bytes memory response) = verify(ccip, carry);
-			assembly {
-				mstore(add(request, 4), sub(mload(request), 4)) // trim resolve() selector
-				request := add(request, 4)
-			}
-			(, bytes memory data) = abi.decode(request, (bytes, bytes));
-			if (bytes4(data) == IMulticallable.multicall.selector) {
+			(bytes memory request, bytes memory response, bool replace) = verify(ccip, carry);
+			if (replace) {
 				assembly {
-					mstore(add(data, 4), sub(mload(data), 4)) // trim selector
-					data := add(data, 4)
+					mstore(add(request, 4), sub(mload(request), 4)) // trim resolve() selector
+					request := add(request, 4)
 				}
-				bytes[] memory a = abi.decode(data, (bytes[]));
-				bytes[] memory b = abi.decode(response, (bytes[]));
-				for (uint256 i; i < a.length; i += 1) {
-					bytes memory v = getEncodedFallbackValue(a[i]);
-					if (v.length != 0) b[i] = v;
+				(, bytes memory data) = abi.decode(request, (bytes, bytes));
+				if (bytes4(data) == IMulticallable.multicall.selector) {
+					assembly {
+						mstore(add(data, 4), sub(mload(data), 4)) // trim selector
+						data := add(data, 4)
+					}
+					bytes[] memory a = abi.decode(data, (bytes[]));
+					bytes[] memory b = abi.decode(response, (bytes[]));
+					for (uint256 i; i < a.length; i += 1) {
+						bytes memory v = getEncodedFallbackValue(a[i]);
+						if (v.length != 0) b[i] = v;
+					}
+					response = abi.encode(b);
 				}
-				response = abi.encode(b);
 			}
 			return response;
 		}
 	}
 	function determineExternalFallback(bytes32 node) internal view returns (bytes32 extnode, address resolver) {
 		bytes memory v = getTiny(slotForCoin(node, COIN_TYPE_FALLBACK));
-		if (v.length == 20) { // its a resolver
+		if (v.length == 20) { // resolver using same node
 			extnode = node;
 			resolver = address(bytes20(v));
 		} else {
-			if (v.length == 32) { // its a nodehash 
+			if (v.length == 32) { // differnt node 
 				extnode = bytes32(v);
-			} else { // assume derived: namehash("_" + node)
+			} else if (v.length != 0) { // external fallback disabled
+				// extnode = 0 => resolver = 0
+			} else { // default
+				// derived: namehash("_" + node)
 				// https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=_&escape=1&encoding=utf8
 				extnode = keccak256(abi.encode(node, 0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7));
 			}
-			resolver = ENS(ENS_REGISTRY).resolver(extnode);
+			// TODO: should this be ENSIP-10?
+			// i think no since we're calling on-chain methods
+			resolver = ENS(ENS_REGISTRY).resolver(extnode); 
 		}
 	}
 	function getEncodedFallbackValue(bytes memory request) internal view returns (bytes memory encoded) {
@@ -242,17 +283,17 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			}
 		}
 	}
-	function isNullAssumingPadded(bytes memory v) internal pure returns (bool) {
+	function isNullAssumingPadded(bytes memory v) internal pure returns (bool ret) {
 		assembly {
 			let p := add(v, 32)
 			let e := add(p, mload(v))
-			for {} lt(p, e) { p := add(p, 32) } {
+			for { ret := 1 } lt(p, e) { p := add(p, 32) } {
 				if iszero(iszero(mload(p))) { // != 0
-					return(0, 32) // return false
+					ret := 0
+					break
 				}
 			}
 		}
-		return true;
 	}
 
 	// multicall
@@ -301,7 +342,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	}
 
 	// IOnchainResolver
-	function toggleOnchain(bytes32 node, address resolver) requireOperator(node) external {
+	function toggleOnchain(bytes32 node) requireOperator(node) external {
 		uint256 slot = slotForSelector(IOnchainResolver.onchain.selector, node);
 		bool on;
 		assembly { 
@@ -321,7 +362,6 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 
 	// header: first 4 bytes
 	// [00000000_00000000000000000000000000000000000000000000000000000000] // null (0 slot)
-	// [00000000_00000000000000000000000000000000000000000000000000000001] // empty (1 slot, hidden)
 	// [00000001_XX000000000000000000000000000000000000000000000000000000] // 1 byte (1 slot)
 	// [0000001C_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX] // 28 bytes (1 slot
 	// [0000001D_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX][XX000000...] // 29 bytes (2 slots)
