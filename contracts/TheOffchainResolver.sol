@@ -23,6 +23,10 @@ interface IOnchainResolver {
 	event OnchainChanged(bytes32 indexed node, bool on);
 }
 
+interface IHybridResolver {
+	function hybridize(bytes calldata request, uint256 style);
+}
+
 contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, IMulticallable, IExtendedResolver, IExtendedDNSResolver, IOnchainResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
@@ -102,15 +106,16 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	function reflectGetBytes(bytes memory request) internal view returns (bytes memory) {
 		bytes32 node;
 		assembly { node := mload(add(request, 36)) }
-		(bytes32 livenode, address resolver) = determineExternalFallback(node);
+		uint256 slot = uint256(keccak256(request)); // hash before we mangle
+		(bytes32 extnode, address resolver) = determineExternalFallback(node);
 		if (resolver != address(0)) {
-			assembly { mstore(add(request, 36), livenode) }
+			assembly { mstore(add(request, 36), extnode) } // mangled
 			(bool ok, bytes memory v) = resolver.staticcall(request);
 			if (ok && abi.decode(v, (bytes)).length != 0) {
 				return v;
 			}
 		}
-		return getTiny(uint256(keccak256(request)));
+		return getTiny(slot);
 	}
 
 	// TOR helpers
@@ -274,7 +279,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	}
 
 	// setters
-	function setAddr(bytes32 node, address a) requireOperator(node) external {
+	function setAddr(bytes32 node, address a) external {
 		setAddr(node, COIN_TYPE_ETH, a == address(0) ? bytes('') : abi.encodePacked(a));
 	}
 	function setAddr(bytes32 node, uint256 cty, bytes memory v) requireOperator(node) public {
@@ -295,7 +300,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		emit PubkeyChanged(node, x, y);
 	}
 
-	// TOR features
+	// IOnchainResolver
 	function toggleOnchain(bytes32 node, address resolver) requireOperator(node) external {
 		uint256 slot = slotForSelector(IOnchainResolver.onchain.selector, node);
 		bool on;
