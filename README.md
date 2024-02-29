@@ -48,13 +48,13 @@
 
 ---
 
-# ExclusivelyOnchainResolver.sol
+# eXclusivelyOnchainResolver.sol
 
 **XOR**  — a trustless on-chain wildcard resolver contract that translates ENSIP-10 calls into non-ENSIP-10 calls.
 
 * Deployments
 	* Only one deployment per chain!
-	* [**ExclusivelyOnchainResolver.sol**](./contracts/ExclusivelyOnchainResolver.sol)
+	* [**eXclusivelyOnchainResolver.sol**](./contracts/eXclusivelyOnchainResolver.sol)
 		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
 
 * Features

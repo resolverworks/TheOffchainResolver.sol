@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.23;
 
-import {ECDSA} from "@openzeppelin/contracts@4.8.2/utils/cryptography/ECDSA.sol";
-import {IERC165} from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
+// interfaces
 import {ENS} from "@ensdomains/ens-contracts/contracts/registry/ENS.sol";
+import {IERC165} from "@openzeppelin/contracts/utils/introspection/IERC165.sol";
 import {IExtendedResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IExtendedResolver.sol";
 import {IExtendedDNSResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IExtendedDNSResolver.sol";
 import {IAddrResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IAddrResolver.sol";
@@ -13,9 +13,13 @@ import {ITextResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profi
 import {IPubkeyResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IPubkeyResolver.sol";
 import {IContentHashResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IContentHashResolver.sol";
 import {IMulticallable} from "@ensdomains/ens-contracts/contracts/resolvers/IMulticallable.sol";
+
+// libraries
+import {ECDSA} from "@openzeppelin/contracts@4.8.2/utils/cryptography/ECDSA.sol";
 import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils.sol";
 import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
 
+// ensip-10
 error OffchainLookup(address from, string[] urls, bytes request, bytes4 callback, bytes carry);
 
 interface IOnchainResolver {
@@ -39,10 +43,11 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	uint256 constant COIN_TYPE_FALLBACK = 0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010; // https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8
 	bool constant REPLACE_WITH_ONCHAIN = true;
 	bool constant OFFCHAIN_ONLY = false;
-	bool constant CALL_NULL_NODE = true;
+	bool constant CALL_WITH_NULL_NODE = true;
 	bool constant CALL_UNMODIFIED = false;
 	bytes4 constant PREFIX_ONLY_OFF = 0x000000FF;
 	bytes4 constant PREFIX_ONLY_ON = ~PREFIX_ONLY_OFF;
+	uint256 ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId
@@ -77,7 +82,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	// getters (structured)
 	function addr(bytes32 node) external view returns (address payable a) {
 		(bytes32 extnode, address resolver) = determineExternalFallback(node);
-		if (resolver != address(0) && IERC165(resolver).supportsInterface(type(IAddrResolver).interfaceId)) {
+		if (resolver != address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IAddrResolver).interfaceId)) {
 			a = IAddrResolver(resolver).addr(extnode);
 		}
 		if (a == address(0)) {
@@ -86,7 +91,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	}
 	function pubkey(bytes32 node) external view returns (bytes32 x, bytes32 y) {
 		(bytes32 extnode, address resolver) = determineExternalFallback(node);
-		if (resolver != address(0) && IERC165(resolver).supportsInterface(type(IPubkeyResolver).interfaceId)) {
+		if (resolver != address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IPubkeyResolver).interfaceId)) {
 			(x, y) = IPubkeyResolver(resolver).pubkey(extnode);
 		}
 		if (x == 0 && y == 0) {
@@ -136,18 +141,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		urls = new string[](1); // TODO: support multiple URLs
 		urls[0] = string(v);
 	}
-	function findSelf(bytes memory name) internal view returns (bytes32 node, uint256 offset) {
-		unchecked {
-			while (true) {
-				node = name.namehash(offset);
-				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
-				uint256 size = uint256(uint8(name[offset]));
-				if (size == 0) revert Unreachable(name);
-				offset += 1 + size;
-			}
-		}
-	}
-	function verify(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory request, bytes memory response, bool replace) {
+	function verifyOffchain(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory request, bytes memory response, bool replace) {
 		bytes memory sig;
 		uint64 expires;
 		(sig, expires, response) = abi.decode(ccip, (bytes, uint64, bytes));
@@ -166,7 +160,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer, false), address(this)));
 	}
 	function buggedCallback(bytes calldata response, bytes calldata buggedExtraData) external view returns (bytes memory v) {
-		(, v, ) = verify(response, abi.decode(buggedExtraData, (bytes)));
+		(, v, ) = verifyOffchain(response, abi.decode(buggedExtraData, (bytes)));
 	}
 
 	// IExtendedResolver
@@ -177,7 +171,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 				return resolveOnchain(data[4:], CALL_UNMODIFIED);
 			} else if (bytes4(data) == PREFIX_ONLY_OFF) {
 				if (onchain(node)) {
-					return resolveOnchain(data[4:], CALL_NULL_NODE);
+					return resolveOnchain(data[4:], CALL_WITH_NULL_NODE);
 				} else {
 					resolveOffchain(name, data[4:], OFFCHAIN_ONLY);
 				}
@@ -187,21 +181,19 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 				if (bytes4(data) == IMulticallable.multicall.selector) {
 					bytes[] memory a = abi.decode(data[4:], (bytes[]));
 					bytes[] memory b = new bytes[](a.length);
-					bool off;
+					// if one record is missing, go off-chain
 					for (uint256 i; i < a.length; i += 1) {
 						bytes memory v = getEncodedFallbackValue(a[i]);
-						if (v.length == 0) {
-							off = true; // one record is missing, go off-chain
-							break;
-						}
+						if (v.length == 0) resolveOffchain(name, data, REPLACE_WITH_ONCHAIN);
 						b[i] = v;
 					}
-					if (!off) return abi.encode(b); // multi-answerable on-chain
+					return abi.encode(b); // multi-answerable on-chain
 				} else {
 					bytes memory v = getEncodedFallbackValue(data);
 					if (v.length > 0) return v; // answerable on-chain
+					resolveOffchain(name, data, OFFCHAIN_ONLY);
 				}
-				resolveOffchain(name, data, REPLACE_WITH_ONCHAIN);
+				
 			}
 		}
 	}
@@ -226,30 +218,39 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
 		revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer, replace));
 	}
+	function findSelf(bytes calldata name) internal view returns (bytes32 node, uint256 offset) {
+		unchecked {
+			while (true) {
+				node = name.namehash(offset);
+				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
+				uint256 size = uint256(uint8(name[offset]));
+				if (size == 0) revert Unreachable(name);
+				offset += 1 + size;
+			}
+		}
+	}
 	function ensCallback(bytes calldata ccip, bytes calldata carry) external view returns (bytes memory) {
 		unchecked {
-			(bytes memory request, bytes memory response, bool replace) = verify(ccip, carry);
-			if (replace) {
-				assembly {
-					mstore(add(request, 4), sub(mload(request), 4)) // trim resolve() selector
-					request := add(request, 4)
-				}
-				(, bytes memory data) = abi.decode(request, (bytes, bytes));
-				if (bytes4(data) == IMulticallable.multicall.selector) {
-					assembly {
-						mstore(add(data, 4), sub(mload(data), 4)) // trim selector
-						data := add(data, 4)
-					}
-					bytes[] memory a = abi.decode(data, (bytes[]));
-					bytes[] memory b = abi.decode(response, (bytes[]));
-					for (uint256 i; i < a.length; i += 1) {
-						bytes memory v = getEncodedFallbackValue(a[i]);
-						if (v.length != 0) b[i] = v;
-					}
-					response = abi.encode(b);
-				}
+			(bytes memory request, bytes memory response, bool replace) = verifyOffchain(ccip, carry);
+			// single record calls that had on-chain values would of been answered on-chain
+			// so we only need to handle multicall() replacement 
+			if (!replace) return response;
+			assembly {
+				mstore(add(request, 4), sub(mload(request), 4)) // trim resolve() selector
+				request := add(request, 4)
 			}
-			return response;
+			(, request) = abi.decode(request, (bytes, bytes));
+			assembly {
+				mstore(add(request, 4), sub(mload(request), 4)) // trim multicall() selector
+				request := add(request, 4)
+			}
+			bytes[] memory a = abi.decode(request,  (bytes[]));
+			bytes[] memory b = abi.decode(response, (bytes[]));
+			for (uint256 i; i < a.length; i += 1) {
+				bytes memory v = getEncodedFallbackValue(a[i]);
+				if (v.length != 0) b[i] = v; // replace with on-chain
+			}
+			return abi.encode(b);
 		}
 	}
 	function determineExternalFallback(bytes32 node) internal view returns (bytes32 extnode, address resolver) {
@@ -267,8 +268,8 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 				// https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=_&escape=1&encoding=utf8
 				extnode = keccak256(abi.encode(node, 0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7));
 			}
-			// TODO: should this be ENSIP-10?
-			// i think no since we're calling on-chain methods
+			// Q: should this be ENSIP-10?
+			// A: no, since we're calling on-chain methods
 			resolver = ENS(ENS_REGISTRY).resolver(extnode); 
 		}
 	}
@@ -296,8 +297,9 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		}
 	}
 
-	// multicall
-	// TODO: allow ccip-read through this mechanism too
+	// multicall (for efficient multi-record writes)
+	// Q: allow ccip-read through this mechanism?
+	// A: no, too complex (mixed targets) and not ENSIP-10 compatible
 	function multicall(bytes[] calldata calls) external returns (bytes[] memory) {
 		return _multicall(0, calls);
 	}
