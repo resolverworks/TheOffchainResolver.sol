@@ -1,3 +1,9 @@
 {
-	"name": "TheOffchainResolver"
+	"name": "TheOffchainResolver",
+	"dependencies": {
+		"ethers": "^6.11.1"
+	},
+	"script": {
+		"test-contracts": "forge test"
+	}
 }

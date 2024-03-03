@@ -3,7 +3,7 @@
 
 * Deployments
 	* Only one deployment per chain!
-	* [**TheOffchainResolver.sol**](./contracts/TheOffchainResolver.sol)
+	* [**TheOffchainResolver.sol**](./src/TheOffchainResolver.sol)
 		* [`mainnet:0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f`](https://etherscan.io/address/0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f#code) 
 		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
 		* [`sepolia:0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39`](https://sepolia.etherscan.io/address/0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39#code)
@@ -54,7 +54,7 @@
 
 * Deployments
 	* Only one deployment per chain!
-	* [**eXclusivelyOnchainResolver.sol**](./contracts/eXclusivelyOnchainResolver.sol)
+	* [**eXclusivelyOnchainResolver.sol**](./src/eXclusivelyOnchainResolver.sol)
 		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
 
 * Features
