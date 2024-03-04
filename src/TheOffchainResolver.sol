@@ -50,6 +50,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	bytes4 constant PREFIX_ONLY_OFF = 0x000000FF;
 	bytes4 constant PREFIX_ONLY_ON = ~PREFIX_ONLY_OFF;
 	uint256 ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
+	string constant TEXT_CONTEXT = "ccip.context";
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId
@@ -58,11 +59,11 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			|| x == type(IAddressResolver).interfaceId
 			|| x == type(IPubkeyResolver).interfaceId
 			|| x == type(IContentHashResolver).interfaceId
+			|| x == type(INameResolver).interfaceId
 			|| x == type(IMulticallable).interfaceId
 			|| x == type(IExtendedResolver).interfaceId
 			|| x == type(IExtendedDNSResolver).interfaceId
 			|| x == type(IOnchainResolver).interfaceId
-			|| x == type(INameResolver).interfaceId
 			|| x == 0x73302a25; // https://adraffy.github.io/keccak.js/test/demo.html#algo=evm&s=ccip.context&escape=1&encoding=utf8
 	}
 
@@ -219,16 +220,20 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 		}
 	}
 	function resolveOffchain(bytes calldata dnsname, bytes calldata data, bool replace) internal view {
-		(bytes32 node0, ) = findSelf(dnsname);
-		(string[] memory urls, address signer) = parseContext(getTiny(slotForText(node0, "ccip.context")));
+		(string[] memory urls, address signer) = parseContext(findContext(dnsname));
 		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, dnsname, data);
 		revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer, replace));
 	}
-	function findSelf(bytes calldata dnsname) internal view returns (bytes32 node, uint256 offset) {
+	function findContext(bytes calldata dnsname) internal view returns (bytes memory context) {
 		unchecked {
+			uint256 offset;
 			while (true) {
-				node = dnsname.namehash(offset);
-				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
+				// find the first node in direct lineage...
+				bytes32 node = dnsname.namehash(offset);
+				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) { // ...that is TOR
+					context = getTiny(slotForText(node, TEXT_CONTEXT));
+					if (context.length != 0) break; // ...and has non-null context
+				}
 				uint256 size = uint256(uint8(dnsname[offset]));
 				if (size == 0) revert Unreachable(dnsname);
 				offset += 1 + size;
