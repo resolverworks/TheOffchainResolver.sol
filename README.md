@@ -1,5 +1,5 @@
 # TheOffchainResolver.sol
-**TOR**  — a trustless universal off-chain ENS and DNS resolver contract and protocol.
+**TOR**  — a trustless universal hybrid off-chain ENS and DNS resolver contract and protocol.
 
 * Deployments
 	* Only one deployment per chain!
@@ -21,7 +21,7 @@
 	* `bytes data` = **abi.encoded** `(signature, expires, hash)`
 	* reply with `data`
 * Implementation
-	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Code](https://github.com/resolverworks/ezccip.js/blob/dda3f8313b56b50a5d24e9ec814e66042065f375/src/handler.js#L37)
+	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Code](https://github.com/resolverworks/ezccip.js/blob/dda3f8313b56b50a5d24e9ec814e66042065f375/src/handler.js#L37) (~5 lines)
 
 ## Context Format
 
@@ -34,14 +34,14 @@
 ### Setup
 
 * *"I have a DNS name"*
-	* **DNS TXT** = `ENS1 ${address of TheOffchainDNSResolver} ${CONTEXT}`
-		* Example: [`ezccip.raffy.xyz`](https://adraffy.github.io/ens-normalize.js/test/resolver.html#ezccip.raffy.xyz)
+	* **DNS TXT** = `ENS1 ${TheOffchainResolver} ${CONTEXT}`
+		* Mainnet Example: [`ezccip.raffy.xyz`](https://adraffy.github.io/ens-normalize.js/test/resolver.html#ezccip.raffy.xyz)
 		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/dns`
 		* For full wildcard coverage, set `@` (basename) and `*` (descendents)
 * *"I have an ENS name"*
-	* **ENS.setResolver()** = `address of TheOffchainENSResolver`
-	* **setText("ccip.context")** = `CONTEXT`
-		* Example: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli&debug=%7B%22records%22%3A%5B%22ccip.context%22%5D%7D#ezccip.eth)
+	* **ENS.setResolver()** = `${TheOffchainResolver}`
+	* **setText(`"ccip.context"`)** = `CONTEXT`
+		* Goerli Example: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#ezccip.eth)
 		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/ens-goerli`
 
 #### That's it! 🎉️

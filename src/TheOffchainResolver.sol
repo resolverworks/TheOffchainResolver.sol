@@ -10,6 +10,7 @@ import {IExtendedDNSResolver} from "@ensdomains/ens-contracts/contracts/resolver
 import {IAddrResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IAddrResolver.sol";
 import {IAddressResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IAddressResolver.sol";
 import {ITextResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/ITextResolver.sol";
+import {INameResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/INameResolver.sol";
 import {IPubkeyResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IPubkeyResolver.sol";
 import {IContentHashResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IContentHashResolver.sol";
 import {IMulticallable} from "@ensdomains/ens-contracts/contracts/resolvers/IMulticallable.sol";
@@ -27,7 +28,8 @@ interface IOnchainResolver {
 	event OnchainChanged(bytes32 indexed node, bool on);
 }
 
-contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, IMulticallable, IExtendedResolver, IExtendedDNSResolver, IOnchainResolver {
+contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, 
+		IMulticallable, IExtendedResolver, IExtendedDNSResolver, IOnchainResolver, INameResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
 
@@ -60,6 +62,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			|| x == type(IExtendedResolver).interfaceId
 			|| x == type(IExtendedDNSResolver).interfaceId
 			|| x == type(IOnchainResolver).interfaceId
+			|| x == type(INameResolver).interfaceId
 			|| x == 0x73302a25; // https://adraffy.github.io/keccak.js/test/demo.html#algo=evm&s=ccip.context&escape=1&encoding=utf8
 	}
 
@@ -110,6 +113,9 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	function contenthash(bytes32) external view returns (bytes memory) {
 		return reflectGetBytes(msg.data);
 	}
+	function name(bytes32) external view returns (string memory) {
+		return string(reflectGetBytes(msg.data));
+	}
 	function reflectGetBytes(bytes memory request) internal view returns (bytes memory) {
 		bytes32 node;
 		assembly { node := mload(add(request, 36)) }
@@ -154,9 +160,9 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	}
 
 	// IExtendedDNSResolver
-	function resolve(bytes calldata name, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
+	function resolve(bytes calldata dnsname, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
 		(string[] memory urls, address signer) = parseContext(context);
-		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
+		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, dnsname, data);
 		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer, false), address(this)));
 	}
 	function buggedCallback(bytes calldata response, bytes calldata buggedExtraData) external view returns (bytes memory v) {
@@ -164,16 +170,16 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	}
 
 	// IExtendedResolver
-	function resolve(bytes calldata name, bytes calldata data) external view returns (bytes memory) {
+	function resolve(bytes calldata dnsname, bytes calldata data) external view returns (bytes memory) {
 		unchecked {
-			bytes32 node = name.namehash(0);
+			bytes32 node = dnsname.namehash(0);
 			if (bytes4(data) == PREFIX_ONLY_ON) {
 				return resolveOnchain(data[4:], CALL_UNMODIFIED);
 			} else if (bytes4(data) == PREFIX_ONLY_OFF) {
 				if (onchain(node)) {
 					return resolveOnchain(data[4:], CALL_WITH_NULL_NODE);
 				} else {
-					resolveOffchain(name, data[4:], OFFCHAIN_ONLY);
+					resolveOffchain(dnsname, data[4:], OFFCHAIN_ONLY);
 				}
 			} else if (onchain(node)) { // manditory on-chain
 				return resolveOnchain(data, CALL_UNMODIFIED);
@@ -184,14 +190,14 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 					// if one record is missing, go off-chain
 					for (uint256 i; i < a.length; i += 1) {
 						bytes memory v = getEncodedFallbackValue(a[i]);
-						if (v.length == 0) resolveOffchain(name, data, REPLACE_WITH_ONCHAIN);
+						if (v.length == 0) resolveOffchain(dnsname, data, REPLACE_WITH_ONCHAIN);
 						b[i] = v;
 					}
 					return abi.encode(b); // multi-answerable on-chain
 				} else {
 					bytes memory v = getEncodedFallbackValue(data);
 					if (v.length > 0) return v; // answerable on-chain
-					resolveOffchain(name, data, OFFCHAIN_ONLY);
+					resolveOffchain(dnsname, data, OFFCHAIN_ONLY);
 				}
 				
 			}
@@ -212,19 +218,19 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			(, result) = address(this).staticcall(v);
 		}
 	}
-	function resolveOffchain(bytes calldata name, bytes calldata data, bool replace) internal view {
-		(bytes32 node0, ) = findSelf(name);
+	function resolveOffchain(bytes calldata dnsname, bytes calldata data, bool replace) internal view {
+		(bytes32 node0, ) = findSelf(dnsname);
 		(string[] memory urls, address signer) = parseContext(getTiny(slotForText(node0, "ccip.context")));
-		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, name, data);
+		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, dnsname, data);
 		revert OffchainLookup(address(this), urls, request, this.ensCallback.selector, abi.encode(request, signer, replace));
 	}
-	function findSelf(bytes calldata name) internal view returns (bytes32 node, uint256 offset) {
+	function findSelf(bytes calldata dnsname) internal view returns (bytes32 node, uint256 offset) {
 		unchecked {
 			while (true) {
-				node = name.namehash(offset);
+				node = dnsname.namehash(offset);
 				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
-				uint256 size = uint256(uint8(name[offset]));
-				if (size == 0) revert Unreachable(name);
+				uint256 size = uint256(uint8(dnsname[offset]));
+				if (size == 0) revert Unreachable(dnsname);
 				offset += 1 + size;
 			}
 		}
