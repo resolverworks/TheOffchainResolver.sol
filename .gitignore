@@ -6,3 +6,6 @@ node_modules/
 # forge crap
 cache/
 out/
+
+# local crap
+.env

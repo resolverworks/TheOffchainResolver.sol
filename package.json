@@ -1,9 +1,13 @@
 {
 	"name": "TheOffchainResolver",
 	"dependencies": {
+		"@adraffy/blocksmith": "^0.0.2",
+		"@resolverworks/ezccip": "^0.0.6",
 		"ethers": "^6.11.1"
 	},
-	"script": {
-		"test-contracts": "forge test"
-	}
+	"scripts": {
+		"test-forge": "forge test",
+		"test-tor": "node test/TOR.js"
+	},
+	"type": "module"
 }

@@ -8,7 +8,7 @@ import {IExtendedResolver} from "@ensdomains/ens-contracts/contracts/resolvers/p
 import {IMulticallable} from "@ensdomains/ens-contracts/contracts/resolvers/IMulticallable.sol";
 import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils.sol";
 
-contract eXclusivelyOnchainResolver is IERC165, IExtendedResolver {
+contract XOR is IERC165, IExtendedResolver {
 	using BytesUtils for bytes;
 
 	error Unreachable(bytes name); 

@@ -28,7 +28,7 @@ interface IOnchainResolver {
 	event OnchainChanged(bytes32 indexed node, bool on);
 }
 
-contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, 
+contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkeyResolver, IContentHashResolver, 
 		IMulticallable, IExtendedResolver, IExtendedDNSResolver, IOnchainResolver, INameResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
@@ -51,6 +51,12 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 	bytes4 constant PREFIX_ONLY_ON = ~PREFIX_ONLY_OFF;
 	uint256 ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
 	string constant TEXT_CONTEXT = "ccip.context";
+	
+	ENS immutable ens;
+
+	constructor(ENS _ens) {
+		ens = _ens;
+	}
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId
@@ -69,8 +75,8 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 
 	// utils
 	modifier requireOperator(bytes32 node) {
-		address owner = ENS(ENS_REGISTRY).owner(node);
-		if (owner != msg.sender && !ENS(ENS_REGISTRY).isApprovedForAll(owner, msg.sender)) revert Unauthorized(owner);
+		address owner = ens.owner(node);
+		if (owner != msg.sender && !ens.isApprovedForAll(owner, msg.sender)) revert Unauthorized(owner);
 		_;
 	}
 	function slotForCoin(bytes32 node, uint256 cty) internal pure returns (uint256) {
@@ -230,7 +236,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			while (true) {
 				// find the first node in direct lineage...
 				bytes32 node = dnsname.namehash(offset);
-				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) { // ...that is TOR
+				if (ens.resolver(node) == address(this)) { // ...that is TOR
 					context = getTiny(slotForText(node, TEXT_CONTEXT));
 					if (context.length != 0) break; // ...and has non-null context
 				}
@@ -281,7 +287,7 @@ contract TheOffchainResolver is IERC165, ITextResolver, IAddrResolver, IAddressR
 			}
 			// Q: should this be ENSIP-10?
 			// A: no, since we're calling on-chain methods
-			resolver = ENS(ENS_REGISTRY).resolver(extnode); 
+			resolver = ens.resolver(extnode); 
 		}
 	}
 	function getEncodedFallbackValue(bytes memory request) internal view returns (bytes memory encoded) {

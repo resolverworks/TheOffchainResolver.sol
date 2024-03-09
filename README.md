@@ -6,7 +6,7 @@
 	* [**TheOffchainResolver.sol**](./src/TheOffchainResolver.sol)
 		* [`mainnet:0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f`](https://etherscan.io/address/0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f#code) 
 		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
-		* [`sepolia:0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39`](https://sepolia.etherscan.io/address/0x9Ec7f2ce83fcDF589487303fA9984942EF80Cb39#code)
+		* [`sepolia:0xD9b59804B337263142b95e912bD6399A3FD08662`](https://sepolia.etherscan.io/address/0xD9b59804B337263142b95e912bD6399A3FD08662#code)
 * Protocol
 	* `bytes requestData` = calldata from CCIP-Read
 	* `bytes responseData` = the answer to that request
@@ -36,13 +36,13 @@
 * *"I have a DNS name"*
 	* **DNS TXT** = `ENS1 ${TheOffchainResolver} ${CONTEXT}`
 		* Mainnet Example: [`ezccip.raffy.xyz`](https://adraffy.github.io/ens-normalize.js/test/resolver.html#ezccip.raffy.xyz)
-		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/dns`
+		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/`
 		* For full wildcard coverage, set `@` (basename) and `*` (descendents)
 * *"I have an ENS name"*
 	* **ENS.setResolver()** = `${TheOffchainResolver}`
 	* **setText(`"ccip.context"`)** = `CONTEXT`
-		* Goerli Example: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#ezccip.eth)
-		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/ens-goerli`
+		* Sepolia Example: [`ezccip.eth`](https://adraffy.github.io/ens-normalize.js/test/resolver.html?sepolia#ezccip.eth)
+		* Context: `0xd00d726b2aD6C81E894DC6B87BE6Ce9c5572D2cd https://raffy.xyz/ezccip/s`
 
 #### That's it! 🎉️
 
@@ -68,3 +68,11 @@ Append `.onchain.eth` to any ENS name and resolve!
 * Example:
 	* Normal: [on.fixed.onchain.eth](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#on.fixed.debug.eth.onchain.eth) (using **TOR**, on/off-chain mixture)
 	* Using **XOR** [on.fixed.debug.eth&#8203;**.onchain.eth**](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#on.fixed.debug.eth.onchain.eth) (only on-chain data)
+
+---
+
+## Testing
+
+1. `npm i`
+1. [foundryup](https://book.getfoundry.sh/getting-started/installation)
+1. `npm run test-tor`

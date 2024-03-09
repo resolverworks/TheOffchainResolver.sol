@@ -1,0 +1,229 @@
+
+[32m
+                             _   _
+                            (_) | |
+      __ _   _ __   __   __  _  | |
+     / _` | | '_ \  \ \ / / | | | |
+    | (_| | | | | |  \ V /  | | | |
+     \__,_| |_| |_|   \_/   |_| |_|
+[0m
+    0.2.0 (b6e7c8b 2024-03-07T00:12:58.671131126Z)
+    [32mhttps://github.com/foundry-rs/foundry[0m
+
+Available Accounts
+==================
+
+(0) 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000.000000000000000000 ETH)
+(1) 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 (10000.000000000000000000 ETH)
+(2) 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC (10000.000000000000000000 ETH)
+(3) 0x90F79bf6EB2c4f870365E785982E1f101E93b906 (10000.000000000000000000 ETH)
+(4) 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 (10000.000000000000000000 ETH)
+
+Private Keys
+==================
+
+(0) 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
+(1) 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
+(2) 0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a
+(3) 0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6
+(4) 0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a
+
+Wallet
+==================
+Mnemonic:          test test test test test test test test test test test junk
+Derivation path:   m/44'/60'/0'/0/
+
+
+Chain ID
+==================
+[32m
+1[0m
+
+Base Fee
+==================
+[32m
+1000000000[0m
+
+Gas Limit
+==================
+[32m
+30000000[0m
+
+Genesis Timestamp
+==================
+[32m
+1710022419[0m
+
+Listening on 127.0.0.1:12345
+eth_chainId
+eth_chainId
+eth_getTransactionCount
+eth_getBlockByNumber
+eth_feeHistory
+eth_estimateGas
+eth_getBlockByNumber
+eth_feeHistory
+eth_sendRawTransaction
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+
+    Transaction: 0x9faae9d78523d52df8f2aadd1d4f0faadb2736fff8a633a774e1c8213918de2a
+    Contract created: 0x5fbdb2315678afecb367f032d93f642f64180aa3
+    Gas used: 643649
+
+    Block Number: 1
+    Block Hash: 0x77dd7384ad2ef93f1746154ed1682e778876ac700631c588a7ed71a0878ad04e
+    Block Time: "Sat, 9 Mar 2024 22:13:40 +0000"
+
+eth_getTransactionByHash
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_chainId
+eth_chainId
+eth_getTransactionCount
+eth_getBlockByNumber
+eth_feeHistory
+eth_estimateGas
+eth_getBlockByNumber
+eth_feeHistory
+eth_sendRawTransaction
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+eth_getTransactionByHash
+
+    Transaction: 0xe7b21faf72ebfc33c1538c3788c374c9427039b3dbc331858c35b64ddc7bc971
+    Contract created: 0xe7f1725e7734ce288f8367e1bb143e90bb3f0512
+    Gas used: 3159800
+
+    Block Number: 2
+    Block Hash: 0x3ae057f773cceb424c2be73a2dbff084a8b16733056c9211ed289a045be8c9c3
+    Block Time: "Sat, 9 Mar 2024 22:13:41 +0000"
+
+eth_getTransactionByHash
+eth_getTransactionReceipt
+eth_getTransactionReceipt
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+eth_getTransactionReceipt
+
+    Transaction: 0x8fa6a0b35a161158cd7b711a8f547d32884ebe5274e36b8695953fb995d822ee
+    Gas used: 51928
+
+    Block Number: 3
+    Block Hash: 0x3b7433a06432b5208cd2e6d566b853dbbfa651478969ec93faa1ca435eb3c332
+    Block Time: "Sat, 9 Mar 2024 22:13:42 +0000"
+
+
+    Block Number: 4
+    Block Hash: 0x865a3cf342f106b990f0889435200bf258d80b51c694325887a730f23ab2eee0
+    Block Time: "Sat, 9 Mar 2024 22:13:43 +0000"
+
+
+    Block Number: 5
+    Block Hash: 0x1f43896f9f363554e7e9bacb34fbac51aebf1247317af64b6518063752a782f5
+    Block Time: "Sat, 9 Mar 2024 22:13:44 +0000"
+
+
+    Block Number: 6
+    Block Hash: 0xd4a06b322bf2005f997188a442c0ec0843f2f9126e50182c6a6955ff6afece9c
+    Block Time: "Sat, 9 Mar 2024 22:13:45 +0000"
+
+eth_blockNumber
+eth_getTransactionReceipt
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_getTransactionReceipt
+
+    Transaction: 0x969d5126fb70360eedad86106c7bf412cbfbfdbbbb79c4b8a1ce92f1ea38653a
+    Gas used: 74213
+
+    Block Number: 7
+    Block Hash: 0x3f33a5c4c8e2035036bd1aafc5315af6c8c7b537ac4233ecbf058ac8892f9303
+    Block Time: "Sat, 9 Mar 2024 22:13:46 +0000"
+
+
+    Block Number: 8
+    Block Hash: 0x6e7becdc593d67377f28c0563855addeb6619a98ab96016127a9a9b21ee551bd
+    Block Time: "Sat, 9 Mar 2024 22:13:47 +0000"
+
+
+    Block Number: 9
+    Block Hash: 0x98203a634e595e7d7490dff5b8bf15415c68065be218710a8d6fc06b732e09c5
+    Block Time: "Sat, 9 Mar 2024 22:13:48 +0000"
+
+
+    Block Number: 10
+    Block Hash: 0xf2bac73f146db5f98071ba75a2972e1e43838082f8f328731215b67500454ddb
+    Block Time: "Sat, 9 Mar 2024 22:13:49 +0000"
+
+eth_blockNumber
+eth_getTransactionReceipt
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_getTransactionReceipt
+
+    Transaction: 0x7c8d48498f0a79e833607e64ac97e2fc5753ed5a79baeb2822e53f3df57f9481
+    Gas used: 101765
+
+    Block Number: 11
+    Block Hash: 0x8112f4b93922ed8b2fb740ca2ae4a86804e304ab58701ba82ffc7d8b76c5690a
+    Block Time: "Sat, 9 Mar 2024 22:13:50 +0000"
+
+
+    Block Number: 12
+    Block Hash: 0xb3f28e2a05b3938c70633275dd874c8146009dfe06c29e8e8b25933d8d79c300
+    Block Time: "Sat, 9 Mar 2024 22:13:51 +0000"
+
+
+    Block Number: 13
+    Block Hash: 0x79bb131266c3cc06bd8861357fad11a877c0e87e639dc1e8afa163d100ad4048
+    Block Time: "Sat, 9 Mar 2024 22:13:52 +0000"
+
+
+    Block Number: 14
+    Block Hash: 0xe9f25fedeb796fb114855205a511c37bc21d9552c72d5901e664df821a37ceab
+    Block Time: "Sat, 9 Mar 2024 22:13:53 +0000"
+
+eth_blockNumber
+eth_getTransactionReceipt
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
