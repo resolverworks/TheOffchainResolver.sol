@@ -5,7 +5,7 @@ libs = ["lib"]
 
 remappings = [
 	'@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/',
-	'@ensdomains/ens-contracts/=lib/ens-contracts/'
+	'@ensdomains/ens-contracts/=lib/ens-contracts/',
 ]
 
 optimizer = true

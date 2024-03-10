@@ -5,8 +5,5 @@ import {ENSRegistry} from "@ensdomains/ens-contracts/contracts/registry/ENSRegis
 
 contract FakeENS is ENSRegistry {
 
-	constructor() {
-		
-	}
-	
+
 }
