@@ -1,0 +1,290 @@
+
+*****[ Init ]***********************************************
+dev#0 Deployed: ENS @ 0x5FbDB2315678afecb367f032d93F642f64180aa3 { gas: [33m643649n[39m, size: [33m2627[39m }
+dev#2 Deployed: PR @ 0x663F3ad617193148711d28f5334eE4Ed07016602 { gas: [33m963579n[39m, size: [33m4219[39m }
+dev#2 Deployed: TOR @ 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 { gas: [33m3171017n[39m, size: [33m14359[39m }
+dev#2 Deployed: XOR @ 0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f { gas: [33m693472n[39m, size: [33m2961[39m }
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m51928n[39m,
+  node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
+  label: [32m'0x4f5b812789fc606be1b3b16908db13fc7a9adf7ca72641f84d75b47069d3d7f0'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'eth'[39m
+}
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0xcb0cbc8493baf4a7b1972914ba0be89040e56e4a3c98d60268fe37b8c8e546d9'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'PR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'raffy.eth'[39m
+}
+dev#0 PR.setText() {
+  gas: [33m57381n[39m,
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m,
+  name: [32m'raffy.eth'[39m
+}
+dev#0 PR.setAddr() {
+  gas: [33m57931n[39m,
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  a: [32m'0x51050ec063d393217B436747617aD1C2285Aeeee'[39m,
+  name: [32m'raffy.eth'[39m
+}
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0x1f637c28d8d31a9344cc3dc39f1f3780b92fb107e4ea5fb6807e4b0ac2ecff1e'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'TOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'tog.eth'[39m
+}
+[CCIP] Ready! 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 http://localhost:12346
+dev#0 TOR.setText() {
+  gas: [33m101765n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  key: [32m'ccip.context'[39m,
+  s: [32m'0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 http://localhost:12346'[39m,
+  name: [32m'tog.eth'[39m
+}
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0xd86825c3ba48d71746d7cb35f2f5728b597e9619dd9348d2f2ed166a4a7a94f1'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'XOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'onchain.eth'[39m
+}
+0 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 
+1 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 eth
+2 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 raffy.eth
+3 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 tog.eth
+4 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f onchain.eth
+
+*****[ Tests ]**********************************************
+[CCIP] resolve(u1.tog.eth).text(name)
+▶ virtual sub
+  [32m✔ has name [90m(256.02727ms)[39m[39m
+  [32m✔ not base [90m(0.244738ms)[39m[39m
+[32m▶ [39mvirtual sub [90m(30370.557081ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m52312n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x30d1d17e6da7695dbfc1442a9803ddfd83e2cc77080a8d2442ae0f8d92b12c41'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u2.tog.eth'[39m
+}
+dev#0 TOR.toggleOnchain() {
+  gas: [33m51318n[39m,
+  node: [32m'0x34f3a72a318908ac14303bd092a6e1ae008e35bc36500db8a4f8fa4fb9ec2bd5'[39m,
+  name: [32m'u2.tog.eth'[39m
+}
+▶ onchain real sub
+  [32m✔ is onchain [90m(13.686788ms)[39m[39m
+  [32m✔ has no name [90m(15.268406ms)[39m[39m
+  [32m✔ w/o ccip-read [90m(14.702204ms)[39m[39m
+  [32m✔ force offchain [90m(16.240589ms)[39m[39m
+  [32m✔ not base [90m(0.229455ms)[39m[39m
+[32m▶ [39monchain real sub [90m(8360.717971ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x5de5b13d2d201cd9caf63959e624a27d94f84b47826998963fe69938fb2da37b'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'TOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u3.tog.eth'[39m
+}
+dev#0 TOR.setText() {
+  gas: [33m55810n[39m,
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  key: [32m'name'[39m,
+  s: [32m'Raffy'[39m,
+  name: [32m'u3.tog.eth'[39m
+}
+▶ onchain real sub hybrid
+  [32m✔ hybrid w/onchain [90m(14.210769ms)[39m[39m
+  [32m✔ force onchain [90m(13.178915ms)[39m[39m
+[CCIP] resolve(u3.tog.eth).text(name)
+  [32m✔ force offchain [90m(45.188057ms)[39m[39m
+dev#0 TOR.setText() {
+  gas: [33m33424n[39m,
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  key: [32m'name'[39m,
+  s: [32m''[39m,
+  name: [32m'u3.tog.eth'[39m
+}
+[CCIP] resolve(u3.tog.eth).text(name)
+  [32m✔ hybrid after clear [90m(39.590688ms)[39m[39m
+[32m▶ [39monchain real sub hybrid [90m(12513.274499ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x60202b9ae5f07addbedd8c178dad899eca10a46e26df42cc4c1b12125150c57c'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'TOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u4.tog.eth'[39m
+}
+dev#0 TOR.setAddr() {
+  gas: [33m76589n[39m,
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  name: [32m'u4.tog.eth'[39m
+}
+▶ hybrid fallback: node
+  [32m✔ expect fallback [90m(14.962534ms)[39m[39m
+dev#0 TOR.setText() {
+  gas: [33m55810n[39m,
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  key: [32m'name'[39m,
+  s: [32m'Chonk'[39m,
+  name: [32m'u4.tog.eth'[39m
+}
+  [32m✔ expect overide [90m(15.563637ms)[39m[39m
+[CCIP] resolve(u4.tog.eth).text(chonk)
+  [32m✔ expect offchain [90m(40.215079ms)[39m[39m
+[CCIP] resolve(u4.tog.eth).text(name)
+  [32m✔ force offchain [90m(37.474211ms)[39m[39m
+[32m▶ [39mhybrid fallback: node [90m(12502.47747ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x6811ccbe49fc858b54d79eb456e57ec7793462ec889eb6e67e83bb6aba68a4ff'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'TOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u5.tog.eth'[39m
+}
+dev#0 TOR.toggleOnchain() {
+  gas: [33m51330n[39m,
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  name: [32m'u5.tog.eth'[39m
+}
+dev#0 TOR.setAddr() {
+  gas: [33m76589n[39m,
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  name: [32m'u5.tog.eth'[39m
+}
+▶ onchain fallback: node
+  [32m✔ expect fallback [90m(15.570986ms)[39m[39m
+  [32m✔ expect null [90m(14.714534ms)[39m[39m
+[32m▶ [39monchain fallback: node [90m(12426.517024ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x9280d3b9b4893d89f04072f5e7f4311b88422699beca41b02c3ef9a968a72da6'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'PR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u6.tog.eth'[39m
+}
+dev#0 PR.setText() {
+  gas: [33m57381n[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m,
+  name: [32m'u6.tog.eth'[39m
+}
+▶ hybrid fallback: resolver
+  [32m✔ name is set [90m(14.056307ms)[39m[39m
+dev#0 ENS.setResolver() {
+  gas: [33m31154n[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  resolver: [32m'TOR'[39m,
+  name: [32m'u6.tog.eth'[39m
+}
+[CCIP] resolve(u6.tog.eth).text(name)
+  [32m✔ name is offchain [90m(38.528905ms)[39m[39m
+dev#0 TOR.setAddr() {
+  gas: [33m54269n[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x663f3ad617193148711d28f5334ee4ed07016602'[39m,
+  name: [32m'u6.tog.eth'[39m
+}
+  [32m✔ name is fallback [90m(15.560595ms)[39m[39m
+[32m▶ [39mhybrid fallback: resolver [90m(16617.950389ms)[39m
+
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x88cef9bed795c060e0a58a17c9231bde30e0e5bab7edf18b6c8badd38ff757ad'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'TOR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'u7.tog.eth'[39m
+}
+[CCIP] resolve(u7.tog.eth).text(name)
+▶ fallback: underscore
+  [32m✔ name is offchain [90m(38.002835ms)[39m[39m
+dev#0 ENS.setSubnodeRecord() {
+  gas: [33m74213n[39m,
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  label: [32m'0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7'[39m,
+  owner: [32m'dev#0'[39m,
+  resolver: [32m'PR'[39m,
+  ttl: [33m0n[39m,
+  name: [32m'_.u7.tog.eth'[39m
+}
+dev#0 PR.setText() {
+  gas: [33m57393n[39m,
+  node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m,
+  name: [32m'_.u7.tog.eth'[39m
+}
+  [32m✔ name is fallback [90m(14.140399ms)[39m[39m
+dev#0 TOR.setAddr() {
+  gas: [33m54053n[39m,
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0xff'[39m,
+  name: [32m'u7.tog.eth'[39m
+}
+[CCIP] resolve(u7.tog.eth).text(name)
+  [32m✔ name is fallback [90m(37.305739ms)[39m[39m
+[32m▶ [39mfallback: underscore [90m(16601.142775ms)[39m
+
+[32m✔ xor on tor [90m(0.183407ms)[39m[39m
+
+*****[ Shutdown ]*******************************************
+ 0 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 
+ 1 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 eth
+ 2 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 raffy.eth
+ 3 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 tog.eth
+ 4 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 u1.tog.eth
+ 5 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 u2.tog.eth
+ 6 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u3.tog.eth
+ 7 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u4.tog.eth
+ 8 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u5.tog.eth
+ 9 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u6.tog.eth
+10 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u7.tog.eth
+11 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 _.u7.tog.eth
+12 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f onchain.eth
+
+*****[ Results ]********************************************
+[34mℹ tests 31[39m
+[34mℹ suites 0[39m
+[34mℹ pass 31[39m
+[34mℹ fail 0[39m
+[34mℹ cancelled 0[39m
+[34mℹ skipped 0[39m
+[34mℹ todo 0[39m
+[34mℹ duration_ms 105.597008[39m

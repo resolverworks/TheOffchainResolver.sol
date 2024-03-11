@@ -1,6 +1,23 @@
 import {ethers} from 'ethers';
 import {createServer} from 'node:http';
 import {EZCCIP} from '@resolverworks/ezccip';
+import {createWriteStream} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+
+export function print_header(s) {
+	console.log();
+	console.log(`*****[ ${s} ]`.padEnd(60, '*'));
+}
+
+export function capture_stdout(file) {
+	let {stdout} = process;
+	let out = createWriteStream(fileURLToPath(file));
+	let old = stdout.write.bind(stdout);
+	stdout.write = (...a) => {
+		old(...a);
+		out.write(...a);
+	};
+}
 
 export function create_ccip_server({port, resolver, signingKey, resolve, log}) {
 	const ezccip = new EZCCIP();

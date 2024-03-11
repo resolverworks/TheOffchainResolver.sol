@@ -20,7 +20,7 @@ import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils.sol";
 import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
 
-// ensip-10
+// ensip-10 
 error OffchainLookup(address from, string[] urls, bytes request, bytes4 callback, bytes carry);
 
 interface IOnchainResolver {
@@ -40,7 +40,6 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	error CCIPReadUntrusted(address signed, address expect);
 	error NodeCheck(bytes32 node);
 
-	address constant ENS_REGISTRY = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
 	uint256 constant COIN_TYPE_ETH = 60;
 	uint256 constant COIN_TYPE_FALLBACK = 0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010; // https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8
 	bool constant REPLACE_WITH_ONCHAIN = true;
@@ -53,9 +52,8 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	string constant TEXT_CONTEXT = "ccip.context";
 	
 	ENS immutable ens;
-
-	constructor(ENS _ens) {
-		ens = _ens;
+	constructor(ENS a) {
+		ens = a;
 	}
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
@@ -123,19 +121,21 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	function name(bytes32) external view returns (string memory) {
 		return string(reflectGetBytes(msg.data));
 	}
-	function reflectGetBytes(bytes memory request) internal view returns (bytes memory) {
+	function reflectGetBytes(bytes memory request) internal view returns (bytes memory v) {
 		bytes32 node;
 		assembly { node := mload(add(request, 36)) }
 		uint256 slot = uint256(keccak256(request)); // hash before we mangle
-		(bytes32 extnode, address resolver) = determineExternalFallback(node);
-		if (resolver != address(0)) {
-			assembly { mstore(add(request, 36), extnode) } // mangled
-			(bool ok, bytes memory v) = resolver.staticcall(request);
-			if (ok && abi.decode(v, (bytes)).length != 0) {
-				return v;
+		v = getTiny(slot);
+		if (v.length == 0) {
+			(bytes32 extnode, address resolver) = determineExternalFallback(node);
+			if (resolver != address(0)) {
+				assembly { mstore(add(request, 36), extnode) } // mangled
+				(bool ok, bytes memory u) = resolver.staticcall(request);
+				if (ok) {
+					v = abi.decode(u, (bytes));
+				}
 			}
 		}
-		return getTiny(slot);
 	}
 
 	// TOR helpers
@@ -203,7 +203,7 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 					return abi.encode(b); // multi-answerable on-chain
 				} else {
 					bytes memory v = getEncodedFallbackValue(data);
-					if (v.length > 0) return v; // answerable on-chain
+					if (v.length != 0) return v; // answerable on-chain
 					resolveOffchain(dnsname, data, OFFCHAIN_ONLY);
 				}
 				

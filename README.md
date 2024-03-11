@@ -23,6 +23,12 @@
 * Implementation
 	* [**resolverworks/ezccip.js**](https://github.com/resolverworks/ezccip.js) → [Code](https://github.com/resolverworks/ezccip.js/blob/dda3f8313b56b50a5d24e9ec814e66042065f375/src/handler.js#L37) (~5 lines)
 
+## Testing
+
+1. `npm i`
+1. [foundryup](https://book.getfoundry.sh/getting-started/installation)
+1. `npm run test`
+
 ## Context Format
 
 ### `CONTEXT` = `${SIGNER} ${ENDPOINT}`
@@ -56,7 +62,6 @@
 	* Only one deployment per chain!
 	* [**eXclusivelyOnchainResolver.sol**](./src/eXclusivelyOnchainResolver.sol)
 		* [`goerli:0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
-
 * Features
 	* works with **any name**
 	* supports `resolve(multicall())`
@@ -68,11 +73,3 @@ Append `.onchain.eth` to any ENS name and resolve!
 * Example:
 	* Normal: [on.fixed.onchain.eth](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#on.fixed.debug.eth.onchain.eth) (using **TOR**, on/off-chain mixture)
 	* Using **XOR** [on.fixed.debug.eth&#8203;**.onchain.eth**](https://adraffy.github.io/ens-normalize.js/test/resolver.html?goerli#on.fixed.debug.eth.onchain.eth) (only on-chain data)
-
----
-
-## Testing
-
-1. `npm i`
-1. [foundryup](https://book.getfoundry.sh/getting-started/installation)
-1. `npm run test-tor`

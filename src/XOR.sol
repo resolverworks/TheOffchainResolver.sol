@@ -12,8 +12,11 @@ contract XOR is IERC165, IExtendedResolver {
 	using BytesUtils for bytes;
 
 	error Unreachable(bytes name); 
-
-	address constant ENS_REGISTRY = 0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e;
+	
+	ENS immutable ens;
+	constructor(ENS a) {
+		ens = a;
+	}
  
 	function supportsInterface(bytes4 x) external pure returns (bool) {
 		return x == type(IERC165).interfaceId 
@@ -57,7 +60,7 @@ contract XOR is IERC165, IExtendedResolver {
 		unchecked {
 			while (true) {
 				node = name.namehash(offset);
-				if (ENS(ENS_REGISTRY).resolver(node) == address(this)) break;
+				if (ens.resolver(node) == address(this)) break;
 				uint256 size = uint256(uint8(name[offset]));
 				if (size == 0) revert Unreachable(name);
 				offset += 1 + size;
@@ -68,7 +71,7 @@ contract XOR is IERC165, IExtendedResolver {
 		unchecked {
 			while (true) {
 				node = name.namehash(offset);
-				resolver = ENS(ENS_REGISTRY).resolver(node);
+				resolver = ens.resolver(node);
 				if (resolver != address(0)) break;
 				offset += 1 + uint256(uint8(name[offset]));
 			}
