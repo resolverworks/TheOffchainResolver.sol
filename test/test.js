@@ -1,5 +1,6 @@
 import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith';
-import {create_ccip_server, capture_stdout, print_header} from './utils.js';
+import {capture_stdout, print_header} from './utils.js';
+import {serve} from '@resolverworks/ezccip';
 import {ethers} from 'ethers';
 import {test, before, after} from 'node:test';
 import assert from 'node:assert/strict';
@@ -60,9 +61,6 @@ before(async () => {
 	tor = await foundry.deploy({name: 'TOR', args: [to_address(ens)], wallet: 2}, $resolver); // trustless
 	xor = await foundry.deploy({name: 'XOR', args: [to_address(ens)], wallet: 2}); // trustless
 
-	assert(await tor.supportsInterface('0x73302a25')); // tor = tor
-	assert(await xor.supportsInterface('0xc3fdc0c5')); // xor = xor
-	
 	// create fake ens stuff
 	eth = await ens.$register(root.create('eth'));
 	raffy_eth = await ens.$register(root.create('raffy.eth'), {resolver: pr, wallet: 1});
@@ -71,13 +69,7 @@ before(async () => {
 
 	// setup tog
 	tog = await ens.$register(eth.create('tog'), {resolver: tor});
-	ccip = await create_ccip_server({
-		port: foundry.info.port + 1, // derived, could be anything
-		signingKey: foundry.wallet(0).signingKey, // derived, could be random
-		resolver: to_address(tor),
-		resolve, // we made this global so it can be used to verify responses without going through CCIP-read
-		log(...a) { console.log(`[CCIP]`, ...a); },
-	});
+	ccip = await serve(resolve, {resolvers: to_address(tor)});
 	await tor.$set('setText', tog, TOR_CONTEXT, ccip.context);
 
 	// setup xor
@@ -91,11 +83,15 @@ before(async () => {
 after(async () => {
 	await new Promise(f  => setTimeout(f, 50)); // go after 
 	print_header('Shutdown');
-	await Resolver.dump(ens, root);
+	await Resolver.dump(ens, root).catch(console.log);
 	foundry.shutdown();
 	ccip.http.close();
 	print_header('Results');
 });
+
+
+test('tor is tor', async () => assert(await tor.supportsInterface('0x73302a25')));
+test('xor is xor', async () => assert(await xor.supportsInterface('0xc3fdc0c5')));
 
 test('virtual sub', async T => {
 	let node = tog.unique();
@@ -192,6 +188,15 @@ test('fallback: underscore', async T => {
 });
 
 test('xor on tor', async T => {
-
-
+	let key = 'abcd';
+	let node = await ens.$register(tog.unique(), {resolver: tor});
+	await tor.$set('setText', node, 'name', TEST_NAME);
+	let resolver = await Resolver.get(ens, node);
+	await T.test('name is onchain', async () => assert.equal(await resolver.text('name'), TEST_NAME));
+	await T.test(`${key} is offchain`, async () => assert.equal(await resolver.text(key), resolve(node.name).text(key)));
+	// try through lense
+	let xor_node = onchain_eth.create(node.name);
+	let xor_resolver = await Resolver.get(ens, xor_node);
+	await T.test('name is still onchain', async () => assert.equal(await xor_resolver.text('name'), TEST_NAME));
+	await T.test(`${key} is now empty`, async () => assert.equal(await xor_resolver.text(key), ''));
 });

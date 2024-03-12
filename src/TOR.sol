@@ -20,7 +20,7 @@ import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils.sol";
 import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
 
-// ensip-10 
+// https://eips.ethereum.org/EIPS/eip-3668
 error OffchainLookup(address from, string[] urls, bytes request, bytes4 callback, bytes carry);
 
 interface IOnchainResolver {
@@ -42,14 +42,14 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 
 	uint256 constant COIN_TYPE_ETH = 60;
 	uint256 constant COIN_TYPE_FALLBACK = 0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010; // https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8
+	string constant TEXT_CONTEXT = "ccip.context";
 	bool constant REPLACE_WITH_ONCHAIN = true;
 	bool constant OFFCHAIN_ONLY = false;
 	bool constant CALL_WITH_NULL_NODE = true;
 	bool constant CALL_UNMODIFIED = false;
 	bytes4 constant PREFIX_ONLY_OFF = 0x000000FF;
 	bytes4 constant PREFIX_ONLY_ON = ~PREFIX_ONLY_OFF;
-	uint256 ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
-	string constant TEXT_CONTEXT = "ccip.context";
+	uint256 constant ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
 	
 	ENS immutable ens;
 	constructor(ENS a) {
