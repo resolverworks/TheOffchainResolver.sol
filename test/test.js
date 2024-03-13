@@ -30,8 +30,6 @@ before(async () => {
 	print_header('Init');
 
 	foundry = await Foundry.launch({
-		port: 12345,
-		chain: 1,
 		log: new URL('./anvil.ansi', import.meta.url)
 	});
 
@@ -49,7 +47,6 @@ before(async () => {
 			return node;
 		},
 	});
-
 	// automatic signer detection for setters that are (node, ...)
 	const $resolver = {
 		async $set(func, node, ...args) {

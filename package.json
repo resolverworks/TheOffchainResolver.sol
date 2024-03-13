@@ -1,8 +1,8 @@
 {
 	"name": "TheOffchainResolver",
 	"dependencies": {
-		"@adraffy/blocksmith": "^0.0.5",
-		"@resolverworks/ezccip": "^0.0.7",
+		"@adraffy/blocksmith": "^0.0.8",
+		"@resolverworks/ezccip": "^0.0.8",
 		"ethers": "^6.11.1"
 	},
 	"scripts": {
