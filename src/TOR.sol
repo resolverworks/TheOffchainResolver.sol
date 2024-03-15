@@ -206,7 +206,6 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 					if (v.length != 0) return v; // answerable on-chain
 					resolveOffchain(dnsname, data, OFFCHAIN_ONLY);
 				}
-				
 			}
 		}
 	}

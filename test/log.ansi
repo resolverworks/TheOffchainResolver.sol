@@ -1,63 +1,59 @@
 
 *****[ Init ]*******************************************************************
-Anvil {
-  chain: [33m31337[39m,
-  endpoint: [32m'ws://127.0.0.1:32955'[39m,
-  wallets: [ [32mdev#0[0m, [32mdev#1[0m, [32mdev#2[0m, [32mdev#3[0m, [32mdev#4[0m ]
-}
-[35mDEPLOY[0m [32mdev#0[0m src/ENS.sol [32mENS<5FbD>[0m {
-  address: [32m'0x5FbDB2315678afecb367f032d93F642f64180aa3'[39m,
+Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wallets: [ [32madmin[0m ] }
+[35mDEPLOY[0m [32madmin[0m src/ENS.sol [32mENS<3Ede>[0m {
+  address: [32m'0x3Ede3eCa2a72B3aeCC820E955B36f38437D01395'[39m,
   gas: [33m643649n[39m,
   size: [33m2627[39m
 }
-[35mDEPLOY[0m [32mdev#2[0m src/PR.sol [32mPR<663F>[0m {
-  address: [32m'0x663F3ad617193148711d28f5334eE4Ed07016602'[39m,
+[35mDEPLOY[0m [32mtrustless1[0m src/PR.sol [32mPR<B2AF>[0m {
+  address: [32m'0xB2AF4b86BF118970aB4028Bf70CE27EF8f22b1db'[39m,
   gas: [33m963579n[39m,
   size: [33m4219[39m
 }
-[35mDEPLOY[0m [32mdev#2[0m src/TOR.sol [32mTOR<2E98>[0m {
-  address: [32m'0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1'[39m,
+[35mDEPLOY[0m [32mtrustless2[0m src/TOR.sol [32mTOR<a900>[0m {
+  address: [32m'0xa900616eD8D0d820D98d0749aDfB8197daA08D3B'[39m,
   gas: [33m3149259n[39m,
   size: [33m14361[39m
 }
-[35mDEPLOY[0m [32mdev#2[0m src/XOR.sol [32mXOR<8438>[0m {
-  address: [32m'0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f'[39m,
+[35mDEPLOY[0m [32mtrustless3[0m src/XOR.sol [32mXOR<9262>[0m {
+  address: [32m'0x926245E3aBD1237aCA27056aDaA926bEc552b451'[39m,
   gas: [33m693472n[39m,
   size: [33m2961[39m
 }
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m51928n[39m,
   name: [32m'eth'[39m,
   node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
   label: [32m'0x4f5b812789fc606be1b3b16908db13fc7a9adf7ca72641f84d75b47069d3d7f0'[39m,
-  owner: [32mdev#0[0m,
+  owner: [32madmin[0m,
   resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
   label: [32m'0x4f5b812789fc606be1b3b16908db13fc7a9adf7ca72641f84d75b47069d3d7f0'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
   name: [32m'raffy.eth'[39m,
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0xcb0cbc8493baf4a7b1972914ba0be89040e56e4a3c98d60268fe37b8c8e546d9'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mPR<663F>[0m,
+  owner: [32mraffy[0m,
+  resolver: [32mPR<B2AF>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0xcb0cbc8493baf4a7b1972914ba0be89040e56e4a3c98d60268fe37b8c8e546d9'[39m,
-  owner: [32mdev#0[0m
+  owner: [32mraffy[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
-  resolver: [32mPR<663F>[0m
+  resolver: [32mPR<B2AF>[0m
 }
-[33mTX[0m [32mdev#0[0m PR<663F>.setText(bytes32,string,string) {
+[33mTX[0m [32mraffy[0m PR<B2AF>.setText(bytes32,string,string) {
   gas: [33m57381n[39m,
   name: [32m'raffy.eth'[39m,
   node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
@@ -66,14 +62,11 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
-[33mTX[0m [32mdev#0[0m PR<663F>.setAddr(bytes32,address) {
+[33mTX[0m [32mraffy[0m PR<B2AF>.setAddr(bytes32,address) {
   gas: [33m57931n[39m,
   name: [32m'raffy.eth'[39m,
   node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
@@ -88,92 +81,89 @@ Anvil {
   node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
   a: [32m'0x51050ec063d393217B436747617aD1C2285Aeeee'[39m
 }
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'tog.eth'[39m,
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0x1f637c28d8d31a9344cc3dc39f1f3780b92fb107e4ea5fb6807e4b0ac2ecff1e'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0x1f637c28d8d31a9344cc3dc39f1f3780b92fb107e4ea5fb6807e4b0ac2ecff1e'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-13T10:43:42.239Z[39m Ready! {
-  context: [32m'0x9AA9a03A321453D139092028505348435C37D5D5 http://localhost:40865'[39m,
-  resolvers: { [32m'*'[39m: [32m'0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1'[39m }
+[35m2024-03-15T07:42:32.425Z[39m Ready! {
+  context: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m,
+  resolvers: { [32m'*'[39m: [32m'0xa900616eD8D0d820D98d0749aDfB8197daA08D3B'[39m }
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setText(bytes32,string,string) {
+[33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m101765n[39m,
   name: [32m'tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   key: [32m'ccip.context'[39m,
-  s: [32m'0x9AA9a03A321453D139092028505348435C37D5D5 http://localhost:40865'[39m
+  s: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[0m,
   key: [32m'ccip.context'[39m,
-  value: [32m'0x9AA9a03A321453D139092028505348435C37D5D5 http://localhost:40865'[39m
+  value: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m
 }
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
   name: [32m'onchain.eth'[39m,
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0xd86825c3ba48d71746d7cb35f2f5728b597e9619dd9348d2f2ed166a4a7a94f1'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mXOR<8438>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mXOR<9262>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
   label: [32m'0xd86825c3ba48d71746d7cb35f2f5728b597e9619dd9348d2f2ed166a4a7a94f1'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x7ee462ab30f32a6c20993d08626e463e6f8a89146bd328564210612e962f5025'[39m,
-  resolver: [32mXOR<8438>[0m
+  resolver: [32mXOR<9262>[0m
 }
-0 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 
-1 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 eth
-2 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 raffy.eth
-3 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 tog.eth
-4 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f onchain.eth
+0 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 
+1 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 eth
+2 0x35cE66aB2A25c8821b985f74BFB578Bc8Cc13523 0xB2AF4b86BF118970aB4028Bf70CE27EF8f22b1db raffy.eth
+3 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B tog.eth
+4 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x926245E3aBD1237aCA27056aDaA926bEc552b451 onchain.eth
 
 *****[ Tests ]******************************************************************
-[32m✔ tor is tor [90m(781.126238ms)[39m[39m
-[32m✔ xor is xor [90m(3.148589ms)[39m[39m
-[35m2024-03-13T10:43:42.572Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).text(name)
+[32m✔ tor is tor [90m(837.514637ms)[39m[39m
+[32m✔ xor is xor [90m(3.146243ms)[39m[39m
+[35m2024-03-15T07:42:32.763Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).text(name)
 ▶ virtual sub
-  [32m✔ has name [90m(210.985303ms)[39m[39m
-  [32m✔ not base [90m(0.124075ms)[39m[39m
-[32m▶ [39mvirtual sub [90m(226.494232ms)[39m
+  [32m✔ has name [90m(215.946716ms)[39m[39m
+  [32m✔ not base [90m(0.120992ms)[39m[39m
+[32m▶ [39mvirtual sub [90m(232.645968ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m52312n[39m,
   name: [32m'u2.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x30d1d17e6da7695dbfc1442a9803ddfd83e2cc77080a8d2442ae0f8d92b12c41'[39m,
-  owner: [32mdev#0[0m,
+  owner: [32madmin[0m,
   resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x30d1d17e6da7695dbfc1442a9803ddfd83e2cc77080a8d2442ae0f8d92b12c41'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.toggleOnchain(bytes32) {
+[33mTX[0m [32madmin[0m TOR<a900>.toggleOnchain(bytes32) {
   gas: [33m51318n[39m,
   name: [32m'u2.tog.eth'[39m,
   node: [32m'0x34f3a72a318908ac14303bd092a6e1ae008e35bc36500db8a4f8fa4fb9ec2bd5'[39m
@@ -183,32 +173,32 @@ Anvil {
   on: [33mtrue[39m
 }
 ▶ onchain real sub
-  [32m✔ is onchain [90m(3.076341ms)[39m[39m
-  [32m✔ has no name [90m(3.158921ms)[39m[39m
-  [32m✔ w/o ccip-read [90m(4.878613ms)[39m[39m
-  [32m✔ force offchain [90m(3.162978ms)[39m[39m
-  [32m✔ not base [90m(0.116418ms)[39m[39m
-[32m▶ [39monchain real sub [90m(79.264982ms)[39m
+  [32m✔ is onchain [90m(3.570382ms)[39m[39m
+  [32m✔ has no name [90m(4.150961ms)[39m[39m
+  [32m✔ w/o ccip-read [90m(3.082714ms)[39m[39m
+  [32m✔ force offchain [90m(2.639514ms)[39m[39m
+  [32m✔ not base [90m(0.135828ms)[39m[39m
+[32m▶ [39monchain real sub [90m(83.452356ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'u3.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x5de5b13d2d201cd9caf63959e624a27d94f84b47826998963fe69938fb2da37b'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x5de5b13d2d201cd9caf63959e624a27d94f84b47826998963fe69938fb2da37b'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setText(bytes32,string,string) {
+[33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m55810n[39m,
   name: [32m'u3.tog.eth'[39m,
   node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
@@ -217,19 +207,16 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
 ▶ onchain real sub hybrid
-  [32m✔ hybrid w/onchain [90m(2.724571ms)[39m[39m
-  [32m✔ force onchain [90m(3.626074ms)[39m[39m
-[35m2024-03-13T10:43:42.730Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
-  [32m✔ force offchain [90m(17.550095ms)[39m[39m
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setText(bytes32,string,string) {
+  [32m✔ hybrid w/onchain [90m(2.87586ms)[39m[39m
+  [32m✔ force onchain [90m(3.197512ms)[39m[39m
+[35m2024-03-15T07:42:33.024Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+  [32m✔ force offchain [90m(14.117777ms)[39m[39m
+[33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m33424n[39m,
   name: [32m'u3.tog.eth'[39m,
   node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
@@ -238,36 +225,33 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m''[39m
 }
-[35m2024-03-13T10:43:42.766Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
-  [32m✔ hybrid after clear [90m(11.968029ms)[39m[39m
-[32m▶ [39monchain real sub hybrid [90m(111.968614ms)[39m
+[35m2024-03-15T07:42:33.069Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+  [32m✔ hybrid after clear [90m(19.552371ms)[39m[39m
+[32m▶ [39monchain real sub hybrid [90m(219.701867ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'u4.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x60202b9ae5f07addbedd8c178dad899eca10a46e26df42cc4c1b12125150c57c'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x60202b9ae5f07addbedd8c178dad899eca10a46e26df42cc4c1b12125150c57c'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setAddr(bytes32,uint256,bytes) {
+[33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m76589n[39m,
   name: [32m'u4.tog.eth'[39m,
   node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
@@ -280,8 +264,8 @@ Anvil {
   newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
 }
 ▶ hybrid fallback: node
-  [32m✔ expect fallback [90m(4.023227ms)[39m[39m
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setText(bytes32,string,string) {
+  [32m✔ expect fallback [90m(3.253305ms)[39m[39m
+[33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m55810n[39m,
   name: [32m'u4.tog.eth'[39m,
   node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
@@ -290,39 +274,36 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Chonk'[39m
 }
-  [32m✔ expect overide [90m(4.821777ms)[39m[39m
-[35m2024-03-13T10:43:42.855Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(chonk)
-  [32m✔ expect offchain [90m(12.343365ms)[39m[39m
-[35m2024-03-13T10:43:42.869Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(name)
-  [32m✔ force offchain [90m(14.206931ms)[39m[39m
-[32m▶ [39mhybrid fallback: node [90m(102.752529ms)[39m
+  [32m✔ expect overide [90m(3.400616ms)[39m[39m
+[35m2024-03-15T07:42:33.273Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(chonk)
+  [32m✔ expect offchain [90m(15.201735ms)[39m[39m
+[35m2024-03-15T07:42:33.285Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(name)
+  [32m✔ force offchain [90m(11.49472ms)[39m[39m
+[32m▶ [39mhybrid fallback: node [90m(214.028273ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'u5.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x6811ccbe49fc858b54d79eb456e57ec7793462ec889eb6e67e83bb6aba68a4ff'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x6811ccbe49fc858b54d79eb456e57ec7793462ec889eb6e67e83bb6aba68a4ff'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.toggleOnchain(bytes32) {
+[33mTX[0m [32madmin[0m TOR<a900>.toggleOnchain(bytes32) {
   gas: [33m51330n[39m,
   name: [32m'u5.tog.eth'[39m,
   node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m
@@ -331,7 +312,7 @@ Anvil {
   node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
   on: [33mtrue[39m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setAddr(bytes32,uint256,bytes) {
+[33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m76589n[39m,
   name: [32m'u5.tog.eth'[39m,
   node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
@@ -344,29 +325,29 @@ Anvil {
   newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
 }
 ▶ onchain fallback: node
-  [32m✔ expect fallback [90m(1.760293ms)[39m[39m
-  [32m✔ expect null [90m(2.945733ms)[39m[39m
-[32m▶ [39monchain fallback: node [90m(116.448326ms)[39m
+  [32m✔ expect fallback [90m(1.91012ms)[39m[39m
+  [32m✔ expect null [90m(1.76235ms)[39m[39m
+[32m▶ [39monchain fallback: node [90m(128.151461ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
   name: [32m'u6.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x9280d3b9b4893d89f04072f5e7f4311b88422699beca41b02c3ef9a968a72da6'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mPR<663F>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mPR<B2AF>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x9280d3b9b4893d89f04072f5e7f4311b88422699beca41b02c3ef9a968a72da6'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
-  resolver: [32mPR<663F>[0m
+  resolver: [32mPR<B2AF>[0m
 }
-[33mTX[0m [32mdev#0[0m PR<663F>.setText(bytes32,string,string) {
+[33mTX[0m [32madmin[0m PR<B2AF>.setText(bytes32,string,string) {
   gas: [33m57381n[39m,
   name: [32m'u6.tog.eth'[39m,
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
@@ -375,82 +356,79 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
 ▶ hybrid fallback: resolver
-  [32m✔ name is set [90m(2.303653ms)[39m[39m
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setResolver(bytes32,address) {
-  gas: [33m31154n[39m,
+  [32m✔ name is set [90m(2.544146ms)[39m[39m
+[33mTX[0m [32madmin[0m ENS<3Ede>.setResolver(bytes32,address) {
+  gas: [33m31142n[39m,
   name: [32m'u6.tog.eth'[39m,
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-13T10:43:43.071Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).text(name)
-  [32m✔ name is offchain [90m(15.226226ms)[39m[39m
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setAddr(bytes32,uint256,bytes) {
+[35m2024-03-15T07:42:33.563Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).text(name)
+  [32m✔ name is offchain [90m(17.207243ms)[39m[39m
+[33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m54269n[39m,
   name: [32m'u6.tog.eth'[39m,
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
   cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
-  v: [32m'0x663f3ad617193148711d28f5334ee4ed07016602'[39m
+  v: [32m'0xb2af4b86bf118970ab4028bf70ce27ef8f22b1db'[39m
 }
 [36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
   coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
-  newAddress: [32m'0x663f3ad617193148711d28f5334ee4ed07016602'[39m
+  newAddress: [32m'0xb2af4b86bf118970ab4028bf70ce27ef8f22b1db'[39m
 }
-  [32m✔ name is fallback [90m(3.469395ms)[39m[39m
-[32m▶ [39mhybrid fallback: resolver [90m(106.740775ms)[39m
+  [32m✔ name is fallback [90m(3.271093ms)[39m[39m
+[32m▶ [39mhybrid fallback: resolver [90m(220.50174ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'u7.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x88cef9bed795c060e0a58a17c9231bde30e0e5bab7edf18b6c8badd38ff757ad'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x88cef9bed795c060e0a58a17c9231bde30e0e5bab7edf18b6c8badd38ff757ad'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-13T10:43:43.133Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+[35m2024-03-15T07:42:33.690Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
 ▶ fallback: underscore
-  [32m✔ name is offchain [90m(13.861742ms)[39m[39m
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  [32m✔ name is offchain [90m(18.538276ms)[39m[39m
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
   name: [32m'_.u7.tog.eth'[39m,
   node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
   label: [32m'0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mPR<663F>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mPR<B2AF>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
   label: [32m'0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
-  resolver: [32mPR<663F>[0m
+  resolver: [32mPR<B2AF>[0m
 }
-[33mTX[0m [32mdev#0[0m PR<663F>.setText(bytes32,string,string) {
+[33mTX[0m [32madmin[0m PR<B2AF>.setText(bytes32,string,string) {
   gas: [33m57393n[39m,
   name: [32m'_.u7.tog.eth'[39m,
   node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
@@ -459,15 +437,12 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
-  [32m✔ name is fallback [90m(2.094363ms)[39m[39m
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setAddr(bytes32,uint256,bytes) {
+  [32m✔ name is fallback [90m(1.992781ms)[39m[39m
+[33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m54053n[39m,
   name: [32m'u7.tog.eth'[39m,
   node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
@@ -479,29 +454,29 @@ Anvil {
   coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
   newAddress: [32m'0xff'[39m
 }
-[35m2024-03-13T10:43:43.250Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
-  [32m✔ name is fallback [90m(10.618273ms)[39m[39m
-[32m▶ [39mfallback: underscore [90m(157.748994ms)[39m
+[35m2024-03-15T07:42:33.867Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+  [32m✔ name is fallback [90m(9.683069ms)[39m[39m
+[32m▶ [39mfallback: underscore [90m(233.158157ms)[39m
 
-[33mTX[0m [32mdev#0[0m ENS<5FbD>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
-  gas: [33m74213n[39m,
+[33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74201n[39m,
   name: [32m'u8.tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x5b2f42fd87e2ca761cd28157747bddc10c6732782af0767eae7b1bdf4f4dc9ae'[39m,
-  owner: [32mdev#0[0m,
-  resolver: [32mTOR<2E98>[0m,
+  owner: [32madmin[0m,
+  resolver: [32mTOR<a900>[0m,
   ttl: [33m0n[39m
 }
 [36mLOG[0m NewOwner(bytes32,bytes32,address) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   label: [32m'0x5b2f42fd87e2ca761cd28157747bddc10c6732782af0767eae7b1bdf4f4dc9ae'[39m,
-  owner: [32mdev#0[0m
+  owner: [32madmin[0m
 }
 [36mLOG[0m NewResolver(bytes32,address) {
   node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
-  resolver: [32mTOR<2E98>[0m
+  resolver: [32mTOR<a900>[0m
 }
-[33mTX[0m [32mdev#0[0m TOR<2E98>.setText(bytes32,string,string) {
+[33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m55810n[39m,
   name: [32m'u8.tog.eth'[39m,
   node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
@@ -510,37 +485,34 @@ Anvil {
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
-  indexedKey: Indexed {
-    hash: [32m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[39m,
-    _isIndexed: [33mtrue[39m
-  },
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
 ▶ xor on tor
-  [32m✔ name is onchain [90m(3.01481ms)[39m[39m
-[35m2024-03-13T10:43:43.318Z[39m ::ffff:127.0.0.1 / resolve(u8.tog.eth).text(abcd)
-  [32m✔ abcd is offchain [90m(16.046372ms)[39m[39m
-  [32m✔ name is still onchain [90m(3.656114ms)[39m[39m
-  [32m✔ abcd is now empty [90m(3.386805ms)[39m[39m
-[32m▶ [39mxor on tor [90m(90.934031ms)[39m
+  [32m✔ name is onchain [90m(3.315431ms)[39m[39m
+[35m2024-03-15T07:42:33.989Z[39m ::ffff:127.0.0.1 / resolve(u8.tog.eth).text(abcd)
+  [32m✔ abcd is offchain [90m(15.657006ms)[39m[39m
+  [32m✔ name is still onchain [90m(3.643118ms)[39m[39m
+  [32m✔ abcd is now empty [90m(4.440415ms)[39m[39m
+[32m▶ [39mxor on tor [90m(148.041422ms)[39m
 
 
 *****[ Shutdown ]***************************************************************
- 0 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 
- 1 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 eth
- 2 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 raffy.eth
- 3 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 tog.eth
+ 0 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 
+ 1 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 eth
+ 2 0x35cE66aB2A25c8821b985f74BFB578Bc8Cc13523 0xB2AF4b86BF118970aB4028Bf70CE27EF8f22b1db raffy.eth
+ 3 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B tog.eth
  4 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 u1.tog.eth
- 5 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x0000000000000000000000000000000000000000 u2.tog.eth
- 6 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u3.tog.eth
- 7 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u4.tog.eth
- 8 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u5.tog.eth
- 9 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u6.tog.eth
-10 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u7.tog.eth
-11 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x663F3ad617193148711d28f5334eE4Ed07016602 _.u7.tog.eth
-12 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x2E983A1Ba5e8b38AAAeC4B440B9dDcFBf72E15d1 u8.tog.eth
-13 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 0x8438Ad1C834623CfF278AB6829a248E37C2D7E3f onchain.eth
+ 5 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 u2.tog.eth
+ 6 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u3.tog.eth
+ 7 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u4.tog.eth
+ 8 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u5.tog.eth
+ 9 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u6.tog.eth
+10 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u7.tog.eth
+11 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xB2AF4b86BF118970aB4028Bf70CE27EF8f22b1db _.u7.tog.eth
+12 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0xa900616eD8D0d820D98d0749aDfB8197daA08D3B u8.tog.eth
+13 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x926245E3aBD1237aCA27056aDaA926bEc552b451 onchain.eth
 14 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 eth.onchain.eth
 15 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 tog.eth.onchain.eth
 16 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 u8.tog.eth.onchain.eth
@@ -553,4 +525,4 @@ Anvil {
 [34mℹ cancelled 0[39m
 [34mℹ skipped 0[39m
 [34mℹ todo 0[39m
-[34mℹ duration_ms 75.036809[39m
+[34mℹ duration_ms 72.185282[39m

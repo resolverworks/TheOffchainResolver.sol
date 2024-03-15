@@ -13,20 +13,10 @@
 Available Accounts
 ==================
 
-(0) 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266 (10000.000000000000000000 ETH)
-(1) 0x70997970C51812dc3A010C7d01b50e0d17dc79C8 (10000.000000000000000000 ETH)
-(2) 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC (10000.000000000000000000 ETH)
-(3) 0x90F79bf6EB2c4f870365E785982E1f101E93b906 (10000.000000000000000000 ETH)
-(4) 0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65 (10000.000000000000000000 ETH)
 
 Private Keys
 ==================
 
-(0) 0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80
-(1) 0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d
-(2) 0x5de4111afa1a4b94908f83103eb1f1706367c2e68ca870fc3fb9a804cdab365a
-(3) 0x7c852118294e51e653712a81e05800f419141751be58f605c371e15141b007a6
-(4) 0x47e179ec197488593b187f80a00eb0da91f1b9d0b13f8733639f19c30a34926a
 
 Wallet
 ==================
@@ -52,154 +42,208 @@ Gas Limit
 Genesis Timestamp
 ==================
 [32m
-1710326621[0m
+1710488551[0m
 
-Listening on 127.0.0.1:32955
+Listening on 127.0.0.1:39909
 eth_chainId
 eth_chainId
 anvil_getAutomine
+anvil_setBalance
+eth_getTransactionCount
 eth_estimateGas
 eth_getBlockByNumber
 eth_gasPrice
 eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x17adb69c7412ed126238fe5f510c06dce35ec13c439506c25524bd5f3bb4499d
-    Contract created: 0x5fbdb2315678afecb367f032d93f642f64180aa3
+    Transaction: 0xe1289b78cb7a8f7ff3d1511d175cb68bb42a2444efd1d82ca1cb996603f220fb
+    Contract created: 0x3ede3eca2a72b3aecc820e955b36f38437d01395
     Gas used: 643649
 
     Block Number: 1
-    Block Hash: 0xee4be78c34e646dbb76834c7826fc4e6407da95a143b106c9255ebfb29a5af47
-    Block Time: "Wed, 13 Mar 2024 10:43:42 +0000"
+    Block Hash: 0xf3f97fed42f8707f47ad2e504bf5f395f65293470ba8ad93afac08416d9f285f
+    Block Time: "Fri, 15 Mar 2024 07:42:32 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_getCode
+anvil_setBalance
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xeba9f16449fd72fc953d01f0d77ac76496193aec29fe27151dd4ac6c79a49a02
-    Contract created: 0x663f3ad617193148711d28f5334ee4ed07016602
+    Transaction: 0xcfc862f469dfe1159bda1b5eee4ca9248eb9039cc1e21efc5d9ce8bf71ec158f
+    Contract created: 0xb2af4b86bf118970ab4028bf70ce27ef8f22b1db
     Gas used: 963579
 
     Block Number: 2
-    Block Hash: 0xfa174e625def05f07dbe01e97d8b29fab4b0fd9b593162ae240ccbd2cf5f0e1f
-    Block Time: "Wed, 13 Mar 2024 10:43:43 +0000"
+    Block Hash: 0xb12bf6835c897da8543e24b32b7b7609cd841f6a97514a98940b73328af2fddc
+    Block Time: "Fri, 15 Mar 2024 07:42:33 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_getCode
+anvil_setBalance
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xf9b3bc0997c265e761e4d4a6522fde0796229f0c4aaf9281a7427ce035b6f095
-    Contract created: 0x2e983a1ba5e8b38aaaec4b440b9ddcfbf72e15d1
+    Transaction: 0xaee8c7012694b069a4d3f4c7ce91dac34014edc5c30ec64c8c17273fe1a58931
+    Contract created: 0xa900616ed8d0d820d98d0749adfb8197daa08d3b
     Gas used: 3149259
 
     Block Number: 3
-    Block Hash: 0x677d043efb4ca6c1ca5139bc3feee23bdc67cc1425314fc631d0a5e5f8ea5709
-    Block Time: "Wed, 13 Mar 2024 10:43:44 +0000"
+    Block Hash: 0x1f658b49b5ebbf4de94f740fd5723fea44a3ceea62f2f8d591c1f8dae422d8b4
+    Block Time: "Fri, 15 Mar 2024 07:42:34 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_getCode
+anvil_setBalance
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x4eba9b82fd91c527b7c9e5c4445fa4fe7f151d58b2f1e36dda5d8818a4a83b10
-    Contract created: 0x8438ad1c834623cff278ab6829a248e37c2d7e3f
+    Transaction: 0x846f506afa7432fa9bb4b251584f0e17b75d65dd976b6ca4791800d9c7ce4232
+    Contract created: 0x926245e3abd1237aca27056adaa926bec552b451
     Gas used: 693472
 
     Block Number: 4
-    Block Hash: 0x320100f130ab8c20873dc46a6b6a61685c4b7acd69e3fcd51987417d55ab8cdf
-    Block Time: "Wed, 13 Mar 2024 10:43:45 +0000"
+    Block Hash: 0x74d65352fa7f935d38e3938d782127ed4bc425b444fa020e51df4a92a3eaaf08
+    Block Time: "Fri, 15 Mar 2024 07:42:35 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_getCode
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
 eth_sendRawTransaction
+eth_blockNumber
 
-    Transaction: 0x174b15dac1b115d605e1adbc3e9cdae2d6af08dacbd466bc5d8f3bc47a3d84e9
+    Transaction: 0xd2b48145baf59f27374ab876d89ae342ed1fbee6b522e30c35e575664d627f39
     Gas used: 51928
 
     Block Number: 5
-    Block Hash: 0xbf0cae75355af5a09762a73fe80ba360321b01cecb4eedde61a6353619d876bc
-    Block Time: "Wed, 13 Mar 2024 10:43:46 +0000"
+    Block Hash: 0x890722620a4370cd72853348e34101b51121e1b82145cc034abb525d5d80bcec
+    Block Time: "Fri, 15 Mar 2024 07:42:36 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
+anvil_setBalance
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
 eth_sendRawTransaction
+eth_blockNumber
 
-    Transaction: 0x97bd128def6d1472d4563d231cfc669fef6229cff6becf237437460ddf322293
+    Transaction: 0x8137d112f093a972c9e043be9ec524070dc3e2fd76fa39a05797ce4200f67a39
     Gas used: 74213
 
     Block Number: 6
-    Block Hash: 0x2f963690f39f74abff3b9d47e3d798b852921fe3fb543ff0c50f44b3c656c2a6
-    Block Time: "Wed, 13 Mar 2024 10:43:47 +0000"
+    Block Hash: 0xa8cc70866ce0094f81bf5d3f802479ac441d10ef1f76f7e515119cd15b25bc47
+    Block Time: "Fri, 15 Mar 2024 07:42:37 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x43356704f1e94ee48b974892bbdc4890d313fae91b842c7640a67f1e371e7dcf
+    Transaction: 0xbceacd6788050916193383da9e53be05752c75c62ebc417d8ae5b81ac0f67639
     Gas used: 57381
 
     Block Number: 7
-    Block Hash: 0x31aa059b38fb9affb36be5a084476ea97c84a14475c845ea1bb79a05967a8942
-    Block Time: "Wed, 13 Mar 2024 10:43:48 +0000"
+    Block Hash: 0x26157460070eb9448498dca2e373742460630eefcbf73eb1be99415d3fa59968
+    Block Time: "Fri, 15 Mar 2024 07:42:38 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
 eth_getBlockByNumber
 eth_gasPrice
-eth_blockNumber
 eth_sendRawTransaction
+eth_blockNumber
 
-    Transaction: 0x356be07612aa2b21efed4db350b876185d1fe83f78f9709ba2c8dfdbef489104
+    Transaction: 0x3c74490750d020e94df0658b517b0ead49619bceea16ca1e7f2857b1b33d6576
     Gas used: 57931
 
     Block Number: 8
-    Block Hash: 0xc984176e26bf96c3b0a040191988c10160ed65307ccb67bdca0a14b6afa8bbd5
-    Block Time: "Wed, 13 Mar 2024 10:43:49 +0000"
+    Block Hash: 0xf218083b4f6c780b77df12618466c66779ba4b6b763c3e7e428021612845f667
+    Block Time: "Fri, 15 Mar 2024 07:42:39 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xba038f1d69a97b4df40e113dec1fe93f882156d29865733ab132185868ba0417
-    Gas used: 74213
+    Transaction: 0x31c6ef7aee2edeef6f0722d647dae61de57d56a335b1a7210b82fbe35503dd2f
+    Gas used: 74201
 
     Block Number: 9
-    Block Hash: 0xa15d6bb6e46996c5fa471129f78a4120f9b837fb446dc44d1fb270fb01b33f52
-    Block Time: "Wed, 13 Mar 2024 10:43:50 +0000"
+    Block Hash: 0x151fa8254a98dfe52d5658de5d854479933d12146cac7785b79535daa5e7d982
+    Block Time: "Fri, 15 Mar 2024 07:42:40 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
 eth_sendRawTransaction
+eth_blockNumber
 
-    Transaction: 0x19fd96d61cf2982b2cb6f3eaed6e405591802bfbe03b86b4cb8bbcfbea1b564f
+    Transaction: 0x9bf14c30fc89a5ceb44eadd671868719a0492074c5a9d4989ea3c259fc9ec017
     Gas used: 101765
 
     Block Number: 10
-    Block Hash: 0x5f2be67f2fefc55b8c4cae1fcf149d523ad69534c60b7d9d4ae00fb2afbc0450
-    Block Time: "Wed, 13 Mar 2024 10:43:51 +0000"
+    Block Hash: 0x2ed4e907d757c14ecaa2d389e36b0b8d2ffc3e5cf1d83cea1b9059aa66dc1c89
+    Block Time: "Fri, 15 Mar 2024 07:42:41 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xe09986a68c35bca42335caa27a60c9c6036bd5317faa9270abe5d1df766aa489
+    Transaction: 0xe0fac45619a8049100f58e08eafec5562fbe3c1260be2bbb3b48723febf2c227
     Gas used: 74213
 
     Block Number: 11
-    Block Hash: 0xebbb1555fd7bb05ee1349a3d8161b1a59c716c20af055d61041aa42733233189
-    Block Time: "Wed, 13 Mar 2024 10:43:52 +0000"
+    Block Hash: 0xf5adc68293865f43914ef3e0dd24c333f58bfff87d637f38e2f5056bb4c7a703
+    Block Time: "Fri, 15 Mar 2024 07:42:42 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
@@ -219,32 +263,39 @@ eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
 eth_gasPrice
 eth_getBlockByNumber
 eth_sendRawTransaction
 eth_blockNumber
 
-    Transaction: 0x6881728322efb51f5626af0a104d0c290112fda406bd89be57591cc04163c948
+    Transaction: 0xdb552e248cc4e3531a5b25ec5561fb741f350028510fb577f8675f9ebbd33cbc
     Gas used: 52312
 
     Block Number: 12
-    Block Hash: 0xf8d3cf151164628539525d238fb6bd58715bdced8490e6ef115989a8ac3cf06c
-    Block Time: "Wed, 13 Mar 2024 10:43:53 +0000"
+    Block Hash: 0x851eb6531e5e46acc4534176d995e03f95f98bb79d077ff52d950ea107405de1
+    Block Time: "Fri, 15 Mar 2024 07:42:43 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
 eth_sendRawTransaction
+eth_blockNumber
 
-    Transaction: 0x76e7a152b0576af2837496c010aeea67465a4d6d3dc0931baa02c042ec8fa9df
+    Transaction: 0xd4450a1072fe28ff09218bfa7f48b2c06cc68fdf87cdefe3571c8b5e9e724cff
     Gas used: 51318
 
     Block Number: 13
-    Block Hash: 0xdd53397127cd644c4bab89391ea61afbca5268ee1d45b8777fb6d72092ebc062
-    Block Time: "Wed, 13 Mar 2024 10:43:54 +0000"
+    Block Hash: 0xbeb0905d1ab4a764ed99939b695fba2981e34b307aada5b6114bec4f9005f345
+    Block Time: "Fri, 15 Mar 2024 07:42:44 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
@@ -254,279 +305,368 @@ eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x6d479a1c74e87b3451698a0c16e65791a88b236f18dfe7f6074001831a181578
-    Gas used: 74213
+    Transaction: 0x34621a9192c0d9ca6f22ab7f61b99fc3824d37dcc6abfd621389fc32a0871aa6
+    Gas used: 74201
 
     Block Number: 14
-    Block Hash: 0x5f0ec41a849830cbfe990b59b12c230ff132833cd05631b6277c6782e99f5d80
-    Block Time: "Wed, 13 Mar 2024 10:43:55 +0000"
+    Block Hash: 0xee0442af95036f39b63263791f49d9cbe5a8872e97ebbfe45fec75c7cdf0cb68
+    Block Time: "Fri, 15 Mar 2024 07:42:45 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xf4b43b1cbed47c9dfb5d7174d10c55805fa89faf8ce568a094bab871e2a8478c
+    Transaction: 0xe299b82b8816a7e3c2de64cc7eacb3c098fb44ff7935c216a5b6d67e5be341c3
     Gas used: 55810
 
     Block Number: 15
-    Block Hash: 0x1deb85b105a2b082a622105d43081d6f7c4d4d3e4a16ae1200b1d1b6c826f92a
-    Block Time: "Wed, 13 Mar 2024 10:43:56 +0000"
+    Block Hash: 0x31f3d640010c2e5351dbbd331fa6155e2ce84cd228cea74fba19ddb74effad35
+    Block Time: "Fri, 15 Mar 2024 07:42:46 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x582213115b65e85b615748694272afb439bf1e0d5b7050bc1e1b9052bf3cceaf
+    Transaction: 0x3a7a168d85e2605f5ac8a1fb5ab82eff3332bb5b1e928e0943b80969d6f60888
     Gas used: 33424
 
     Block Number: 16
-    Block Hash: 0xb495075b8eea132c57e10a6f616076f3c153efaf95f9feb1355cfde994afe557
-    Block Time: "Wed, 13 Mar 2024 10:43:57 +0000"
+    Block Hash: 0x63474b1dfa76fb044e9638dbd349d00e9d991e53a34996787a3032229b1118a5
+    Block Time: "Fri, 15 Mar 2024 07:42:47 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x504242d9b8af5bec3ed76637a1f377d27ccc39c25983fe93a5afa96a6af97e35
-    Gas used: 74213
+    Transaction: 0x6e0699c4783e1d90d38f8e4f7e49791591a65011ed8e8fe280762ee8037065b5
+    Gas used: 74201
 
     Block Number: 17
-    Block Hash: 0x7718ddc12addf77a913547d727bb869a71cd919b45e719f23553f1bf0c382d61
-    Block Time: "Wed, 13 Mar 2024 10:43:58 +0000"
+    Block Hash: 0x84036be04de7ea1d0b3012c01fbe64a187cf43399898e38759677aed06220ee3
+    Block Time: "Fri, 15 Mar 2024 07:42:48 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xc4812b8c2690fcd25bf44dfcc3df98541a99e958a9618b50f88b7aacb2f8d3c8
+    Transaction: 0x01a927163473ef278542e7e9cec7457365ad625f20ce65d6c06e08e54f224fd1
     Gas used: 76589
 
     Block Number: 18
-    Block Hash: 0x1f4950332c7acec704c2f4272122280b7a7f9ca7dea180e3949f02a15f3f5ebf
-    Block Time: "Wed, 13 Mar 2024 10:43:59 +0000"
+    Block Hash: 0x83ca2151be392e67298e27d0a70b4448a074971027340a1426d6d803406339cc
+    Block Time: "Fri, 15 Mar 2024 07:42:49 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xa612e04e3820a8a42bbbe8711f17f2d8736807ff3a251bb3e29e29eb3cffb960
+    Transaction: 0xa572059ce9eefe98c3c37dd5ea62c5a5be13865c474bf5257e28895e167bb538
     Gas used: 55810
 
     Block Number: 19
-    Block Hash: 0xcaa8b2f408d2327797998468ea94cc2401bb29bff7e5a5a2361ef4e7500b43d4
-    Block Time: "Wed, 13 Mar 2024 10:44:00 +0000"
+    Block Hash: 0x5b84f548bd115b8fb018b0f934ff417d02c9e87c9119b73bf18d6338861a4746
+    Block Time: "Fri, 15 Mar 2024 07:42:50 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x75689f5d7da9f1f765939f2bf6855f199b02fbbfcfc8f3d930bc25e218cad832
+    Gas used: 74201
+
+    Block Number: 20
+    Block Hash: 0xbd1b65300635fe885390461c3551696db5867e15ec51ef551c68c70f27160d70
+    Block Time: "Fri, 15 Mar 2024 07:42:51 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
 eth_estimateGas
 eth_getBlockByNumber
 eth_gasPrice
 eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x6dd0082a4017bb150ef15cca7db8be7e1ba1f428009cb1388ec56d9fb50bdbf0
-    Gas used: 74213
-
-    Block Number: 20
-    Block Hash: 0xec4c1d9bc350f508598bdfe7ff8afd9495d2b2e11f0fb18a6fdd2162f2d78afa
-    Block Time: "Wed, 13 Mar 2024 10:44:01 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_call
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0x05745d6d043ef0fc0abd192f6e000884ec583e0913c7b87d0e39c214642467c3
+    Transaction: 0x56ccbbe3d711f37640f411c57b5256b4fa738b4cd3f7186d7adb75998d95a055
     Gas used: 51330
 
     Block Number: 21
-    Block Hash: 0x43b3777411ba95971ddee6fc0815dc9c6b8ef410ecd5bcb91209b7e71f88f7e6
-    Block Time: "Wed, 13 Mar 2024 10:44:02 +0000"
+    Block Hash: 0x83b17842532d60126c700a2ed721e2b29dd616c8c82f85448beb2bac2b68f055
+    Block Time: "Fri, 15 Mar 2024 07:42:52 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0x3fe7511b538585effd06dca94363062b0d8e05dbaf3e029aa038908942e03188
-    Gas used: 76589
-
-    Block Number: 22
-    Block Hash: 0xe529c5f709dd8ec1b09c203f7830422c0907004c244e01eb8e2cecd18ec462b2
-    Block Time: "Wed, 13 Mar 2024 10:44:03 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0x131d31270b55e56a52fc5abce44e3487e9601609a59ed794073c88a1d8511b2c
-    Gas used: 74213
-
-    Block Number: 23
-    Block Hash: 0x945a6b29d0d07c427bf7acc55732ccaa2187861ab86a6f3fc28b7053c1f2ff1e
-    Block Time: "Wed, 13 Mar 2024 10:44:04 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0x2fe164606abdd0c34dd654e951838dfd0a4d265ea3214328c714a4f7acbba5f0
-    Gas used: 57381
-
-    Block Number: 24
-    Block Hash: 0x52fa4a5645ca711561a182d95cd2ed98a8d580b524dc41c019433bec45c5cdb0
-    Block Time: "Wed, 13 Mar 2024 10:44:05 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_call
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0xb1dc9c6b1b13a5d3473cfc1835e82a10823a3240196c45559bbf5915d3ea4881
-    Gas used: 31154
-
-    Block Number: 25
-    Block Hash: 0xc734d6d4fd0d471faf91f8a069018b0d646dc0e32ba686507b157a57c9ca7f2b
-    Block Time: "Wed, 13 Mar 2024 10:44:06 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_call
-eth_call
-eth_call
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0xc3cdd5c57332148881055e3a4b9afa13e00ba240d588add1ebe9d9a64e67a698
-    Gas used: 54269
-
-    Block Number: 26
-    Block Hash: 0x1d0c7371ca9ef3c0b6dc7de87455666db37555c6c58f55928c7cbe4e0e1abf75
-    Block Time: "Wed, 13 Mar 2024 10:44:07 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_estimateGas
-eth_sendRawTransaction
-
-    Transaction: 0x675601afd962059c3c3cd762e06aea20e846161fbd9931a00c53233d14b16e73
-    Gas used: 74213
-
-    Block Number: 27
-    Block Hash: 0x24a62078cff12c3e5abb00668ff31336eef2ab29322b169a05175e0d329eb6b4
-    Block Time: "Wed, 13 Mar 2024 10:44:08 +0000"
-
-eth_getTransactionReceipt
-eth_call
-eth_call
-eth_call
-eth_call
-eth_call
-eth_call
+eth_getTransactionCount
 eth_estimateGas
 eth_getBlockByNumber
 eth_gasPrice
 eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x531e6a2faa2c745768b9bb7914b6d9d8fffb256390aa5ad123c96fc83c2e53ac
+    Transaction: 0x9a92804480231cf9a2f12fc7928b47f1a377d9f9284482c726bb7b40f17cd3bd
+    Gas used: 76589
+
+    Block Number: 22
+    Block Hash: 0x1e6854d43dc1cce8a5121638c7ed854c9051ad7f20250011dfa94ddf6dbf39b0
+    Block Time: "Fri, 15 Mar 2024 07:42:53 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x39a92fe6e058bab4cec8fe1339c5360d3ded6255b230ba699b4ffa47506cec5d
+    Gas used: 74213
+
+    Block Number: 23
+    Block Hash: 0x30b7bcfc006d336733e891c1c87770e3883cbc7c2b59245a3e77716ac4dd398d
+    Block Time: "Fri, 15 Mar 2024 07:42:54 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x50784295e9aa0cb7bc3d2e354442ea75ba036a1e4c801e5000e788243cd857d5
+    Gas used: 57381
+
+    Block Number: 24
+    Block Hash: 0x5bae3519f10ae773ca4b16c92225521f81748ff032763bb43a20b89f4e634750
+    Block Time: "Fri, 15 Mar 2024 07:42:55 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x47e3426141f879c0af0fcdfa77e81170eeceabbe87eacb64c4c62348c2e0007e
+    Gas used: 31142
+
+    Block Number: 25
+    Block Hash: 0xebfa6acb4ee9de07d71223a60e91f3435cd7e28188eab35494a00a9c62f5ed2a
+    Block Time: "Fri, 15 Mar 2024 07:42:56 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x01b705a6734211724b52be8cbe1d63e06a22779d77c6a812f5c37b6e1902b04f
+    Gas used: 54269
+
+    Block Number: 26
+    Block Hash: 0xb3cc4967b5d8bea6c75e742a5ada71c05e2be48a1bce83587ad05d3e2c50ebbf
+    Block Time: "Fri, 15 Mar 2024 07:42:57 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xc61f70237d9855e4895b0a1cfdf10ffef7cd74ed8965442abdab94cc5e1b4fc0
+    Gas used: 74201
+
+    Block Number: 27
+    Block Hash: 0x1b21443c4d52333bc50c8dedb8aad4244961c08d12091dfe64dc2baad200fba4
+    Block Time: "Fri, 15 Mar 2024 07:42:58 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x832cecc0fbdedbca75417a46bbab0679785a246a85a841eb325fa19e24a4b567
     Gas used: 74213
 
     Block Number: 28
-    Block Hash: 0x265f190d1fe26ae303a3d78228355843f057dde9d0c35d00c75c4463c85f691f
-    Block Time: "Wed, 13 Mar 2024 10:44:09 +0000"
+    Block Hash: 0xcd53fbac3224c60d49bd4af090d3c6022f48d58f1e87edc401bab7525243fa19
+    Block Time: "Fri, 15 Mar 2024 07:42:59 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x21bf835797079c43e169b2a4b9572eaed20298384081e9a04b5561fd6808d7b5
+    Transaction: 0x25cbde4f747a9fd4b22f646ce00285984f70bdd5650246e0203b2bc10d282580
     Gas used: 57393
 
     Block Number: 29
-    Block Hash: 0xb8308df13045c266f9cfd1ba26c655a3e3249dd04f9828ddf4f5b7b634fefaae
-    Block Time: "Wed, 13 Mar 2024 10:44:10 +0000"
+    Block Hash: 0xaa0f1d64dbdd92e22b192d838e9e05bb6d16e8889a651da894d0959e3dd09863
+    Block Time: "Fri, 15 Mar 2024 07:43:00 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x280dc1c654446f47c0a3ffb02d9bfa680e48f9aa9e45d38d408ee079c33ccb08
+    Transaction: 0x7da2cde484480383acf31d860b6cd2458281be5863cbc85533c94e5b69385aba
     Gas used: 54053
 
     Block Number: 30
-    Block Hash: 0xdd49f7e089461cccacccf983a72387c20a8eaf775d3ecc2131f5c3f2d3d9edaa
-    Block Time: "Wed, 13 Mar 2024 10:44:11 +0000"
+    Block Hash: 0x6564c699875bcf5cbaebfac3091a732620e3240c86e59d241ef4437dc42f4558
+    Block Time: "Fri, 15 Mar 2024 07:43:01 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0x0b7fb41e4f6e4904eada69c1b59d7b47911eaa2b57212ef262428cf2b4990b72
-    Gas used: 74213
+    Transaction: 0x37755f2b70c40732548922295761e4b30bbccc04db4948ea3640e0b8c5b705ef
+    Gas used: 74201
 
     Block Number: 31
-    Block Hash: 0xcda22a9d4009d5eebc4e613df2697fbe687cd8e9f08f127494f86d0f1b241932
-    Block Time: "Wed, 13 Mar 2024 10:44:12 +0000"
+    Block Hash: 0x0323bb969f80b28b1512079ef6917efe5cae580da40b4b491fdde86540122c91
+    Block Time: "Fri, 15 Mar 2024 07:43:02 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
+eth_getTransactionCount
 eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
 eth_sendRawTransaction
 
-    Transaction: 0xb7446f08ba4a198cef4566f0156d5bc09834297ad669b6be0e8988b56d2ce0a2
+    Transaction: 0xd7639f43a74ae3de2f858eba7e96bf5aa449710d3ea1730efe4d39c982f34127
     Gas used: 55810
 
     Block Number: 32
-    Block Hash: 0x4fe61ffce3b11030548dbe4f1e3af70f771e7cecc6b567e3b1cbf0f475378cd5
-    Block Time: "Wed, 13 Mar 2024 10:44:13 +0000"
+    Block Hash: 0x6c64724830b625fa6fca29526086971de1c9fbb486e5138d54901dd1543cf189
+    Block Time: "Fri, 15 Mar 2024 07:43:03 +0000"
 
 eth_getTransactionReceipt
+eth_blockNumber
 eth_call
 eth_call
 eth_call

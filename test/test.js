@@ -1,4 +1,5 @@
 import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith';
+//import {Foundry, Node, Resolver, to_address} from '../../blocksmith.js/src/index.js';
 import {capture_stdout, print_header} from './utils.js';
 import {serve} from '@resolverworks/ezccip';
 import {ethers} from 'ethers';
@@ -13,7 +14,7 @@ const TEST_ADDR = '0x51050ec063d393217b436747617ad1c2285aeeee';
 const TOR_CONTEXT = 'ccip.context';
 const TOR_FALLBACK = '0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010';
 
-let foundry, root, ens, tor, xor, eth, tog, ccip, raffy_eth, onchain_eth, pr;
+let foundry, root, ens, tor, xor, eth, tog, ccip, raffy, raffy_eth, onchain_eth, pr;
 
 // offchain record handler
 function resolve(name) {
@@ -35,32 +36,33 @@ before(async () => {
 
 	// deploy contracts
 	root = Node.root();
-	ens = await foundry.deploy({name: 'ENS'}, {
+	ens = await foundry.deploy({file: 'ENS'}, {
 		async $set(func, node, ...args) {
-			let wallet = foundry.wallet(await this.owner(node.namehash));
-			return foundry.confirm(this.connect(wallet)[func](node.namehash, ...args), {name: node.name});
+			let w = foundry.requireWallet(await this.owner(node.namehash));
+			return foundry.confirm(this.connect(w)[func](node.namehash, ...args), {name: node.name});
 		},
 		async $register(node, {owner, resolver = ethers.ZeroAddress} = {}) {
-			let wallet = foundry.wallet(await this.owner(node.parent.namehash)); // sign from owner of parent
-			owner = to_address(owner ?? wallet); // default owner is signer
-			node.receipt = await foundry.confirm(this.connect(wallet).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, to_address(resolver), 0), {name: node.name});
+			let w = foundry.requireWallet(await this.owner(node.parent.namehash)); // sign from owner of parent
+			owner = foundry.requireWallet(owner, w); // default owner is signer
+			node.receipt = await foundry.confirm(this.connect(w).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, to_address(resolver), 0), {name: node.name});
 			return node;
 		},
 	});
 	// automatic signer detection for setters that are (node, ...)
 	const $resolver = {
 		async $set(func, node, ...args) {
-			let wallet = foundry.wallet(await ens.owner(node.namehash));
+			let wallet = foundry.requireWallet(await ens.owner(node.namehash));
 			return foundry.confirm(this.connect(wallet)[func](node.namehash, ...args), {name: node.name});
 		}
-	};
-	pr  = await foundry.deploy({name: 'PR',  args: [to_address(ens)], wallet: 2}, $resolver); // trustless
-	tor = await foundry.deploy({name: 'TOR', args: [to_address(ens)], wallet: 2}, $resolver); // trustless
-	xor = await foundry.deploy({name: 'XOR', args: [to_address(ens)], wallet: 2}); // trustless
+	};	
+	pr  = await foundry.deploy({file: 'PR',  args: [to_address(ens)], from: 'trustless1'}, $resolver);
+	tor = await foundry.deploy({file: 'TOR', args: [to_address(ens)], from: 'trustless2'}, $resolver); 
+	xor = await foundry.deploy({file: 'XOR', args: [to_address(ens)], from: 'trustless3'}); 
 
 	// create fake ens stuff
 	eth = await ens.$register(root.create('eth'));
-	raffy_eth = await ens.$register(root.create('raffy.eth'), {resolver: pr, wallet: 1});
+	raffy = await foundry.ensureWallet('raffy');
+	raffy_eth = await ens.$register(root.create('raffy.eth'), {resolver: pr, owner: raffy});
 	await pr.$set('setText', raffy_eth, 'name', TEST_NAME);
 	await pr.$set('setAddr(bytes32,address)', raffy_eth, TEST_ADDR);
 

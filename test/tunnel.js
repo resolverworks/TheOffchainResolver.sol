@@ -16,7 +16,7 @@ test('it works', async () => {
 	let ezccip = new EZCCIP();	
 	let [{frag: {selector}}] = ezccip.register(abi, ([a, b]) => [a * 1000n + b]);
 
-	let tunnel = await foundry.deploy({name: 'OffchainTunnel'});
+	let tunnel = await foundry.deploy({file: 'OffchainTunnel'});
 
 	let ccip = await serve(ezccip, {resolver: to_address(tunnel)});
 	after(() => ccip.http.close());
