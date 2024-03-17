@@ -1,6 +1,6 @@
 
 *****[ Init ]*******************************************************************
-Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wallets: [ [32madmin[0m ] }
+Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:34619'[39m, wallets: [ [32madmin[0m ] }
 [35mDEPLOY[0m [32madmin[0m src/ENS.sol [32mENS<3Ede>[0m {
   address: [32m'0x3Ede3eCa2a72B3aeCC820E955B36f38437D01395'[39m,
   gas: [33m643649n[39m,
@@ -99,8 +99,8 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-15T07:42:32.425Z[39m Ready! {
-  context: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m,
+[35m2024-03-15T08:56:15.868Z[39m Ready! {
+  context: [32m'0x9902a4cD7aC06a6aEb08666C33Ee3E1cCD2B6e92 http://localhost:39667'[39m,
   resolvers: { [32m'*'[39m: [32m'0xa900616eD8D0d820D98d0749aDfB8197daA08D3B'[39m }
 }
 [33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
@@ -108,13 +108,13 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   name: [32m'tog.eth'[39m,
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   key: [32m'ccip.context'[39m,
-  s: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m
+  s: [32m'0x9902a4cD7aC06a6aEb08666C33Ee3E1cCD2B6e92 http://localhost:39667'[39m
 }
 [36mLOG[0m TextChanged(bytes32,string,string,string) {
   node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
   indexedKey: [36m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[0m,
   key: [32m'ccip.context'[39m,
-  value: [32m'0x74012d58BD6849DFD6F0166A659021f6233D9AdA http://localhost:43937'[39m
+  value: [32m'0x9902a4cD7aC06a6aEb08666C33Ee3E1cCD2B6e92 http://localhost:39667'[39m
 }
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
@@ -141,13 +141,13 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
 4 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x926245E3aBD1237aCA27056aDaA926bEc552b451 onchain.eth
 
 *****[ Tests ]******************************************************************
-[32m✔ tor is tor [90m(837.514637ms)[39m[39m
-[32m✔ xor is xor [90m(3.146243ms)[39m[39m
-[35m2024-03-15T07:42:32.763Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).text(name)
+[32m✔ tor is tor [90m(851.707985ms)[39m[39m
+[32m✔ xor is xor [90m(1.955135ms)[39m[39m
+[35m2024-03-15T08:56:16.219Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).text(name)
 ▶ virtual sub
-  [32m✔ has name [90m(215.946716ms)[39m[39m
-  [32m✔ not base [90m(0.120992ms)[39m[39m
-[32m▶ [39mvirtual sub [90m(232.645968ms)[39m
+  [32m✔ has name [90m(222.144142ms)[39m[39m
+  [32m✔ not base [90m(0.123856ms)[39m[39m
+[32m▶ [39mvirtual sub [90m(235.885759ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m52312n[39m,
@@ -173,12 +173,12 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   on: [33mtrue[39m
 }
 ▶ onchain real sub
-  [32m✔ is onchain [90m(3.570382ms)[39m[39m
-  [32m✔ has no name [90m(4.150961ms)[39m[39m
-  [32m✔ w/o ccip-read [90m(3.082714ms)[39m[39m
-  [32m✔ force offchain [90m(2.639514ms)[39m[39m
-  [32m✔ not base [90m(0.135828ms)[39m[39m
-[32m▶ [39monchain real sub [90m(83.452356ms)[39m
+  [32m✔ is onchain [90m(3.211303ms)[39m[39m
+  [32m✔ has no name [90m(3.679163ms)[39m[39m
+  [32m✔ w/o ccip-read [90m(3.366799ms)[39m[39m
+  [32m✔ force offchain [90m(3.386288ms)[39m[39m
+  [32m✔ not base [90m(0.116617ms)[39m[39m
+[32m▶ [39monchain real sub [90m(80.012392ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74201n[39m,
@@ -212,10 +212,10 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   value: [32m'Raffy'[39m
 }
 ▶ onchain real sub hybrid
-  [32m✔ hybrid w/onchain [90m(2.87586ms)[39m[39m
-  [32m✔ force onchain [90m(3.197512ms)[39m[39m
-[35m2024-03-15T07:42:33.024Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
-  [32m✔ force offchain [90m(14.117777ms)[39m[39m
+  [32m✔ hybrid w/onchain [90m(3.189855ms)[39m[39m
+  [32m✔ force onchain [90m(3.12213ms)[39m[39m
+[35m2024-03-15T08:56:16.483Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+  [32m✔ force offchain [90m(18.997247ms)[39m[39m
 [33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m33424n[39m,
   name: [32m'u3.tog.eth'[39m,
@@ -229,9 +229,9 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   key: [32m'name'[39m,
   value: [32m''[39m
 }
-[35m2024-03-15T07:42:33.069Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
-  [32m✔ hybrid after clear [90m(19.552371ms)[39m[39m
-[32m▶ [39monchain real sub hybrid [90m(219.701867ms)[39m
+[35m2024-03-15T08:56:16.523Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+  [32m✔ hybrid after clear [90m(11.557315ms)[39m[39m
+[32m▶ [39monchain real sub hybrid [90m(218.766315ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74201n[39m,
@@ -264,7 +264,7 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
 }
 ▶ hybrid fallback: node
-  [32m✔ expect fallback [90m(3.253305ms)[39m[39m
+  [32m✔ expect fallback [90m(3.93124ms)[39m[39m
 [33mTX[0m [32madmin[0m TOR<a900>.setText(bytes32,string,string) {
   gas: [33m55810n[39m,
   name: [32m'u4.tog.eth'[39m,
@@ -278,12 +278,12 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   key: [32m'name'[39m,
   value: [32m'Chonk'[39m
 }
-  [32m✔ expect overide [90m(3.400616ms)[39m[39m
-[35m2024-03-15T07:42:33.273Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(chonk)
-  [32m✔ expect offchain [90m(15.201735ms)[39m[39m
-[35m2024-03-15T07:42:33.285Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(name)
-  [32m✔ force offchain [90m(11.49472ms)[39m[39m
-[32m▶ [39mhybrid fallback: node [90m(214.028273ms)[39m
+  [32m✔ expect overide [90m(3.399762ms)[39m[39m
+[35m2024-03-15T08:56:16.723Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(chonk)
+  [32m✔ expect offchain [90m(13.06539ms)[39m[39m
+[35m2024-03-15T08:56:16.736Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(name)
+  [32m✔ force offchain [90m(13.009151ms)[39m[39m
+[32m▶ [39mhybrid fallback: node [90m(212.743964ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74201n[39m,
@@ -325,9 +325,9 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
 }
 ▶ onchain fallback: node
-  [32m✔ expect fallback [90m(1.91012ms)[39m[39m
-  [32m✔ expect null [90m(1.76235ms)[39m[39m
-[32m▶ [39monchain fallback: node [90m(128.151461ms)[39m
+  [32m✔ expect fallback [90m(1.859548ms)[39m[39m
+  [32m✔ expect null [90m(2.988847ms)[39m[39m
+[32m▶ [39monchain fallback: node [90m(179.515873ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
@@ -361,7 +361,7 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   value: [32m'Raffy'[39m
 }
 ▶ hybrid fallback: resolver
-  [32m✔ name is set [90m(2.544146ms)[39m[39m
+  [32m✔ name is set [90m(2.719878ms)[39m[39m
 [33mTX[0m [32madmin[0m ENS<3Ede>.setResolver(bytes32,address) {
   gas: [33m31142n[39m,
   name: [32m'u6.tog.eth'[39m,
@@ -372,8 +372,8 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
   resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-15T07:42:33.563Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).text(name)
-  [32m✔ name is offchain [90m(17.207243ms)[39m[39m
+[35m2024-03-15T08:56:17.115Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).text(name)
+  [32m✔ name is offchain [90m(16.339278ms)[39m[39m
 [33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m54269n[39m,
   name: [32m'u6.tog.eth'[39m,
@@ -386,8 +386,8 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
   newAddress: [32m'0xb2af4b86bf118970ab4028bf70ce27ef8f22b1db'[39m
 }
-  [32m✔ name is fallback [90m(3.271093ms)[39m[39m
-[32m▶ [39mhybrid fallback: resolver [90m(220.50174ms)[39m
+  [32m✔ name is fallback [90m(3.194638ms)[39m[39m
+[32m▶ [39mhybrid fallback: resolver [90m(231.071678ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74201n[39m,
@@ -407,9 +407,9 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
   resolver: [32mTOR<a900>[0m
 }
-[35m2024-03-15T07:42:33.690Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+[35m2024-03-15T08:56:17.246Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
 ▶ fallback: underscore
-  [32m✔ name is offchain [90m(18.538276ms)[39m[39m
+  [32m✔ name is offchain [90m(18.76988ms)[39m[39m
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74213n[39m,
   name: [32m'_.u7.tog.eth'[39m,
@@ -441,7 +441,7 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   key: [32m'name'[39m,
   value: [32m'Raffy'[39m
 }
-  [32m✔ name is fallback [90m(1.992781ms)[39m[39m
+  [32m✔ name is fallback [90m(3.177276ms)[39m[39m
 [33mTX[0m [32madmin[0m TOR<a900>.setAddr(bytes32,uint256,bytes) {
   gas: [33m54053n[39m,
   name: [32m'u7.tog.eth'[39m,
@@ -454,9 +454,9 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
   newAddress: [32m'0xff'[39m
 }
-[35m2024-03-15T07:42:33.867Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
-  [32m✔ name is fallback [90m(9.683069ms)[39m[39m
-[32m▶ [39mfallback: underscore [90m(233.158157ms)[39m
+[35m2024-03-15T08:56:17.431Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+  [32m✔ name is fallback [90m(16.225375ms)[39m[39m
+[32m▶ [39mfallback: underscore [90m(284.689797ms)[39m
 
 [33mTX[0m [32madmin[0m ENS<3Ede>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
   gas: [33m74201n[39m,
@@ -490,12 +490,12 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
   value: [32m'Raffy'[39m
 }
 ▶ xor on tor
-  [32m✔ name is onchain [90m(3.315431ms)[39m[39m
-[35m2024-03-15T07:42:33.989Z[39m ::ffff:127.0.0.1 / resolve(u8.tog.eth).text(abcd)
-  [32m✔ abcd is offchain [90m(15.657006ms)[39m[39m
-  [32m✔ name is still onchain [90m(3.643118ms)[39m[39m
-  [32m✔ abcd is now empty [90m(4.440415ms)[39m[39m
-[32m▶ [39mxor on tor [90m(148.041422ms)[39m
+  [32m✔ name is onchain [90m(4.233204ms)[39m[39m
+[35m2024-03-15T08:56:17.559Z[39m ::ffff:127.0.0.1 / resolve(u8.tog.eth).text(abcd)
+  [32m✔ abcd is offchain [90m(15.836098ms)[39m[39m
+  [32m✔ name is still onchain [90m(3.837454ms)[39m[39m
+  [32m✔ abcd is now empty [90m(4.046108ms)[39m[39m
+[32m▶ [39mxor on tor [90m(152.383765ms)[39m
 
 
 *****[ Shutdown ]***************************************************************
@@ -525,4 +525,4 @@ Anvil { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:39909'[39m, wall
 [34mℹ cancelled 0[39m
 [34mℹ skipped 0[39m
 [34mℹ todo 0[39m
-[34mℹ duration_ms 72.185282[39m
+[34mℹ duration_ms 79.673071[39m

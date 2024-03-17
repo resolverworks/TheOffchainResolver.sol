@@ -71,9 +71,9 @@ contract OffchainTunnel is IERC165 {
 		(address signer, string memory url) = abi.decode(v, (address, string));
 		call(signer, url, msg.data);
 	}
-	function call(address signer, string memory url, bytes memory request) public view returns (bytes memory) {
+	function call(address signer, string memory endpoint, bytes memory request) public view returns (bytes memory) {
 		string[] memory urls = new string[](1);
-		urls[0] = url;
+		urls[0] = endpoint;
 		revert OffchainLookup(address(this), urls, request, this.callback.selector, abi.encode(request, signer));
 	}
 	function callback(bytes calldata ccip, bytes calldata carry) external view returns (bytes memory) {
