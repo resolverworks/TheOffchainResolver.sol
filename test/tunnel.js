@@ -23,7 +23,7 @@ test('it works', async () => {
 
 	await foundry.confirm(tunnel.claimAndSetContext(selector, ccip.signer, ccip.endpoint, 0));
 
-	console.log(await tunnel.contextForSelector(selector));
+	console.log(await tunnel.getSelector(selector));
 
 	let contract = new ethers.Contract(tunnel, abi, foundry.provider);
 	assert(69420n, await contract.f.staticCall(69, 420, {enableCcipRead: true}));

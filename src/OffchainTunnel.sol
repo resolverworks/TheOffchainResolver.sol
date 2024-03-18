@@ -19,54 +19,69 @@ contract OffchainTunnel is IERC165 {
 		return x == type(IERC165).interfaceId || x == this.call.selector;
 	}
 
-	function slotForContext(address a, uint256 i) internal pure returns (uint256) {
-		return uint256(keccak256(abi.encodePacked(a, i)));
+	function _decodeOwnerIndex(uint256 owni) internal pure returns (address owner, uint96 index) {
+		owner = address(uint160(owni));
+		index = uint96(owni >> 160);
 	}
-	function slotForSelector(bytes4 x) public pure returns (uint256) {
-		unchecked {
-			return uint32(x) + 0x43c1d5eecd9e2f1153d9601994bca098d280c2a03f477e74cb5ae37db570bc67; // https://adraffy.github.io/keccak.js/test/demo.html
-		}
+	function _slotForOwnerIndex(address a, uint256 i) internal pure returns (uint256) {
+		return uint256(keccak256(abi.encode(a, _hash(i))));
+	}
+	function _hash(uint256 x) internal pure returns (uint256) {
+		// https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=selector&escape=1&encoding=utf8
+		return uint256(keccak256(abi.encode(0x4c11fe2a708d5242b13f178422d4088cb270c488d9932765064ea92953422272, x)));
+	}
+	function _slotForSelector(bytes4 x) internal pure returns (uint256) {
+		return _hash(uint32(x));
 	}
 
-
-	function setContext(address signer, string calldata endpoint, uint96 index) public {
-		setTiny(slotForContext(msg.sender, index), abi.encode(signer, endpoint));
-	}
 	function getContext(address owner, uint96 index) external view returns (address signer, string memory endpoint) {
-		bytes memory v = getTiny(slotForContext(owner, index));
+		bytes memory v = getTiny(_slotForOwnerIndex(owner, index));
 		if (v.length != 0) (signer, endpoint) = abi.decode(v, (address, string)); 
 	}
-	function contextForSelector(bytes4 selector) external view returns (address signer, string memory endpoint) {
-		uint256 slot = slotForSelector(selector);
-		uint256 cptr;
-		assembly { cptr := sload(slot) }
-		if (cptr != 0) {
-			bytes memory v = getTiny(cptr);
+	function getSelector(bytes4 selector) external view returns (address owner, uint96 index, address signer, string memory endpoint) {
+		uint256 slot = _slotForSelector(selector);
+		uint256 owni;
+		assembly { owni := sload(slot) }
+		if (owni != 0) {
+			(owner, index) = _decodeOwnerIndex(owni);
+			bytes memory v = getTiny(_slotForOwnerIndex(owner, index));
 			if (v.length != 0) {
 				(signer, endpoint) = abi.decode(v, (address, string)); 
 			}
 		}
 	}
-
-	function claimAndSetContext(bytes4 selector, address signer, string calldata endpoint, uint96 index) external {		
-		setContext(signer, endpoint, index);
-		claim(selector, index);
+	
+	function setContext(address signer, string calldata endpoint, uint96 index) external {
+		_setContext(msg.sender, index, signer, endpoint);
 	}
-	function claim(bytes4 selector, uint256 index) public {
-		uint256 slot = slotForSelector(selector);
-		uint256 cptr;
-		assembly { cptr := sload(slot) }
-		if (cptr != 0) revert SelectorTaken();
-		cptr = slotForContext(msg.sender, index);
-		assembly { sstore(slot, cptr) }
+	function _setContext(address owner, uint96 index, address signer, string calldata endpoint) internal {
+		setTiny(_slotForOwnerIndex(owner, index), abi.encode(signer, endpoint));
+	}
+	
+	function claimAndSetContext(bytes4 selector, address signer, string calldata endpoint, uint96 index) external {		
+		address owner = msg.sender;
+		_setContext(owner, index, signer, endpoint);
+		_claim(selector, owner, index);
+	}
+	function claim(bytes4 selector, uint256 index) external {
+		_claim(selector, msg.sender, index);
+	} 
+	function _claim(bytes4 selector, address owner, uint256 index) internal {
+		uint256 slot = _slotForSelector(selector);
+		uint256 owni;
+		assembly { owni := sload(slot) }
+		if (owni != 0) revert SelectorTaken();
+		owni = (uint256(index) << 160) | uint160(owner);
+		assembly { sstore(slot, owni) }
 	}
 
 	fallback(bytes calldata) external returns (bytes memory) {
-		uint256 slot = slotForSelector(msg.sig);
-		uint256 cptr;
-		assembly { cptr := sload(slot) }
-		if (cptr == 0) revert NoContext();
-		bytes memory v = getTiny(cptr);
+		uint256 slot = _slotForSelector(msg.sig);
+		uint256 owni;
+		assembly { owni := sload(slot) }
+		if (owni == 0) revert NoContext();
+		(address owner, uint96 index) = _decodeOwnerIndex(owni);		
+		bytes memory v = getTiny(_slotForOwnerIndex(owner, index));
 		if (v.length == 0) revert NoContext();
 		(address signer, string memory url) = abi.decode(v, (address, string));
 		call(signer, url, msg.data);
