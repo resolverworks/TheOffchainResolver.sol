@@ -12,7 +12,7 @@ contract OffchainTunnel is IERC165 {
 
 	error CCIPReadExpired(uint256 t);
 	error CCIPReadUntrusted(address signed, address expect);
-	error BadInput();
+	error NoContext();
 	error SelectorTaken();
 	
 	function supportsInterface(bytes4 x) external pure returns (bool) {
@@ -61,13 +61,13 @@ contract OffchainTunnel is IERC165 {
 		assembly { sstore(slot, cptr) }
 	}
 
-	fallback(bytes calldata req) external returns (bytes memory) {
+	fallback(bytes calldata) external returns (bytes memory) {
 		uint256 slot = slotForSelector(msg.sig);
 		uint256 cptr;
 		assembly { cptr := sload(slot) }
-		if (cptr == 0) revert BadInput();
+		if (cptr == 0) revert NoContext();
 		bytes memory v = getTiny(cptr);
-		if (v.length == 0) revert BadInput();
+		if (v.length == 0) revert NoContext();
 		(address signer, string memory url) = abi.decode(v, (address, string));
 		call(signer, url, msg.data);
 	}
