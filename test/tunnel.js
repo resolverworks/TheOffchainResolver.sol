@@ -33,10 +33,10 @@ test('it works', async () => {
 	// print the owner and server info for f()
 	console.log(await tunnel.getSelector(selector));
 
-	// call f() on tunnel, which via fallback + register,y
+	// call f() on tunnel, which via fallback + register,
 	// reverts for ccip using our ccip-endpoint,
 	// then verifies our response was signed by the registered signer,
-	// last, returns the result of f()
+	// and returns the result of f()
 	let contract = new ethers.Contract(tunnel, abi, foundry.provider);
 	assert(69420n, await contract.f.staticCall(69, 420, {enableCcipRead: true}));
 
