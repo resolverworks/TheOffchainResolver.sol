@@ -91,7 +91,7 @@ When `selector` is called with CCIP-Read, the `calldata` is forwarded to the `en
 
 ## Testing
 
-All contracts have end-to-end [adraffy/**blocksmith**](https://github.com/adraffy/blocksmith.js) tests.
+All contracts have end-to-end [adraffy/**blocksmith**](https://github.com/adraffy/blocksmith.js) tests. Install `npm i @adraffy/blocksmith` then:
 
 1. [`foundryup`](https://book.getfoundry.sh/getting-started/installation)
 1. `npm i`
