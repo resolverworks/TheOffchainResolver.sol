@@ -24,16 +24,19 @@ test('it works', async () => {
 	let tunnel = await foundry.deploy({file: 'OffchainTunnel'});
 
 	// create a ccip-server for answering wrappable-questions from tunnel-contract
+	// (which has a randomly generated private key)
 	let ccip = await serve(ezccip, {resolver: to_address(tunnel)});
 	after(() => ccip.http.close());
 
-	// claim interface of f() on tunnel thats "tunnels" to our ccip-server
+	// claim interface of f() on tunnel thats "tunnels" to our ccip-server that signs responses
+	// last argument 0 => save (signer, endpoint) under (sender, 0)
+	// (selector) => (sender, index) => (signer, endpoint)
 	await foundry.confirm(tunnel.claimAndSetContext(selector, ccip.signer, ccip.endpoint, 0));
 
 	// print the owner and server info for f()
 	console.log(await tunnel.getSelector(selector));
 
-	// call f() on tunnel, which via fallback + register,
+	// call f() on tunnel, which via fallback() and selector registry,
 	// reverts for ccip using our ccip-endpoint,
 	// then verifies our response was signed by the registered signer,
 	// and returns the result of f()
