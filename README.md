@@ -3,7 +3,7 @@
 
 * [**TheOffchainResolver.sol**](./src/TOR.sol)
 	* `node test/test.js`
-	* Mainnet: [`0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f`](https://etherscan.io/address/0x828ec5bDe537B8673AF98D77bCB275ae1CA26D1f#code) 
+	* Mainnet: [`0x84c5AdB77dd9f362A1a3480009992d8d47325dc3`](https://etherscan.io/address/0x84c5AdB77dd9f362A1a3480009992d8d47325dc3#code) (Latest)
 	* Sepolia:[`0xf93F7F8002BcfB285D44E9Ef82E711cCD0D502A2`](https://sepolia.etherscan.io/address/0xf93F7F8002BcfB285D44E9Ef82E711cCD0D502A2#code) (Latest)
 	* Goerli: [`0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
 
@@ -91,7 +91,7 @@ When `selector` is called with CCIP-Read, the `calldata` is forwarded to the `en
 
 ## Testing
 
-All contracts have end-to-end [adraffy/**blocksmith**](https://github.com/adraffy/blocksmith.js) tests. Install `npm i @adraffy/blocksmith` then:
+All contracts have end-to-end [adraffy/**blocksmith**](https://github.com/adraffy/blocksmith.js) tests.
 
 1. [`foundryup`](https://book.getfoundry.sh/getting-started/installation)
 1. `npm i`
