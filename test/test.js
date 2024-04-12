@@ -1,5 +1,4 @@
-import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith';
-//import {Foundry, Node, Resolver, to_address} from '../../blocksmith.js/src/index.js';
+import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith'; //from '../../blocksmith.js/src/index.js';
 import {capture_stdout, print_header} from './utils.js';
 import {serve} from '@resolverworks/ezccip';
 import {ethers} from 'ethers';
@@ -14,7 +13,8 @@ const TEST_ADDR = '0x51050ec063d393217b436747617ad1c2285aeeee';
 const TOR_CONTEXT = 'ccip.context';
 const TOR_FALLBACK = '0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010';
 
-let foundry, root, ens, tor, xor, eth, tog, ccip, raffy, raffy_eth, onchain_eth, pr;
+let foundry, root, ens, ens_dao, reverse_registrar, wrapper, tor, xor, eth_nft, eth, deployer, tog_eth, ccip, raffy, raffy_eth, onchain_eth, pr;
+
 
 // offchain record handler
 function resolve(name) {
@@ -22,59 +22,129 @@ function resolve(name) {
 	if (node && node.record) return node.record;
 	return {
 		text(key) { return `${name}:text:${key}`; },
-		addr(type) { return `0x4200000000000000000000000000000000000069`; }, 
+		addr(type) { return ethers.toBeHex(type, 20); }, 
 		contenthash() { return '0xe301017012201687de19f1516b9e560ab8655faa678e3a023ebff43494ac06a36581aafc957e'; },
 	};
+}
+
+// test resolver -> ccip -> offchain -> resolve() -> ccip -> resolver === resolve()
+async function test_resolver_is_offchain(T, resolver) {
+	let r = resolve(resolver.node.name);
+	await T.test('has name', async () => assert.equal(await resolver.text('name'), r.text('name')));
+	await T.test('has addr', async () => assert.equal(await resolver.addr(60), r.addr(60)));
+	await T.test('has chash', async () => assert.equal(await resolver.contenthash(), r.contenthash()));
 }
 
 before(async () => {
 	print_header('Init');
 
 	foundry = await Foundry.launch({
-		log: new URL('./anvil.ansi', import.meta.url)
+		infoLog: new URL('./anvil.ansi', import.meta.url)
 	});
 
-	// deploy contracts
+	// create the registry using the dao wallet
 	root = Node.root();
-	ens = await foundry.deploy({file: 'ENS'}, {
+	ens_dao = await foundry.ensureWallet('dao');
+	ens = await foundry.deploy({file: 'ENSRegistry', from: ens_dao});
+
+	// automatic registration (ETH2LD uses nft)
+	Object.assign(ens, {
+		async $register(node, {owner, resolver, duration = 365*24*60*60} = {}) {
+			if (node.isETH2LD) {
+				await foundry.confirm(eth_nft.register(node.labelhash, owner, duration), {name: node.name});
+				if (resolver) await this.$set('setResolver', node, resolver);
+			} else {
+				let w = foundry.requireWallet(await this.owner(node.parent.namehash));
+				owner = foundry.requireWallet(owner, w);
+				await foundry.confirm(this.connect(w).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, resolver ?? ethers.ZeroAddress, 0), {name: node.name});
+			}
+			return node;
+		}
+	});
+
+	// automatic signer for setters that are of the form: func(node, ...)
+	// $set('setResolver', node, ...) => setResolver(node.namehash, ...)
+	const $setter = {
 		async $set(func, node, ...args) {
-			let w = foundry.requireWallet(await this.owner(node.namehash));
+			let w = foundry.requireWallet(await ens.owner(node.namehash));
+			if (w === wrapper) w = foundry.requireWallet(await wrapper.ownerOf(node.namehash));
 			return foundry.confirm(this.connect(w)[func](node.namehash, ...args), {name: node.name});
-		},
-		async $register(node, {owner, resolver = ethers.ZeroAddress} = {}) {
-			let w = foundry.requireWallet(await this.owner(node.parent.namehash)); // sign from owner of parent
-			owner = foundry.requireWallet(owner, w); // default owner is signer
-			node.receipt = await foundry.confirm(this.connect(w).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, to_address(resolver), 0), {name: node.name});
+		}
+	};
+	Object.assign(ens, $setter);
+
+	// TODO: the registry is owned by root
+	//let root_controller = await foundry.deploy({file: 'Root', args: [ens], from: ens_dao});
+	//await ens.$set('setOwner', root, root_controller);
+
+	//let dummy_oracle = await foundry.deploy({file: 'DummyOracle', args: [69], from: ens_dao});
+	
+	// create the ETH2LD registrar
+	eth = await ens.$register(root.create('eth'));
+	eth_nft = await foundry.deploy({file: 'BaseRegistrarImplementation', args: [ens, eth.namehash], from: ens_dao});
+	await ens.$set('setOwner', eth, eth_nft);
+	await foundry.confirm(eth_nft.addController(ens_dao)); // TODO: change EOA controller to eth controller
+
+	// create the reverse registrar
+	reverse_registrar = await foundry.deploy({file: 'ReverseRegistrar', args: [ens], from: ens_dao});
+
+	// setup the addr.reverse namespace
+	let reverse = await ens.$register(root.create('reverse'));
+	let addr_reverse = await ens.$register(reverse.create('addr'), {owner: reverse_registrar});
+
+	// monitor name claims
+	reverse_registrar.on('ReverseClaimed', a => addr_reverse.create(a.slice(2).toLowerCase()));
+
+	// create the name wrapper
+	let metadata_service = await foundry.deploy({file: 'StaticMetadataService', args: ['http://localhost'], from: ens_dao});
+	wrapper = await foundry.deploy({file: 'NameWrapper', args: [ens, eth_nft, metadata_service]});
+	Object.assign(wrapper, $setter, {
+		async $wrap(node) {
+			let w = foundry.requireWallet(await ens.owner(node.namehash));
+			if (node.isETH2LD) {
+				await foundry.confirm(eth_nft.connect(w).approve(this, node.labelhash));
+				await foundry.confirm(this.connect(w).wrapETH2LD(node.label, w, 0, ethers.ZeroAddress));
+			} else {
+				await foundry.confirm(ens.connect(w).setApprovalForAll(this, true));
+				await foundry.confirm(this.connect(w).wrap(node.dns, w, ethers.ZeroAddress));
+			}
 			return node;
 		},
+		async $unwrap(node) {
+			let w = foundry.requireWallet(await this.ownerOf(node.namehash));
+			if (node.isETH2LD) {
+				await foundry.confirm(this.connect(w).unwrapETH2LD(node.labelhash, w, w));
+			} else {
+				await foundry.confirm(this.connect(w).unwrap(node.parent.namehash, node.labelhash, w));
+			}
+		},
 	});
-	// automatic signer detection for setters that are (node, ...)
-	const $resolver = {
-		async $set(func, node, ...args) {
-			let wallet = foundry.requireWallet(await ens.owner(node.namehash));
-			return foundry.confirm(this.connect(wallet)[func](node.namehash, ...args), {name: node.name});
-		}
-	};	
-	pr  = await foundry.deploy({file: 'PR',  args: [to_address(ens)], from: 'trustless1'}, $resolver);
-	tor = await foundry.deploy({file: 'TOR', args: [to_address(ens)], from: 'trustless2'}, $resolver); 
-	xor = await foundry.deploy({file: 'XOR', args: [to_address(ens)], from: 'trustless3'}); 
 
-	// create fake ens stuff
-	eth = await ens.$register(root.create('eth'));
+	// create public resolver
+	pr = await foundry.deploy({file: 'PublicResolver', args: [ens, wrapper, /*controller*/ethers.ZeroAddress, reverse_registrar], from: 'deployer:pr'});
+	Object.assign(pr, $setter);
+	
+	// create unwrapped name using PR
 	raffy = await foundry.ensureWallet('raffy');
-	raffy_eth = await ens.$register(root.create('raffy.eth'), {resolver: pr, owner: raffy});
+	raffy_eth = await ens.$register(eth.create('raffy'), {resolver: pr, owner: raffy});
 	await pr.$set('setText', raffy_eth, 'name', TEST_NAME);
 	await pr.$set('setAddr(bytes32,address)', raffy_eth, TEST_ADDR);
 
+	// create tor
+	deployer = await foundry.ensureWallet('deployer:tor');
+	tor = await foundry.deploy({file: 'TOR', args: [ens, wrapper], from: deployer});
+	Object.assign(tor, $setter);
+
 	// setup tog
-	tog = await ens.$register(eth.create('tog'), {resolver: tor});
-	ccip = await serve(resolve, {resolvers: to_address(tor)});
-	await tor.$set('setText', tog, TOR_CONTEXT, ccip.context);
+	tog_eth = await ens.$register(eth.create('tog'), {resolver: tor, owner: deployer});
+	ccip = await serve(resolve, {resolvers: {'': to_address(tor)}});
+	await tor.$set('setText', tog_eth, TOR_CONTEXT, ccip.context);
 
 	// setup xor
-	onchain_eth = await ens.$register(root.create('onchain.eth'), {resolver: xor});
+	xor = await foundry.deploy({file: 'XOR', args: [ens], from: 'deployer:xor'});
+	onchain_eth = await ens.$register(eth.create('onchain'), {resolver: xor, owner: ens_dao});
 
-	// initial registry
+	// dump registry
 	await Resolver.dump(ens, root);
 	print_header('Tests');
 });
@@ -88,19 +158,48 @@ after(async () => {
 	print_header('Results');
 });
 
-
 test('tor is tor', async () => assert(await tor.supportsInterface('0x73302a25')));
 test('xor is xor', async () => assert(await xor.supportsInterface('0xc3fdc0c5')));
 
-test('virtual sub', async T => {
-	let node = tog.unique();
+test('tor reverse claim', async T => {
+	const name = 'tor.eth';
+	let rev_node = root.find(`${to_address(tor).slice(2).toLowerCase()}.addr.reverse`);
+	await T.test('exists', () => assert(rev_node != null, 'no claim'));
+	await T.test('owner is deployer', async () => assert.equal(await ens.owner(rev_node.namehash), to_address(deployer)));
+	await T.test('resolver is TOR', async () => assert.equal(await ens.resolver(rev_node.namehash), to_address(tor)));
+	await T.test('deployer setName()', () => tor.$set('setName', rev_node, name));
+	let resolver = await Resolver.get(ens, rev_node);
+	await T.test('name()', async () => assert.equal(await resolver.name(), name));	
+});
+
+test('wrapped 2LD', async T => {
+	let owner = await foundry.createWallet();
+	let node = await ens.$register(eth.unique(), {owner, resolver: tor});
+	await wrapper.$wrap(node);
+	await T.test('set context', () => tor.$set('setText', node, TOR_CONTEXT, ccip.context));
 	let resolver = await Resolver.get(ens, node);
-	await T.test('has name', async () => assert.equal(await resolver.text('name'), resolve(resolver.node.name).text('name')));
+	await test_resolver_is_offchain(T, resolver);
+});
+
+test('wrapped 3LD', async T => {
+	let owner = await foundry.createWallet();
+	let parent = await ens.$register(eth.create('w3ld'), {owner});
+	let node = await ens.$register(parent.create('sub'), {resolver: tor});
+	await wrapper.$wrap(node);
+	let resolver = await Resolver.get(ens, node);
+	await T.test('set context', () => tor.$set('setText', node, TOR_CONTEXT, ccip.context));
+	await test_resolver_is_offchain(T, resolver);
+});
+
+test('virtual sub', async T => {
+	let node = tog_eth.unique();
+	let resolver = await Resolver.get(ens, node);
+	await test_resolver_is_offchain(T, resolver);
 	await T.test('not base', async () => assert.notEqual(resolver.base, node));
 });
 
-test('onchain real sub', async T => {
-	let node = await ens.$register(tog.unique());
+test('onchain sub', async T => {
+	let node = await ens.$register(tog_eth.unique());
 	await tor.$set('toggleOnchain', node);
 	let resolver = await Resolver.get(ens, node);
 	await T.test('is onchain', async () => assert(await tor.onchain(node.namehash)));
@@ -110,8 +209,9 @@ test('onchain real sub', async T => {
 	await T.test('not base', async () => assert.notEqual(resolver.base, node));
 });
 
-test('onchain real sub hybrid', async T => {
-	let node = await ens.$register(tog.unique(), {resolver: tor});
+
+test('onchain sub hybrid', async T => {
+	let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 	let resolver = await Resolver.get(ens, node);
 	await tor.$set('setText', node, 'name', TEST_NAME);
 	await T.test('hybrid w/onchain', async () => assert.equal(await resolver.text('name'), TEST_NAME));
@@ -123,7 +223,7 @@ test('onchain real sub hybrid', async T => {
 
 test('hybrid fallback: node', async T => {
 	// create name with fallback to raffy.eth
-	let node = await ens.$register(tog.unique(), {resolver: tor});
+	let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 	let resolver = await Resolver.get(ens, node);
 	await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, raffy_eth.namehash);
 	// resolve unset record that exists fallback
@@ -140,7 +240,7 @@ test('hybrid fallback: node', async T => {
 
 test('onchain fallback: node', async T => {
 	// create onchain name with fallback to raffy.eth
-	let node = await ens.$register(tog.unique(), {resolver: tor});
+	let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 	let resolver = await Resolver.get(ens, node);
 	await tor.$set('toggleOnchain', node);
 	await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, raffy_eth.namehash);
@@ -152,7 +252,7 @@ test('onchain fallback: node', async T => {
 
 test('hybrid fallback: resolver', async T => {
 	// create a name with one resolver
-	let node = await ens.$register(tog.unique(), {resolver: pr});
+	let node = await ens.$register(tog_eth.unique(), {resolver: pr});
 	await pr.$set('setText', node, 'name', TEST_NAME);
 	let resolver0 = await Resolver.get(ens, node);
 	// confirm name
@@ -160,8 +260,8 @@ test('hybrid fallback: resolver', async T => {
 	// change the resolver
 	await ens.$set('setResolver', node, tor);
 	let resolver1 = await Resolver.get(ens, node);
-	// confirm name is unset
-	await T.test('name is offchain', async () => assert.equal(await resolver1.text('name'), resolve(resolver1.node.name).text('name')));
+	// confirm name is offchain
+	await test_resolver_is_offchain(T, resolver1);
 	// set alias to old resolver
 	await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, to_address(pr));
 	// confirm name is fallback
@@ -169,11 +269,11 @@ test('hybrid fallback: resolver', async T => {
 });
 
 test('fallback: underscore', async T => {
-	let node = await ens.$register(tog.unique(), {resolver: tor});
+	let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 	// get the resolver
 	let resolver = await Resolver.get(ens, node);
 	// confirm name is default
-	await T.test('name is offchain', async () => assert.equal(await resolver.text('name'), resolve(resolver.node.name).text('name')));
+	await test_resolver_is_offchain(T, resolver);
 	// create the child
 	let node_ = await ens.$register(node.create('_'), {resolver: pr});
 	// set a name in the child
@@ -188,7 +288,7 @@ test('fallback: underscore', async T => {
 
 test('xor on tor', async T => {
 	let key = 'abcd';
-	let node = await ens.$register(tog.unique(), {resolver: tor});
+	let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 	await tor.$set('setText', node, 'name', TEST_NAME);
 	let resolver = await Resolver.get(ens, node);
 	await T.test('name is onchain', async () => assert.equal(await resolver.text('name'), TEST_NAME));

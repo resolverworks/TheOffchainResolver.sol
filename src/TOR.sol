@@ -14,8 +14,11 @@ import {INameResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profi
 import {IPubkeyResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IPubkeyResolver.sol";
 import {IContentHashResolver} from "@ensdomains/ens-contracts/contracts/resolvers/profiles/IContentHashResolver.sol";
 import {IMulticallable} from "@ensdomains/ens-contracts/contracts/resolvers/IMulticallable.sol";
+import {INameWrapper} from "@ensdomains/ens-contracts/contracts/wrapper/INameWrapper.sol";
+import {IReverseRegistrar} from "@ensdomains/ens-contracts/contracts/reverseRegistrar/IReverseRegistrar.sol";
 
 // libraries
+//import {ECDSA} from "./ECDSA.sol";
 import {ECDSA} from "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
 import {BytesUtils} from "@ensdomains/ens-contracts/contracts/wrapper/BytesUtils.sol";
 import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
@@ -41,6 +44,7 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	error NodeCheck(bytes32 node);
 
 	uint256 constant COIN_TYPE_ETH = 60;
+	bytes32 constant ADDR_REVERSE_NODE = 0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2; // https://adraffy.github.io/keccak.js/test/demo.html#algo=namehash&s=addr.reverse&escape=1&encoding=utf8	
 	uint256 constant COIN_TYPE_FALLBACK = 0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010; // https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8
 	string constant TEXT_CONTEXT = "ccip.context";
 	bool constant REPLACE_WITH_ONCHAIN = true;
@@ -52,8 +56,11 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	uint256 constant ERC165_GAS_LIMIT = 30000; // https://eips.ethereum.org/EIPS/eip-165
 	
 	ENS immutable ens;
-	constructor(ENS a) {
-		ens = a;
+	INameWrapper immutable wrapper;
+	constructor(ENS _ens, INameWrapper _wrapper) {
+		ens = _ens; // wrapper.ens();
+		wrapper = _wrapper;
+		IReverseRegistrar(ens.owner(ADDR_REVERSE_NODE)).claimWithResolver(msg.sender, address(this));
 	}
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {
@@ -74,7 +81,9 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	// utils
 	modifier requireOperator(bytes32 node) {
 		address owner = ens.owner(node);
-		if (owner != msg.sender && !ens.isApprovedForAll(owner, msg.sender)) revert Unauthorized(owner);
+		if (owner == address(wrapper) ? !wrapper.canModifyName(node, msg.sender) : (owner != msg.sender && !ens.isApprovedForAll(owner, msg.sender))) {
+			revert Unauthorized(owner); 
+		}
 		_;
 	}
 	function slotForCoin(bytes32 node, uint256 cty) internal pure returns (uint256) {
@@ -275,7 +284,7 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 			extnode = node;
 			resolver = address(bytes20(v));
 		} else {
-			if (v.length == 32) { // differnt node 
+			if (v.length == 32) { // different node 
 				extnode = bytes32(v);
 			} else if (v.length != 0) { // external fallback disabled
 				// extnode = 0 => resolver = 0
@@ -357,6 +366,10 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	function setPubkey(bytes32 node, bytes32 x, bytes32 y) requireOperator(node) external {
 		setTiny(slotForSelector(IPubkeyResolver.pubkey.selector, node), x == 0 && y == 0 ? bytes('') : abi.encode(x, y));
 		emit PubkeyChanged(node, x, y);
+	}
+	function setName(bytes32 node, string calldata s) requireOperator(node) external {
+		setTiny(slotForSelector(INameResolver.name.selector, node), bytes(s));
+		emit NameChanged(node, s);
 	}
 
 	// IOnchainResolver

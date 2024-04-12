@@ -1,7 +1,7 @@
 import {Foundry, to_address} from '@adraffy/blocksmith';
 import {EZCCIP, serve} from '@resolverworks/ezccip';
 import {ethers} from 'ethers';
-import {test, before, after} from 'node:test';
+import {test, after} from 'node:test';
 import assert from 'node:assert/strict';
 
 test('it works', async () => {

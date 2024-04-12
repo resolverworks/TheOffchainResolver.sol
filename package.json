@@ -1,11 +1,12 @@
 {
 	"name": "TheOffchainResolver",
 	"dependencies": {
-		"@adraffy/blocksmith": "^0.0.11",
-		"@resolverworks/ezccip": "^0.0.8",
+		"@adraffy/blocksmith": "^0.0.12",
+		"@resolverworks/ezccip": "^0.0.9",
 		"ethers": "^6.11.1"
 	},
 	"scripts": {
+		"build": "forge build --force",
 		"test": "node test/test.js"
 	},
 	"type": "module"
