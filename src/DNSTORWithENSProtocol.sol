@@ -15,7 +15,7 @@ import {HexUtils} from "@ensdomains/ens-contracts/contracts/utils/HexUtils.sol";
 // https://eips.ethereum.org/EIPS/eip-3668
 error OffchainLookup(address from, string[] urls, bytes request, bytes4 callback, bytes carry);
 
-contract DNSTOR is IERC165, IExtendedDNSResolver {
+contract DNSTORWithENSProtocol is IERC165, IExtendedDNSResolver {
 	using BytesUtils for bytes;
 	using HexUtils for bytes;
 

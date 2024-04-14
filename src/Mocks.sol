@@ -11,3 +11,5 @@ import {ReverseRegistrar} from "@ensdomains/ens-contracts/contracts/reverseRegis
 import {BaseRegistrarImplementation} from "@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol";
 //import {StablePriceOracle} from "@ensdomains/ens-contracts/contracts/ethregistrar/StablePriceOracle.sol";
 //import {DummyOracle} from "@ensdomains/ens-contracts/contracts/ethregistrar/DummyOracle.sol";
+import {OffchainDNSResolver} from "@ensdomains/ens-contracts/contracts/dnsregistrar/OffchainDNSResolver.sol";
+import {DNSSECImpl} from "@ensdomains/ens-contracts/contracts/dnssec-oracle/DNSSECImpl.sol";

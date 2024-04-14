@@ -60,7 +60,10 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	constructor(ENS _ens, INameWrapper _wrapper) {
 		ens = _ens; // wrapper.ens();
 		wrapper = _wrapper;
-		IReverseRegistrar(ens.owner(ADDR_REVERSE_NODE)).claimWithResolver(msg.sender, address(this));
+		address owner = ens.owner(ADDR_REVERSE_NODE);
+		if (owner != address(0)) {
+			IReverseRegistrar(owner).claimWithResolver(msg.sender, address(this));
+		}
 	}
 
 	function supportsInterface(bytes4 x) external pure returns (bool) {

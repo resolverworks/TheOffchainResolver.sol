@@ -1,5 +1,6 @@
-import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith'; //from '../../blocksmith.js/src/index.js';
+import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith';
 import {capture_stdout, print_header} from './utils.js';
+import {get_offchain_record, test_resolver_is_offchain} from './offchain-help.js';
 import {serve} from '@resolverworks/ezccip';
 import {ethers} from 'ethers';
 import {test, before, after} from 'node:test';
@@ -14,26 +15,6 @@ const TOR_CONTEXT = 'ccip.context';
 const TOR_FALLBACK = '0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010';
 
 let foundry, root, ens, ens_dao, reverse_registrar, wrapper, tor, xor, eth_nft, eth, deployer, tog_eth, ccip, raffy, raffy_eth, onchain_eth, pr;
-
-
-// offchain record handler
-function resolve(name) {
-	let node = root.find(name);
-	if (node && node.record) return node.record;
-	return {
-		text(key) { return `${name}:text:${key}`; },
-		addr(type) { return ethers.toBeHex(type, 20); }, 
-		contenthash() { return '0xe301017012201687de19f1516b9e560ab8655faa678e3a023ebff43494ac06a36581aafc957e'; },
-	};
-}
-
-// test resolver -> ccip -> offchain -> resolve() -> ccip -> resolver === resolve()
-async function test_resolver_is_offchain(T, resolver) {
-	let r = resolve(resolver.node.name);
-	await T.test('has name', async () => assert.equal(await resolver.text('name'), r.text('name')));
-	await T.test('has addr', async () => assert.equal(await resolver.addr(60), r.addr(60)));
-	await T.test('has chash', async () => assert.equal(await resolver.contenthash(), r.contenthash()));
-}
 
 before(async () => {
 	print_header('Init');
@@ -137,7 +118,7 @@ before(async () => {
 
 	// setup tog
 	tog_eth = await ens.$register(eth.create('tog'), {resolver: tor, owner: deployer});
-	ccip = await serve(resolve, {resolvers: {'': to_address(tor)}});
+	ccip = await serve(get_offchain_record, {resolvers: {'': to_address(tor)}});
 	await tor.$set('setText', tog_eth, TOR_CONTEXT, ccip.context);
 
 	// setup xor
@@ -174,7 +155,7 @@ test('tor reverse claim', async T => {
 
 test('wrapped 2LD', async T => {
 	let owner = await foundry.createWallet();
-	let node = await ens.$register(eth.unique(), {owner, resolver: tor});
+	let node = await ens.$register(eth.create('w2ld'), {owner, resolver: tor});
 	await wrapper.$wrap(node);
 	await T.test('set context', () => tor.$set('setText', node, TOR_CONTEXT, ccip.context));
 	let resolver = await Resolver.get(ens, node);
@@ -216,9 +197,9 @@ test('onchain sub hybrid', async T => {
 	await tor.$set('setText', node, 'name', TEST_NAME);
 	await T.test('hybrid w/onchain', async () => assert.equal(await resolver.text('name'), TEST_NAME));
 	await T.test('force onchain', async () => assert.equal(await resolver.text('name', {tor: 'on', ccip: false}), TEST_NAME));
-	await T.test('force offchain', async () => assert.equal(await resolver.text('name', {tor: 'off'}), resolve(resolver.node.name).text('name')));
+	await T.test('force offchain', async () => assert.equal(await resolver.text('name', {tor: 'off'}), get_offchain_record(resolver.node.name).text('name')));
 	await tor.$set('setText', node, 'name', ''); // clear the record
-	await T.test('hybrid after clear', async () => assert.equal(await resolver.text('name'), resolve(resolver.node.name).text('name')));
+	await T.test('hybrid after clear', async () => assert.equal(await resolver.text('name'), get_offchain_record(resolver.node.name).text('name')));
 });
 
 test('hybrid fallback: node', async T => {
@@ -233,9 +214,9 @@ test('hybrid fallback: node', async T => {
 	await tor.$set('setText', node, 'name', override);
 	await T.test('expect overide', async () => assert.equal(await resolver.text('name'), override));
 	// resolve unset record that should go offchain
-	await T.test('expect offchain', async () => assert.equal(await resolver.text('chonk'), resolve(resolver.node.name).text('chonk')));
+	await T.test('expect offchain', async () => assert.equal(await resolver.text('chonk'), get_offchain_record(resolver.node.name).text('chonk')));
 	// apply offchain filter
-	await T.test('force offchain', async () => assert.equal(await resolver.text('name', {tor: 'off'}), resolve(resolver.node.name).text('name')));
+	await T.test('force offchain', async () => assert.equal(await resolver.text('name', {tor: 'off'}), get_offchain_record(resolver.node.name).text('name')));
 });
 
 test('onchain fallback: node', async T => {
@@ -283,7 +264,7 @@ test('fallback: underscore', async T => {
 	// disable the fallback
 	await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, '0xFF');
 	// read the name from parent again
-	await T.test('name is fallback', async () => assert.equal(await resolver.text('name'), resolve(resolver.node.name).text('name')));
+	await T.test('name is fallback', async () => assert.equal(await resolver.text('name'), get_offchain_record(resolver.node.name).text('name')));
 });
 
 test('xor on tor', async T => {
@@ -292,7 +273,7 @@ test('xor on tor', async T => {
 	await tor.$set('setText', node, 'name', TEST_NAME);
 	let resolver = await Resolver.get(ens, node);
 	await T.test('name is onchain', async () => assert.equal(await resolver.text('name'), TEST_NAME));
-	await T.test(`${key} is offchain`, async () => assert.equal(await resolver.text(key), resolve(node.name).text(key)));
+	await T.test(`${key} is offchain`, async () => assert.equal(await resolver.text(key), get_offchain_record(node.name).text(key)));
 	// try through lense
 	let xor_node = onchain_eth.create(node.name);
 	let xor_resolver = await Resolver.get(ens, xor_node);
