@@ -2,9 +2,9 @@
 **TOR**  — a trustless universal hybrid off-chain ENS and DNS resolver contract and protocol.
 
 * [**TheOffchainResolver.sol**](./src/TOR.sol)
-	* `node test/test.js`
-	* Mainnet: [`0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD`](https://etherscan.io/address/0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD#code) (Latest)
-	* Sepolia:[`0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3`](https://sepolia.etherscan.io/address/0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3#code) (Latest)
+	* End-to-end [Tests](#testing): `node test/test.js`
+	* Mainnet: [`0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD`](https://etherscan.io/address/0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD#code)
+	* Sepolia: [`0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3`](https://sepolia.etherscan.io/address/0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3#code)
 
 ## TOR Protocol
 * `bytes requestData` = calldata from CCIP-Read
@@ -17,7 +17,7 @@
 * `bytes signedData` = **abi.encoded** `(resolver, expires, requestHash, responseHash)`
 * `bytes32 signedHash` = **keccak256** of `signedData`
 * `bytes signature` = **signature** of `signedHash` with private key
-* `bytes data` = **abi.encoded** `(signature, expires, hash)`
+* `bytes data` = **abi.encoded** `(signature, expires, signedData)`
 * reply with `data`
 
 ### Implementations
