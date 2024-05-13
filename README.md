@@ -2,7 +2,7 @@
 **TOR**  — a trustless universal hybrid off-chain ENS and DNS resolver contract and protocol.
 
 * [**TheOffchainResolver.sol**](./src/TOR.sol)
-	* End-to-end [Tests](#testing): `node test/test.js`
+	* Test: `node test/test.js`
 	* Mainnet: [`0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD`](https://etherscan.io/address/0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD#code)
 	* Sepolia: [`0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3`](https://sepolia.etherscan.io/address/0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3#code)
 
@@ -49,12 +49,21 @@
 
 ---
 
+# DNSTORWithENSProtocol.sol
+
+DNS part of TOR but uses standard ENS signing protocol that is compatible with official [ENS Offchain Resolver](https://github.com/ensdomains/offchain-resolver/).
+
+* [**DNSTORWithENSProtocol.sol**](./src/DNSTORWithENSProtocol.sol)
+	* Test: `node test/dns.js`
+
+---
+
 # eXclusivelyOnchainResolver.sol
 
 **XOR**  — a trustless on-chain wildcard resolver contract that translates ENSIP-10 calls into non-ENSIP-10 calls.
 
 * [**eXclusivelyOnchainResolver.sol**](./src/XOR.sol)
-	* Tests are merged with **TOR**.
+	* Test: merged with **TOR**
 	* Goerli: [`0x9b87849Aa21889343b6fB1E146f9F734ecFA9982`](https://goerli.etherscan.io/address/0x9b87849Aa21889343b6fB1E146f9F734ecFA9982#code)
 * Features
 	* works with **any name**

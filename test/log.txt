@@ -1,0 +1,2015 @@
+
+*****[ Init ]*******************************************************************
+
+[32m
+                             _   _
+                            (_) | |
+      __ _   _ __   __   __  _  | |
+     / _` | | '_ \  \ \ / / | | | |
+    | (_| | | | | |  \ V /  | | | |
+     \__,_| |_| |_|   \_/   |_| |_|
+[0m
+    0.2.0 (aa333c6 2024-05-05T00:18:50.531084657Z)
+    [32mhttps://github.com/foundry-rs/foundry[0m
+
+Available Accounts
+==================
+
+
+Private Keys
+==================
+
+
+Wallet
+==================
+Mnemonic:          test test test test test test test test test test test junk
+Derivation path:   m/44'/60'/0'/0/
+
+
+Chain ID
+==================
+
+[32m31337[0m
+
+Base Fee
+==================
+
+[32m1000000000[0m
+
+Gas Limit
+==================
+
+[32m30000000[0m
+
+Genesis Timestamp
+==================
+
+[32m1715635181[0m
+
+Listening on 127.0.0.1:43257
+eth_chainId
+eth_chainId
+anvil_getAutomine
+anvil_setBalance
+LAUNCH { chain: [33m31337[39m, endpoint: [32m'ws://127.0.0.1:43257'[39m, wallets: [ [35madmin[0m ] }
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xed676453d0ca0505702fe31f38bb8061263c5a0381f5aac8dbd2287396e6d8ba
+    Contract created: 0x7f9566c8942e9c4d4efaa1e8021201dc6b112de1
+    Gas used: 643649
+
+    Block Number: 1
+    Block Hash: 0xf7a30cae9d968c70283d99efb9a90b0b40f55fecfe7f4429d0b6c09778d42fa6
+    Block Time: "Mon, 13 May 2024 21:19:42 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdao[0m lib/ens-contracts/contracts/registry/ENSRegistry.sol [35mENSRegistry<7f9566C8>[0m [33m643649[0mgas [33m2627[0mbytes
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x85edcc4ddae0223be343dcceb661a12001ce433b807634b3bca16b0c03ad5255
+    Gas used: 51928
+
+    Block Number: 2
+    Block Hash: 0x287d4796199dd8e0ffe66c46dfd9e7b96399f895b93af2111ab46c0b4c52af2e
+    Block Time: "Mon, 13 May 2024 21:19:43 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m51928n[39m,
+  name: [32m'eth'[39m,
+  node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
+  label: [32m'0x4f5b812789fc606be1b3b16908db13fc7a9adf7ca72641f84d75b47069d3d7f0'[39m,
+  owner: [35mdao[0m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
+  label: [32m'0x4f5b812789fc606be1b3b16908db13fc7a9adf7ca72641f84d75b47069d3d7f0'[39m,
+  owner: [35mdao[0m
+}
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x3c6e7f93ec2fcf53f1a9abb93ef5a4610638a1787d74cc89b74b713dfe1e33b6
+    Contract created: 0xc47768f31ba254db0142d78fe0c225f7ac159f9c
+    Gas used: 1878993
+
+    Block Number: 3
+    Block Hash: 0x67b5f1e264a1a63b03fa1dc4a070f3d8628a934048191d517e238260eac7be6d
+    Block Time: "Mon, 13 May 2024 21:19:44 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdao[0m lib/ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol [35mBaseRegistrarImplementation<C47768f3>[0m [33m1878993[0mgas [33m8079[0mbytes
+[36mLOG[0m OwnershipTransferred(address,address) {
+  previousOwner: [32m'0x0000000000000000000000000000000000000000'[39m,
+  newOwner: [35mdao[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x053884dc5c0048492607716ae89fa81e6c1b6365cb01831b5a5c1906bd10f8d3
+    Gas used: 29105
+
+    Block Number: 4
+    Block Hash: 0x31fd30f86f58b3be297b746d230240610e9b6f3cced36dc8da4652b6156c2273
+    Block Time: "Mon, 13 May 2024 21:19:45 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m ENSRegistry<7f9566C8>.setOwner(bytes32,address) {
+  gas: [33m29105n[39m,
+  name: [32m'eth'[39m,
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  owner: [35mBaseRegistrarImplementation<C47768f3>[0m
+}
+[36mLOG[0m Transfer(bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  owner: [35mBaseRegistrarImplementation<C47768f3>[0m
+}
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x8cc2f55aef7316ddab2511c684916b7a8792c3083d7699bbad2e8cb3ebbc0a42
+    Gas used: 47290
+
+    Block Number: 5
+    Block Hash: 0x5337e0b14aca92ece830b099547a6565035861bd706f55b1296c7d6d819b777b
+    Block Time: "Mon, 13 May 2024 21:19:46 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.addController(address) { gas: [33m47290n[39m, controller: [35mdao[0m }
+[36mLOG[0m ControllerAdded(address) { controller: [35mdao[0m }
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xa272d9b44085ee8397fd0343f5d3abb47ec2191f5f251b9aca481173c94db950
+    Contract created: 0x379fbe1fa7fe87baba8efc349a907790c49b3d23
+    Gas used: 818521
+
+    Block Number: 6
+    Block Hash: 0x016c7ce09e296161a1692c5c36a222bc3a873352859e56f26b84a2d4a765a58b
+    Block Time: "Mon, 13 May 2024 21:19:47 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdao[0m lib/ens-contracts/contracts/reverseRegistrar/ReverseRegistrar.sol [35mReverseRegistrar<379FBE1F>[0m [33m818521[0mgas [33m3383[0mbytes
+[36mLOG[0m OwnershipTransferred(address,address) {
+  previousOwner: [32m'0x0000000000000000000000000000000000000000'[39m,
+  newOwner: [35mdao[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x0bfecf311484063441efb4c91d2dbcb2879f22ae8ec527aa9d748bddaf83065a
+    Gas used: 51916
+
+    Block Number: 7
+    Block Hash: 0xac24702009f4a47f0c06b01d1f9dcf8190d3802035580621c6718e0b2ce860ab
+    Block Time: "Mon, 13 May 2024 21:19:48 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m51916n[39m,
+  name: [32m'reverse'[39m,
+  node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
+  label: [32m'0xdec08c9dbbdd0890e300eb5062089b2d4b1c40e3673bbccb5423f7b37dcf9a9c'[39m,
+  owner: [35mdao[0m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x0000000000000000000000000000000000000000000000000000000000000000'[39m,
+  label: [32m'0xdec08c9dbbdd0890e300eb5062089b2d4b1c40e3673bbccb5423f7b37dcf9a9c'[39m,
+  owner: [35mdao[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x9fd20f7ef32eb8d002a3bfc6d6d8e04ae733e561ee8a6b330ae502eabddba48a
+    Gas used: 52312
+
+    Block Number: 8
+    Block Hash: 0xee73562fc8b367b7e96957b692a50a6a7f99039ef29010d8b6ef8817dc68914f
+    Block Time: "Mon, 13 May 2024 21:19:49 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m52312n[39m,
+  name: [32m'addr.reverse'[39m,
+  node: [32m'0xa097f6721ce401e757d1223a763fef49b8b5f90bb18567ddb86fd205dff71d34'[39m,
+  label: [32m'0xe5e14487b78f85faa6e1808e89246cf57dd34831548ff2e6097380d98db2504a'[39m,
+  owner: [35mReverseRegistrar<379FBE1F>[0m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0xa097f6721ce401e757d1223a763fef49b8b5f90bb18567ddb86fd205dff71d34'[39m,
+  label: [32m'0xe5e14487b78f85faa6e1808e89246cf57dd34831548ff2e6097380d98db2504a'[39m,
+  owner: [35mReverseRegistrar<379FBE1F>[0m
+}
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xe487716b5caa60e14529a2fc2856006a6b599d18b512ae016a7489c0fa253d77
+    Contract created: 0x3b91bb74f7d93990b03b0e0c153d406224d93d27
+    Gas used: 189115
+
+    Block Number: 9
+    Block Hash: 0xd7cfac7ced675fc19c640045991abb00e8b0b57b0db306f9afea38236c9f27d6
+    Block Time: "Mon, 13 May 2024 21:19:50 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdao[0m lib/ens-contracts/contracts/wrapper/StaticMetadataService.sol [35mStaticMetadataService<3B91bb74>[0m [33m189115[0mgas [33m478[0mbytes
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x47da4ba587aad3472da51448d484eca136f08272b0e42200e3a1c85ce270c654
+    Contract created: 0x3ede3eca2a72b3aecc820e955b36f38437d01395
+    Gas used: 5480322
+
+    Block Number: 10
+    Block Hash: 0x62dc367b2cdb562f79db5a68bfff2d07b0aee35c9b025cffd36eec596dfbd066
+    Block Time: "Mon, 13 May 2024 21:19:51 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35madmin[0m lib/ens-contracts/contracts/wrapper/NameWrapper.sol [35mNameWrapper<3Ede3eCa>[0m [33m5480322[0mgas [33m24280[0mbytes
+[36mLOG[0m OwnershipTransferred(address,address) {
+  previousOwner: [32m'0x0000000000000000000000000000000000000000'[39m,
+  newOwner: [35madmin[0m
+}
+[36mLOG[0m ReverseClaimed(address,bytes32) {
+  addr: [35mNameWrapper<3Ede3eCa>[0m,
+  node: [32m'0xfb0c76398529dd44968df90a8adc7b7f103e483404f4cdeac2971c0d2b725be7'[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2'[39m,
+  label: [32m'0xbf4623a6473e9a71e9e42b178d3c07cc7995f32dd8c72fe1ffe2bfa514570835'[39m,
+  owner: [35madmin[0m
+}
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xae4e24b5d1b1209fa2ea53832a8ed610aafeefaf5442cbed8baef29f42f7b95a
+    Contract created: 0x5cd21a425cdbd673f9963c7cb03b371456c6a330
+    Gas used: 2756758
+
+    Block Number: 11
+    Block Hash: 0x6eeae22f57d5abb454d912f1dbcb30e6d0dec8bb5756248a99f609a9c494a400
+    Block Time: "Mon, 13 May 2024 21:19:52 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdeployer:pr[0m lib/ens-contracts/contracts/resolvers/PublicResolver.sol [35mPublicResolver<5cd21a42>[0m [33m2756758[0mgas [33m12304[0mbytes
+[36mLOG[0m ReverseClaimed(address,bytes32) {
+  addr: [35mPublicResolver<5cd21a42>[0m,
+  node: [32m'0x01549e74f05d15549604b817232661c0618b8b64ad1bec7a72999f933e2ee35e'[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2'[39m,
+  label: [32m'0xd53f27bfed7ccca04ffbe02d55f903ac088780f2b4759e3ae48e842094231959'[39m,
+  owner: [35mdeployer:pr[0m
+}
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xb5b9cbff1089c55a2875327a70a36f305c42bdfc9d15e68d3af05217e0f1baa7
+    Gas used: 131878
+
+    Block Number: 12
+    Block Hash: 0x0a144d9ab6745c296c29a4a848098dfcb95d12bd12e1198638325f1ebdec694d
+    Block Time: "Mon, 13 May 2024 21:19:53 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.register(uint256,address,uint256) {
+  gas: [33m131878n[39m,
+  name: [32m'raffy.eth'[39m,
+  id: [33m91842011529764390124322931916134555051359118325819011691525342013207339157209n[39m,
+  owner: [35mraffy[0m,
+  duration: [33m31536000n[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mraffy[0m,
+  tokenId: [33m91842011529764390124322931916134555051359118325819011691525342013207339157209n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0xcb0cbc8493baf4a7b1972914ba0be89040e56e4a3c98d60268fe37b8c8e546d9'[39m,
+  owner: [35mraffy[0m
+}
+[36mLOG[0m NameRegistered(uint256,address,uint256) {
+  id: [33m91842011529764390124322931916134555051359118325819011691525342013207339157209n[39m,
+  owner: [35mraffy[0m,
+  expires: [33m1747171193n[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xb0095c30acaf9b9ec3df286c8eb58de9512959c8b32a27df66fe6269bc32369b
+    Gas used: 48254
+
+    Block Number: 13
+    Block Hash: 0x7c729a6132ea2453e60b5c9dc0f6f30315125e73652db50d164a678a8ef3db7b
+    Block Time: "Mon, 13 May 2024 21:19:54 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mraffy[0m ENSRegistry<7f9566C8>.setResolver(bytes32,address) {
+  gas: [33m48254n[39m,
+  name: [32m'raffy.eth'[39m,
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  resolver: [35mPublicResolver<5cd21a42>[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  resolver: [35mPublicResolver<5cd21a42>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x905b195b22df7c80c5a623b576de1460a7666589584e42e69a44b92abfd15a3f
+    Gas used: 57653
+
+    Block Number: 14
+    Block Hash: 0x813d5db7d70acb62b7696f45dd082a219d9af5b47a86e2744d227e5cb50c1142
+    Block Time: "Mon, 13 May 2024 21:19:55 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mraffy[0m PublicResolver<5cd21a42>.setText(bytes32,string,string) {
+  gas: [33m57653n[39m,
+  name: [32m'raffy.eth'[39m,
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x6e29209a7fea3a3233a59eba1852b72878ce2a3658ea54f1ea7ee11a8ce1353d
+    Gas used: 58498
+
+    Block Number: 15
+    Block Hash: 0x735f1ba46b09722d4c96851da2eec7618a7fc03ea173a009fc5480110fe3df53
+    Block Time: "Mon, 13 May 2024 21:19:56 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mraffy[0m PublicResolver<5cd21a42>.setAddr(bytes32,address) {
+  gas: [33m58498n[39m,
+  name: [32m'raffy.eth'[39m,
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  a: [32m'0x51050ec063d393217B436747617aD1C2285Aeeee'[39m
+}
+[36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  coinType: [33m60n[39m,
+  newAddress: [32m'0x51050ec063d393217b436747617ad1c2285aeeee'[39m
+}
+[36mLOG[0m AddrChanged(bytes32,address) {
+  node: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m,
+  a: [32m'0x51050ec063d393217B436747617aD1C2285Aeeee'[39m
+}
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x92448244f275d81118e0b0cca9fe2b51835d2bba59bad1dd540bd1bb2d5cddb3
+    Contract created: 0xdfeb428246ff2013ae1bc611ae271ada031e7104
+    Gas used: 3576103
+
+    Block Number: 16
+    Block Hash: 0x1f70ab64302ad76102f8c6db73e6970455cd3b1d44d7985d2c4dda66a22620c0
+    Block Time: "Mon, 13 May 2024 21:19:57 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdeployer:tor[0m src/TOR.sol [35mTOR<dFeb4282>[0m [33m3576103[0mgas [33m16029[0mbytes
+[36mLOG[0m ReverseClaimed(address,bytes32) {
+  addr: [35mTOR<dFeb4282>[0m,
+  node: [32m'0xa9c209747ec23bc1e2a6438671dc7615eb53530013195dd2fc858ac67bd2afd2'[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x91d1777781884d03a6757a803996e38de2a42967fb37eeaca72729271025a9e2'[39m,
+  label: [32m'0x7d256f6234c07bc4f1e9981f5590e362bd7a314bb7ab44a49405ab46d766a0f7'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0xa9c209747ec23bc1e2a6438671dc7615eb53530013195dd2fc858ac67bd2afd2'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x1f8af0e9e0c9715c575ad3b04287227160edae98292ca24244dc3fda4713d15c
+    Gas used: 131878
+
+    Block Number: 17
+    Block Hash: 0xeb70066d70e784667f86c392714fd938c52d1f47ea4ccc2527b01389217cd967
+    Block Time: "Mon, 13 May 2024 21:19:58 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.register(uint256,address,uint256) {
+  gas: [33m131878n[39m,
+  name: [32m'tog.eth'[39m,
+  id: [33m14197473083273484874754098471259021775927482858912975788503316901904559963934n[39m,
+  owner: [35mdeployer:tor[0m,
+  duration: [33m31536000n[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mdeployer:tor[0m,
+  tokenId: [33m14197473083273484874754098471259021775927482858912975788503316901904559963934n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0x1f637c28d8d31a9344cc3dc39f1f3780b92fb107e4ea5fb6807e4b0ac2ecff1e'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NameRegistered(uint256,address,uint256) {
+  id: [33m14197473083273484874754098471259021775927482858912975788503316901904559963934n[39m,
+  owner: [35mdeployer:tor[0m,
+  expires: [33m1747171198n[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x3bd326781c7d7fe07da4a17ee6f3d4500ecd9d966f89d7fafce9fccf1d0da47f
+    Gas used: 48266
+
+    Block Number: 18
+    Block Hash: 0x2b82a7e1fe888d1854d2afcace097c19ab4a27e9504680634b6c05a2e3735bd8
+    Block Time: "Mon, 13 May 2024 21:19:59 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setResolver(bytes32,address) {
+  gas: [33m48266n[39m,
+  name: [32m'tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+[35m2024-05-13T21:19:43.054Z[39m Ready! {
+  protocol: [32m'tor'[39m,
+  context: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x1025e9db4912633a42a962bf949207dee1a62772e356b0d576a1a30429500f35
+    Gas used: 101835
+
+    Block Number: 19
+    Block Hash: 0x7466973898236ac2b6f0e5a36443573b50bdcb3bb19409608453449b3c68b759
+    Block Time: "Mon, 13 May 2024 21:20:00 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m101835n[39m,
+  name: [32m'tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  key: [32m'ccip.context'[39m,
+  s: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  indexedKey: [36m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[0m,
+  key: [32m'ccip.context'[39m,
+  value: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x19f8873612843c2db579a0ade0d2ec543f34ff3ce951f6a8b1a0947de1548991
+    Contract created: 0x0487f35263022d388cc3a9084a5c46f569508f25
+    Gas used: 693472
+
+    Block Number: 20
+    Block Hash: 0xd5faf48e525c2687becdb4cd45f326feb65dd4847002373a4cfcb9091246c2fb
+    Block Time: "Mon, 13 May 2024 21:20:01 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+eth_getCode
+[33mDEPLOY[0m [35mdeployer:xor[0m src/XOR.sol [35mXOR<0487f352>[0m [33m693472[0mgas [33m2961[0mbytes
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x7ee20cefb476bac3406534333c4b664ddfd3af2aed4af2706a4cb113e1e7cd58
+    Gas used: 131878
+
+    Block Number: 21
+    Block Hash: 0x0144fabcbd24a8a20765988cb3f6ee8426246a7c4330d44ecebf705537e31b96
+    Block Time: "Mon, 13 May 2024 21:20:02 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.register(uint256,address,uint256) {
+  gas: [33m131878n[39m,
+  name: [32m'onchain.eth'[39m,
+  id: [33m97883588030144974174322914563330879601262132529451244073481404049150912926961n[39m,
+  owner: [35mdao[0m,
+  duration: [33m31536000n[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mdao[0m,
+  tokenId: [33m97883588030144974174322914563330879601262132529451244073481404049150912926961n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0xd86825c3ba48d71746d7cb35f2f5728b597e9619dd9348d2f2ed166a4a7a94f1'[39m,
+  owner: [35mdao[0m
+}
+[36mLOG[0m NameRegistered(uint256,address,uint256) {
+  id: [33m97883588030144974174322914563330879601262132529451244073481404049150912926961n[39m,
+  owner: [35mdao[0m,
+  expires: [33m1747171202n[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xdc775564d41ed050b5060ae2b236b7e17e50863288bd3534ee28facce26c3956
+    Gas used: 48266
+
+    Block Number: 22
+    Block Hash: 0x3a1e5e7dbcb04550c5370fb0dc903da6a2860155f5421370a1f5b176b5c182ff
+    Block Time: "Mon, 13 May 2024 21:20:03 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m ENSRegistry<7f9566C8>.setResolver(bytes32,address) {
+  gas: [33m48266n[39m,
+  name: [32m'onchain.eth'[39m,
+  node: [32m'0x7ee462ab30f32a6c20993d08626e463e6f8a89146bd328564210612e962f5025'[39m,
+  resolver: [35mXOR<0487f352>[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x7ee462ab30f32a6c20993d08626e463e6f8a89146bd328564210612e962f5025'[39m,
+  resolver: [35mXOR<0487f352>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+ 0 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0000000000000000000000000000000000000000 
+ 1 0xC47768f31ba254Db0142D78FE0C225F7aC159f9C 0x0000000000000000000000000000000000000000 eth
+ 2 0x35cE66aB2A25c8821b985f74BFB578Bc8Cc13523 0x5cd21a425CdBD673f9963c7Cb03B371456C6A330 raffy.eth
+ 3 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 tog.eth
+ 4 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0487f35263022d388cC3a9084A5C46F569508F25 onchain.eth
+ 5 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0000000000000000000000000000000000000000 reverse
+ 6 0x379FBE1FA7fe87BaBa8eFC349a907790C49b3D23 0x0000000000000000000000000000000000000000 addr.reverse
+ 7 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 3ede3eca2a72b3aecc820e955b36f38437d01395.addr.reverse
+ 8 0x0Bb945acd4C5944e6172dff3aB84bccf9f67AdC0 0x0000000000000000000000000000000000000000 5cd21a425cdbd673f9963c7cb03b371456c6a330.addr.reverse
+ 9 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 dfeb428246ff2013ae1bc611ae271ada031e7104.addr.reverse
+
+*****[ Tests ]******************************************************************
+eth_call
+▶ TOR
+  [32m✔ tor is tor [90m(2.348106ms)[39m[39m
+eth_call
+  [32m✔ xor is xor [90m(2.766954ms)[39m[39m
+  ▶ tor reverse claim
+    [32m✔ exists [90m(0.297209ms)[39m[39m
+eth_call
+    [32m✔ owner is deployer [90m(2.740043ms)[39m[39m
+eth_call
+    [32m✔ resolver is TOR [90m(2.137791ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xf175457b8cd0f007a87e61c670bcb4f000fd675aadbce9a6775558e360b215af
+    Gas used: 53246
+
+    Block Number: 23
+    Block Hash: 0x9045bfcfbbe6ccfa882c9263c7bede5c8f63fdcb1b9970b7fbe7ec5bde106249
+    Block Time: "Mon, 13 May 2024 21:20:04 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setName(bytes32,string) {
+  gas: [33m53246n[39m,
+  name: [32m'dfeb428246ff2013ae1bc611ae271ada031e7104.addr.reverse'[39m,
+  node: [32m'0xa9c209747ec23bc1e2a6438671dc7615eb53530013195dd2fc858ac67bd2afd2'[39m,
+  s: [32m'tor.eth'[39m
+}
+[36mLOG[0m NameChanged(bytes32,string) {
+  node: [32m'0xa9c209747ec23bc1e2a6438671dc7615eb53530013195dd2fc858ac67bd2afd2'[39m,
+  name: [32m'tor.eth'[39m
+}
+    [32m✔ deployer setName() [90m(26.572696ms)[39m[39m
+eth_call
+eth_call
+eth_call
+eth_call
+    [32m✔ name() [90m(173.046083ms)[39m[39m
+  [32m▶ [39mtor reverse claim [90m(215.833766ms)[39m
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x29efc4d4acea0757824ed6e7f8f6602f9ed23a2af9708b9b396c9c2378039bd5
+    Gas used: 131878
+
+    Block Number: 24
+    Block Hash: 0x73a7f0fb360c818b54894687326479a3353eb7c12f8628e43e060915b0bd67e2
+    Block Time: "Mon, 13 May 2024 21:20:05 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.register(uint256,address,uint256) {
+  gas: [33m131878n[39m,
+  name: [32m'w2ld.eth'[39m,
+  id: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m,
+  owner: [35mrandom1[0m,
+  duration: [33m31536000n[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mrandom1[0m,
+  tokenId: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0x8bb26a0f3548df2516770d105f52f9cdd50a08c5d86b9d0adf6a5436f6e0d62f'[39m,
+  owner: [35mrandom1[0m
+}
+[36mLOG[0m NameRegistered(uint256,address,uint256) {
+  id: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m,
+  owner: [35mrandom1[0m,
+  expires: [33m1747171205n[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x552dfc8dfb3078d8bdd29ce185bb1065526e731d5c03a54a16b7d56ad2c97b3a
+    Gas used: 48266
+
+    Block Number: 25
+    Block Hash: 0x8040934068b23fe160d12d909596acd97661413214fa1e83be46623cc6a906dd
+    Block Time: "Mon, 13 May 2024 21:20:06 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom1[0m ENSRegistry<7f9566C8>.setResolver(bytes32,address) {
+  gas: [33m48266n[39m,
+  name: [32m'w2ld.eth'[39m,
+  node: [32m'0x9d94e3cbead9c8a7d1b01aa843c9b2c20ef87b0e44155a23088410d570f024a6'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x9d94e3cbead9c8a7d1b01aa843c9b2c20ef87b0e44155a23088410d570f024a6'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x935f1117b19571e9cd15e1f3d51909146c1c0c6752db193c7f5228ad8a30fef0
+    Gas used: 49096
+
+    Block Number: 26
+    Block Hash: 0xf58499ee4f67e54887dd5c206eb099821bec71fc291ba4847804e94114732462
+    Block Time: "Mon, 13 May 2024 21:20:07 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom1[0m BaseRegistrarImplementation<C47768f3>.approve(address,uint256) {
+  gas: [33m49096n[39m,
+  to: [35mNameWrapper<3Ede3eCa>[0m,
+  tokenId: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m
+}
+[36mLOG[0m Approval(address,address,uint256) {
+  owner: [35mrandom1[0m,
+  approved: [35mNameWrapper<3Ede3eCa>[0m,
+  tokenId: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m
+}
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x8b76bffaafc8d05a81cee65400f009dcab0be2c2654e61e9de28e61c7d7e2266
+    Gas used: 134798
+
+    Block Number: 27
+    Block Hash: 0xa8d748f7c0104569f3c726cdea991f0acac991ac6482b6061f4612cc1bed6633
+    Block Time: "Mon, 13 May 2024 21:20:08 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom1[0m NameWrapper<3Ede3eCa>.wrapETH2LD(string,address,uint16,address) {
+  gas: [33m134798n[39m,
+  label: [32m'w2ld'[39m,
+  wrappedOwner: [35mrandom1[0m,
+  ownerControlledFuses: [33m0n[39m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [35mrandom1[0m,
+  to: [35mNameWrapper<3Ede3eCa>[0m,
+  tokenId: [33m63186716725728069322031738047357621371406605991801201337887349431181282170415n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0x8bb26a0f3548df2516770d105f52f9cdd50a08c5d86b9d0adf6a5436f6e0d62f'[39m,
+  owner: [35mNameWrapper<3Ede3eCa>[0m
+}
+[36mLOG[0m TransferSingle(address,address,address,uint256,uint256) {
+  operator: [35mrandom1[0m,
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mrandom1[0m,
+  id: [33m71276182787182586058653278422963884656696797300581202772928295679579139351718n[39m,
+  value: [33m1n[39m
+}
+[36mLOG[0m NameWrapped(bytes32,bytes,address,uint32,uint64) {
+  node: [32m'0x9d94e3cbead9c8a7d1b01aa843c9b2c20ef87b0e44155a23088410d570f024a6'[39m,
+  name: [32m'0x0477326c640365746800'[39m,
+  owner: [35mrandom1[0m,
+  fuses: [33m196608n[39m,
+  expiry: [33m1754947205n[39m
+}
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xbf1d2db1311ac5339f26da946ee9466ea8ce4985ca96c4449c4fd35c1cd54032
+    Gas used: 107883
+
+    Block Number: 28
+    Block Hash: 0x4103d63cab6d97ff323b690155ac99f5f0908a5ea76f8bbbde548e7bf98d574b
+    Block Time: "Mon, 13 May 2024 21:20:09 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom1[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m107883n[39m,
+  name: [32m'w2ld.eth'[39m,
+  node: [32m'0x9d94e3cbead9c8a7d1b01aa843c9b2c20ef87b0e44155a23088410d570f024a6'[39m,
+  key: [32m'ccip.context'[39m,
+  s: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x9d94e3cbead9c8a7d1b01aa843c9b2c20ef87b0e44155a23088410d570f024a6'[39m,
+  indexedKey: [36m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[0m,
+  key: [32m'ccip.context'[39m,
+  value: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+  ▶ wrapped 2LD
+    [32m✔ set context [90m(29.877061ms)[39m[39m
+eth_call
+eth_call
+eth_call
+eth_call
+[35m2024-05-13T21:19:43.752Z[39m ::ffff:127.0.0.1 / resolve(w2ld.eth).text(name)
+eth_call
+    [32m✔ text [90m(31.00908ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:43.769Z[39m ::ffff:127.0.0.1 / resolve(w2ld.eth).addr(60)
+eth_call
+    [32m✔ addr [90m(14.615688ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:43.782Z[39m ::ffff:127.0.0.1 / resolve(w2ld.eth).contenthash()
+eth_call
+    [32m✔ chash [90m(13.035987ms)[39m[39m
+  [32m▶ [39mwrapped 2LD [90m(300.136124ms)[39m
+anvil_setBalance
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x9034ec9e63e6653a85b21ae1926dc00681cdcca92dd0ccbe0211b9d175041265
+    Gas used: 131878
+
+    Block Number: 29
+    Block Hash: 0xdaa0f008d44823570d8961ad85527eea042c096b9d34f2eb78677ddf59f20f30
+    Block Time: "Mon, 13 May 2024 21:20:10 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdao[0m BaseRegistrarImplementation<C47768f3>.register(uint256,address,uint256) {
+  gas: [33m131878n[39m,
+  name: [32m'w3ld.eth'[39m,
+  id: [33m42170876466692694037672102132010459951320926390060498040812537368395676485513n[39m,
+  owner: [35mrandom2[0m,
+  duration: [33m31536000n[39m
+}
+[36mLOG[0m Transfer(address,address,uint256) {
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mrandom2[0m,
+  tokenId: [33m42170876466692694037672102132010459951320926390060498040812537368395676485513n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae'[39m,
+  label: [32m'0x5d3bdec7b38c4fb8a72dd18919a27bc2a773075e60599e18ab63718a3e018789'[39m,
+  owner: [35mrandom2[0m
+}
+[36mLOG[0m NameRegistered(uint256,address,uint256) {
+  id: [33m42170876466692694037672102132010459951320926390060498040812537368395676485513n[39m,
+  owner: [35mrandom2[0m,
+  expires: [33m1747171210n[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x98d63ae4fad6545a34636a4a5b4c5a09b6b865b4a0c120f8f1a8c5f9eb41d12f
+    Gas used: 74213
+
+    Block Number: 30
+    Block Hash: 0x89c4f3b347635faea7b8559e1b50d28600a1efaeaad4b61bb5aabfef7ceb0b44
+    Block Time: "Mon, 13 May 2024 21:20:11 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom2[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'sub.w3ld.eth'[39m,
+  node: [32m'0xb1fd2e95b7a744273150c54da4f6d718ac116bf8243e7518049a5ac9d0cf4a4e'[39m,
+  label: [32m'0xfa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b'[39m,
+  owner: [35mrandom2[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0xb1fd2e95b7a744273150c54da4f6d718ac116bf8243e7518049a5ac9d0cf4a4e'[39m,
+  label: [32m'0xfa1ea47215815692a5f1391cff19abbaf694c82fb2151a4c351b6c0eeaaf317b'[39m,
+  owner: [35mrandom2[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0xaffb128eac95cd5ba8b36cd50d5fd84d4a8724d7f6c0eff12f0e2c25ad1cc7c8'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xc8e524c2ef44c45f724b69de64aca909553ee1491c5a774dc9c8a65fe3184bc9
+    Gas used: 46124
+
+    Block Number: 31
+    Block Hash: 0xa8cf47fc3ea7dfae40dc58ced6810332f6296d7ee1378e9922f9828677341a4a
+    Block Time: "Mon, 13 May 2024 21:20:12 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom2[0m ENSRegistry<7f9566C8>.setApprovalForAll(address,bool) { gas: [33m46124n[39m, operator: [35mNameWrapper<3Ede3eCa>[0m, approved: [33mtrue[39m }
+[36mLOG[0m ApprovalForAll(address,address,bool) { owner: [35mrandom2[0m, operator: [35mNameWrapper<3Ede3eCa>[0m, approved: [33mtrue[39m }
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x7dcb23ad38d5141025c6f14f055515310b8e7c60a056eb3d3ce1b5db95893195
+    Gas used: 91331
+
+    Block Number: 32
+    Block Hash: 0xd787cbb89ed17e742f1be5828f7cd135a87ce930a0f5f282d5374fec81afd934
+    Block Time: "Mon, 13 May 2024 21:20:13 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom2[0m NameWrapper<3Ede3eCa>.wrap(bytes,address,address) {
+  gas: [33m91331n[39m,
+  name: [32m'0x037375620477336c640365746800'[39m,
+  wrappedOwner: [35mrandom2[0m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m
+}
+[36mLOG[0m Transfer(bytes32,address) {
+  node: [32m'0xaffb128eac95cd5ba8b36cd50d5fd84d4a8724d7f6c0eff12f0e2c25ad1cc7c8'[39m,
+  owner: [35mNameWrapper<3Ede3eCa>[0m
+}
+[36mLOG[0m TransferSingle(address,address,address,uint256,uint256) {
+  operator: [35mrandom2[0m,
+  from: [32m'0x0000000000000000000000000000000000000000'[39m,
+  to: [35mrandom2[0m,
+  id: [33m79598355193253000607000075951281912727242483234360807793502427323628793939912n[39m,
+  value: [33m1n[39m
+}
+[36mLOG[0m NameWrapped(bytes32,bytes,address,uint32,uint64) {
+  node: [32m'0xaffb128eac95cd5ba8b36cd50d5fd84d4a8724d7f6c0eff12f0e2c25ad1cc7c8'[39m,
+  name: [32m'0x037375620477336c640365746800'[39m,
+  owner: [35mrandom2[0m,
+  fuses: [33m0n[39m,
+  expiry: [33m0n[39m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x40ce3aabf0d3b33ecde36c743b6940ae040b62fc387662d82aed19a9e569a1e9
+    Gas used: 107816
+
+    Block Number: 33
+    Block Hash: 0xbdc4996be2f1d0695aff10ce8823931dba723354b6ad54906f8d7db08c6b18c7
+    Block Time: "Mon, 13 May 2024 21:20:14 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mrandom2[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m107816n[39m,
+  name: [32m'sub.w3ld.eth'[39m,
+  node: [32m'0xaffb128eac95cd5ba8b36cd50d5fd84d4a8724d7f6c0eff12f0e2c25ad1cc7c8'[39m,
+  key: [32m'ccip.context'[39m,
+  s: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0xaffb128eac95cd5ba8b36cd50d5fd84d4a8724d7f6c0eff12f0e2c25ad1cc7c8'[39m,
+  indexedKey: [36m'0x73302a25c5d20a7d87a32d7a93d45d7eb1a82fe1405dfec24d430447a485692e'[0m,
+  key: [32m'ccip.context'[39m,
+  value: [32m'0x9D87d4EA50BF89f20adD31456BD38AFeC4f77C9C http://localhost:43245'[39m
+}
+  ▶ wrapped 3LD
+    [32m✔ set context [90m(78.407133ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.073Z[39m ::ffff:127.0.0.1 / resolve(sub.w3ld.eth).text(name)
+eth_call
+    [32m✔ text [90m(11.472336ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.084Z[39m ::ffff:127.0.0.1 / resolve(sub.w3ld.eth).addr(60)
+eth_call
+    [32m✔ addr [90m(10.015737ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.099Z[39m ::ffff:127.0.0.1 / resolve(sub.w3ld.eth).contenthash()
+eth_call
+    [32m✔ chash [90m(15.884946ms)[39m[39m
+  [32m▶ [39mwrapped 3LD [90m(315.847115ms)[39m
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+[35m2024-05-13T21:19:44.125Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).text(name)
+eth_call
+  ▶ virtual sub
+    [32m✔ text [90m(14.548923ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.138Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).addr(60)
+eth_call
+    [32m✔ addr [90m(12.866077ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.148Z[39m ::ffff:127.0.0.1 / resolve(u1.tog.eth).contenthash()
+eth_call
+    [32m✔ chash [90m(9.817715ms)[39m[39m
+    [32m✔ not base [90m(0.147928ms)[39m[39m
+  [32m▶ [39mvirtual sub [90m(48.659676ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x8f7dbb00b9536825dce5b0dc324e53c3cb1fb482eaf29ef43d6b9315ce70d494
+    Gas used: 52312
+
+    Block Number: 34
+    Block Hash: 0x18681f092d2483392f7cce988846d8083c6f10a1e02b07e693ce6d6891c3a019
+    Block Time: "Mon, 13 May 2024 21:20:15 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m52312n[39m,
+  name: [32m'u2.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x30d1d17e6da7695dbfc1442a9803ddfd83e2cc77080a8d2442ae0f8d92b12c41'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [32m'0x0000000000000000000000000000000000000000'[39m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x30d1d17e6da7695dbfc1442a9803ddfd83e2cc77080a8d2442ae0f8d92b12c41'[39m,
+  owner: [35mdeployer:tor[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x9cbda33108f175f718a249ea877f875cccdeb5566203dc6f580722a119f0497d
+    Gas used: 51344
+
+    Block Number: 35
+    Block Hash: 0x9e3485bdd4c4d815f8141ef0d2b76a1856604359ccec406d2cd5b786cac24000
+    Block Time: "Mon, 13 May 2024 21:20:16 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.toggleOnchain(bytes32) {
+  gas: [33m51344n[39m,
+  name: [32m'u2.tog.eth'[39m,
+  node: [32m'0x34f3a72a318908ac14303bd092a6e1ae008e35bc36500db8a4f8fa4fb9ec2bd5'[39m
+}
+[36mLOG[0m OnchainChanged(bytes32,bool) {
+  node: [32m'0x34f3a72a318908ac14303bd092a6e1ae008e35bc36500db8a4f8fa4fb9ec2bd5'[39m,
+  on: [33mtrue[39m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+  ▶ onchain sub
+    [32m✔ is onchain [90m(2.707102ms)[39m[39m
+eth_call
+    [32m✔ has no name [90m(2.075453ms)[39m[39m
+eth_call
+    [32m✔ w/o ccip-read [90m(3.157649ms)[39m[39m
+eth_call
+    [32m✔ force offchain [90m(3.566277ms)[39m[39m
+    [32m✔ not base [90m(0.113804ms)[39m[39m
+  [32m▶ [39monchain sub [90m(119.648236ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x66df2f245f853ee29b03a1320b47077a630889d3b864d35c895c41da5b652524
+    Gas used: 74213
+
+    Block Number: 36
+    Block Hash: 0x80671a96704afc1d87cf81c47802082e83d7244901b8cb498220f7c753171cb7
+    Block Time: "Mon, 13 May 2024 21:20:17 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u3.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x5de5b13d2d201cd9caf63959e624a27d94f84b47826998963fe69938fb2da37b'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x5de5b13d2d201cd9caf63959e624a27d94f84b47826998963fe69938fb2da37b'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xaf3aa8774447b1692e148e4be578b077f0b93e7c132c4f5743d696b1118b98e8
+    Gas used: 55880
+
+    Block Number: 37
+    Block Hash: 0xb3a0c8b343f2491e5567e5d6a8590197f43e0d8c52d6fee9e6decfc241293c50
+    Block Time: "Mon, 13 May 2024 21:20:18 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m55880n[39m,
+  name: [32m'u3.tog.eth'[39m,
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  key: [32m'name'[39m,
+  s: [32m'Raffy'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+eth_call
+  ▶ onchain sub hybrid
+    [32m✔ hybrid w/onchain [90m(2.074402ms)[39m[39m
+eth_call
+    [32m✔ force onchain [90m(3.153732ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.426Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+eth_call
+    [32m✔ force offchain [90m(10.348363ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xc5541c959440fa425f8ab7dd58781dddde45f57a5804bc6d86869b1c9014be65
+    Gas used: 33494
+
+    Block Number: 38
+    Block Hash: 0x6d7a261529d91dba32444220358ce4f58f9a89fd3c7e5bd711c2e4cd80d71789
+    Block Time: "Mon, 13 May 2024 21:20:19 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m33494n[39m,
+  name: [32m'u3.tog.eth'[39m,
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  key: [32m'name'[39m,
+  s: [32m''[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0xdf42df59721be5ef37a98b50e50fac0a99fb6009c31182124a28220837bcbe38'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m''[39m
+}
+eth_call
+[35m2024-05-13T21:19:44.507Z[39m ::ffff:127.0.0.1 / resolve(u3.tog.eth).text(name)
+eth_call
+    [32m✔ hybrid after clear [90m(10.470392ms)[39m[39m
+  [32m▶ [39monchain sub hybrid [90m(238.709188ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x8542d6a7ef139b7ed42938767e172cf2bf4a811c01c2a8e9cadaec23f2e0a909
+    Gas used: 74213
+
+    Block Number: 39
+    Block Hash: 0xf6ce3077e6a461b0663901f4d0178e507d9aaf4d1a78fc4aaf24015288a3a7f1
+    Block Time: "Mon, 13 May 2024 21:20:20 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u4.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x60202b9ae5f07addbedd8c178dad899eca10a46e26df42cc4c1b12125150c57c'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x60202b9ae5f07addbedd8c178dad899eca10a46e26df42cc4c1b12125150c57c'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xa69299171706428f5931773886373fe61d66ed0519a07b677fe4a44e0479072a
+    Gas used: 76681
+
+    Block Number: 40
+    Block Hash: 0x6c6b2d418013c2d7bc4f2d33f95b875d5c64a1f0838c46da743513710aa829c7
+    Block Time: "Mon, 13 May 2024 21:20:21 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setAddr(bytes32,uint256,bytes) {
+  gas: [33m76681n[39m,
+  name: [32m'u4.tog.eth'[39m,
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
+}
+[36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
+}
+eth_call
+  ▶ hybrid fallback: node
+    [32m✔ expect fallback [90m(3.108646ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xd13f25862865f740c89252d1988ec530723ed7cd3f9a7c3cc7b110edf999dc72
+    Gas used: 55880
+
+    Block Number: 41
+    Block Hash: 0xdc50566f4034400a5b6efe3dd6c3be57dd4ba45c0b1d46fef2714cfad9316344
+    Block Time: "Mon, 13 May 2024 21:20:22 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m55880n[39m,
+  name: [32m'u4.tog.eth'[39m,
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  key: [32m'name'[39m,
+  s: [32m'Chonk'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x32451485d094e6f632105f3548eb163efb75c43b06d3db9a0a1cf8d13242ab81'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Chonk'[39m
+}
+eth_call
+    [32m✔ expect overide [90m(3.984343ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.661Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(chonk)
+eth_call
+    [32m✔ expect offchain [90m(13.34555ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.675Z[39m ::ffff:127.0.0.1 / resolve(u4.tog.eth).text(name)
+eth_call
+    [32m✔ force offchain [90m(12.555714ms)[39m[39m
+  [32m▶ [39mhybrid fallback: node [90m(167.215197ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x4c8e6d20d43d99255e866330a15d424b6c8e805020293e86d911adfb0a763f52
+    Gas used: 74213
+
+    Block Number: 42
+    Block Hash: 0xf9cf4856a95610e77f49f54d57e37b892423c5c1ba140a8763b502b776d20959
+    Block Time: "Mon, 13 May 2024 21:20:23 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u5.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x6811ccbe49fc858b54d79eb456e57ec7793462ec889eb6e67e83bb6aba68a4ff'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x6811ccbe49fc858b54d79eb456e57ec7793462ec889eb6e67e83bb6aba68a4ff'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x55718ece411db0f5c36443e183fb06ed8a776dc44f79e109fb19fd3e83fc5869
+    Gas used: 51356
+
+    Block Number: 43
+    Block Hash: 0x129958b190123c1d6c116fd84967b3dc79e63152efade7b0e8490b5a8503d89e
+    Block Time: "Mon, 13 May 2024 21:20:24 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.toggleOnchain(bytes32) {
+  gas: [33m51356n[39m,
+  name: [32m'u5.tog.eth'[39m,
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m
+}
+[36mLOG[0m OnchainChanged(bytes32,bool) {
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  on: [33mtrue[39m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0xebd54f300ad3ac61d7b2aba35c3a74f50d589ac2b1fa121c7c1d8345350ec619
+    Gas used: 76681
+
+    Block Number: 44
+    Block Hash: 0xf5d551f122a4fd27632b7c3323d51c41ad21885eb93091b2ddcd1d6dc68b7b58
+    Block Time: "Mon, 13 May 2024 21:20:25 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setAddr(bytes32,uint256,bytes) {
+  gas: [33m76681n[39m,
+  name: [32m'u5.tog.eth'[39m,
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
+}
+[36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
+  node: [32m'0x99b81e382ed8b8ac6d3c7ac88aad0d7dc0467b8a0a31ef871c4e0d9025b10cf5'[39m,
+  coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  newAddress: [32m'0x9c8b7ac505c9f0161bbbd04437fce8c630a0886e1ffea00078e298f063a8a5df'[39m
+}
+eth_call
+  ▶ onchain fallback: node
+    [32m✔ expect fallback [90m(3.724835ms)[39m[39m
+eth_call
+    [32m✔ expect null [90m(4.186333ms)[39m[39m
+  [32m▶ [39monchain fallback: node [90m(181.054864ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x527d05a581d4cfb1e369f198871f430e1373341b070138f00c8e30cf950438f3
+    Gas used: 74213
+
+    Block Number: 45
+    Block Hash: 0x60c005d656e65be1ff98573f3aaf8f891ed9ab0e7a6195781f8cca6ea7522521
+    Block Time: "Mon, 13 May 2024 21:20:26 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u6.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x9280d3b9b4893d89f04072f5e7f4311b88422699beca41b02c3ef9a968a72da6'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mPublicResolver<5cd21a42>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x9280d3b9b4893d89f04072f5e7f4311b88422699beca41b02c3ef9a968a72da6'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  resolver: [35mPublicResolver<5cd21a42>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x582a913a0d738f82634b5170b8bee4b0add24074e65e100d2db59bd3c8a05997
+    Gas used: 57653
+
+    Block Number: 46
+    Block Hash: 0x96939cfa11e98e20f5764dbd05bda31c143191f38b568d5a77b8b72604fd8ad4
+    Block Time: "Mon, 13 May 2024 21:20:27 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m PublicResolver<5cd21a42>.setText(bytes32,string,string) {
+  gas: [33m57653n[39m,
+  name: [32m'u6.tog.eth'[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+eth_call
+eth_call
+eth_call
+  ▶ hybrid fallback: resolver
+    [32m✔ name is set [90m(3.306499ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x71399a34d88b9d19cdb4ada50b05d72e9d63b3e0f038b2578bd2aec1b87d68b5
+    Gas used: 31154
+
+    Block Number: 47
+    Block Hash: 0x22887267d1d514b9f5705c389a695674eee5343e85698039b3e1cb5e8ae865c5
+    Block Time: "Mon, 13 May 2024 21:20:28 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setResolver(bytes32,address) {
+  gas: [33m31154n[39m,
+  name: [32m'u6.tog.eth'[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+[35m2024-05-13T21:19:44.965Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).text(name)
+eth_call
+    [32m✔ text [90m(13.578148ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.975Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).addr(60)
+eth_call
+    [32m✔ addr [90m(10.258733ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:44.984Z[39m ::ffff:127.0.0.1 / resolve(u6.tog.eth).contenthash()
+eth_call
+    [32m✔ chash [90m(8.161279ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xb9f7778b3f9477f855906673f9894e79e8e5f131019b6951da95dbe94730a004
+    Gas used: 54361
+
+    Block Number: 48
+    Block Hash: 0x28a6ea672e0b8e86f766c936d52949aca1dccc41805ccc166c3050cdcae04cb0
+    Block Time: "Mon, 13 May 2024 21:20:29 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setAddr(bytes32,uint256,bytes) {
+  gas: [33m54361n[39m,
+  name: [32m'u6.tog.eth'[39m,
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0x5cd21a425cdbd673f9963c7cb03b371456c6a330'[39m
+}
+[36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
+  node: [32m'0x625bf93bfcfd93f64a294adb3b081e1f00ae81f13a37dc420e8276bfa66d76e8'[39m,
+  coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  newAddress: [32m'0x5cd21a425cdbd673f9963c7cb03b371456c6a330'[39m
+}
+eth_call
+    [32m✔ name is fallback [90m(3.463594ms)[39m[39m
+  [32m▶ [39mhybrid fallback: resolver [90m(201.409607ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x40f23ea0c196f89da794fecab7fedb4dcd3c9db21617cb6a70fe5b670a727a82
+    Gas used: 74213
+
+    Block Number: 49
+    Block Hash: 0x680d24e6d3a25c44a312040ec8564b8cd8febef5890c02c4b841c65a0a22c893
+    Block Time: "Mon, 13 May 2024 21:20:30 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u7.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x88cef9bed795c060e0a58a17c9231bde30e0e5bab7edf18b6c8badd38ff757ad'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x88cef9bed795c060e0a58a17c9231bde30e0e5bab7edf18b6c8badd38ff757ad'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+[35m2024-05-13T21:19:45.101Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+eth_call
+  ▶ fallback: underscore
+    [32m✔ text [90m(14.07431ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:45.112Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).addr(60)
+eth_call
+    [32m✔ addr [90m(9.706596ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:45.124Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).contenthash()
+eth_call
+    [32m✔ chash [90m(11.52191ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xa399f610d8608eb6684f422534d7cdeaea049b67e10bfb19e7653266eb05c177
+    Gas used: 74213
+
+    Block Number: 50
+    Block Hash: 0xa3b0320d35ad2eac6931cc3e898fb82eb0eac5713e5f750d998e9dc25c0db161
+    Block Time: "Mon, 13 May 2024 21:20:31 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'_.u7.tog.eth'[39m,
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  label: [32m'0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mPublicResolver<5cd21a42>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  label: [32m'0xcd5edcba1904ce1b09e94c8a2d2a85375599856ca21c793571193054498b51d7'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
+  resolver: [35mPublicResolver<5cd21a42>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0xc723fd5c88b0e81392e658762e2ae234532f9bb98316015662a945450d73a34e
+    Gas used: 57665
+
+    Block Number: 51
+    Block Hash: 0xf296b00c0ccddbfa3117afb57333b1839c81a47bf859630b1eb16a686a7e77ae
+    Block Time: "Mon, 13 May 2024 21:20:32 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m PublicResolver<5cd21a42>.setText(bytes32,string,string) {
+  gas: [33m57665n[39m,
+  name: [32m'_.u7.tog.eth'[39m,
+  node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x01839f4942fc9ed198f3b4208ecf79c9e9e82902d78997d93a9a9c7082d3d4f0'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+eth_call
+    [32m✔ name is fallback [90m(3.066257ms)[39m[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x9e09b178901bc546651e1e8664f231e03f8818b0fea0ecfd0a20e4693e5a32aa
+    Gas used: 54145
+
+    Block Number: 52
+    Block Hash: 0x05082209d416b79952a588929ec968eca45322aed6467641077e41870b4b9e27
+    Block Time: "Mon, 13 May 2024 21:20:33 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setAddr(bytes32,uint256,bytes) {
+  gas: [33m54145n[39m,
+  name: [32m'u7.tog.eth'[39m,
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  cty: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  v: [32m'0xff'[39m
+}
+[36mLOG[0m AddressChanged(bytes32,uint256,bytes) {
+  node: [32m'0x1bfadaab992f0e2f69769d98b3af89bbf5a1dfc10a22ca0801cea46006f7304b'[39m,
+  coinType: [33m81043282338925483631878461732084420541800751556297842951124152226153187811344n[39m,
+  newAddress: [32m'0xff'[39m
+}
+eth_call
+[35m2024-05-13T21:19:45.254Z[39m ::ffff:127.0.0.1 / resolve(u7.tog.eth).text(name)
+eth_call
+    [32m✔ name is fallback [90m(8.583523ms)[39m[39m
+  [32m▶ [39mfallback: underscore [90m(196.663181ms)[39m
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_gasPrice
+eth_getBlockByNumber
+eth_blockNumber
+eth_sendRawTransaction
+
+    Transaction: 0x7201514cbef953c55dd9dd6b05f341bc1e62cd84fdd316ddf17ff7757e118315
+    Gas used: 74213
+
+    Block Number: 53
+    Block Hash: 0xa66ad24c00a8d6bc086c0eb5dbc62184516af025f367f8de693076f2b5557379
+    Block Time: "Mon, 13 May 2024 21:20:34 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m ENSRegistry<7f9566C8>.setSubnodeRecord(bytes32,bytes32,address,address,uint64) {
+  gas: [33m74213n[39m,
+  name: [32m'u8.tog.eth'[39m,
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x5b2f42fd87e2ca761cd28157747bddc10c6732782af0767eae7b1bdf4f4dc9ae'[39m,
+  owner: [35mdeployer:tor[0m,
+  resolver: [35mTOR<dFeb4282>[0m,
+  ttl: [33m0n[39m
+}
+[36mLOG[0m NewOwner(bytes32,bytes32,address) {
+  node: [32m'0x09a0a06828cd0ec0a48616da58b81f0afa933c8276912c50794eabaf7f3119df'[39m,
+  label: [32m'0x5b2f42fd87e2ca761cd28157747bddc10c6732782af0767eae7b1bdf4f4dc9ae'[39m,
+  owner: [35mdeployer:tor[0m
+}
+[36mLOG[0m NewResolver(bytes32,address) {
+  node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
+  resolver: [35mTOR<dFeb4282>[0m
+}
+eth_call
+eth_getTransactionCount
+eth_estimateGas
+eth_getBlockByNumber
+eth_gasPrice
+eth_sendRawTransaction
+eth_blockNumber
+
+    Transaction: 0x3234b2c5a0965e6aefe51cc004aadff5583f378301c5cc4fb22db6fb2c14125e
+    Gas used: 55880
+
+    Block Number: 54
+    Block Hash: 0xfe86738fe2cb6253e16713207aad502765a6f855b9bd4657ddbcd6d1f5853603
+    Block Time: "Mon, 13 May 2024 21:20:35 +0000"
+
+eth_getTransactionReceipt
+eth_blockNumber
+[33mTX[0m [35mdeployer:tor[0m TOR<dFeb4282>.setText(bytes32,string,string) {
+  gas: [33m55880n[39m,
+  name: [32m'u8.tog.eth'[39m,
+  node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
+  key: [32m'name'[39m,
+  s: [32m'Raffy'[39m
+}
+[36mLOG[0m TextChanged(bytes32,string,string,string) {
+  node: [32m'0x24fc84f1b12c0428d69bb16c869ab58898871e67e8187c157c800f5a733b9d57'[39m,
+  indexedKey: [36m'0x2361458367e696363fbcc70777d07ebbd2394e89fd0adcaf147faccd1d294d60'[0m,
+  key: [32m'name'[39m,
+  value: [32m'Raffy'[39m
+}
+eth_call
+eth_call
+eth_call
+eth_call
+  ▶ xor on tor
+    [32m✔ name is onchain [90m(3.274979ms)[39m[39m
+eth_call
+[35m2024-05-13T21:19:45.365Z[39m ::ffff:127.0.0.1 / resolve(u8.tog.eth).text(abcd)
+eth_call
+    [32m✔ abcd is offchain [90m(9.200042ms)[39m[39m
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+    [32m✔ name is still onchain [90m(4.188778ms)[39m[39m
+eth_call
+    [32m✔ abcd is now empty [90m(3.395566ms)[39m[39m
+  [32m▶ [39mxor on tor [90m(135.244348ms)[39m
+
+*****[ Shutdown ]***************************************************************
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+eth_call
+ 0 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0000000000000000000000000000000000000000 
+ 1 0xC47768f31ba254Db0142D78FE0C225F7aC159f9C 0x0000000000000000000000000000000000000000 eth
+ 2 0x35cE66aB2A25c8821b985f74BFB578Bc8Cc13523 0x5cd21a425CdBD673f9963c7Cb03B371456C6A330 raffy.eth
+ 3 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 tog.eth
+ 4 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 u1.tog.eth
+ 5 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0x0000000000000000000000000000000000000000 u2.tog.eth
+ 6 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u3.tog.eth
+ 7 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u4.tog.eth
+ 8 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u5.tog.eth
+ 9 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u6.tog.eth
+10 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u7.tog.eth
+11 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0x5cd21a425CdBD673f9963c7Cb03B371456C6A330 _.u7.tog.eth
+12 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 u8.tog.eth
+13 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0487f35263022d388cC3a9084A5C46F569508F25 onchain.eth
+14 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 eth.onchain.eth
+15 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 tog.eth.onchain.eth
+16 0x0000000000000000000000000000000000000000 0x0000000000000000000000000000000000000000 u8.tog.eth.onchain.eth
+17 0x3Ede3eCa2a72B3aeCC820E955B36f38437D01395 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 w2ld.eth
+18 0x45b35C88d90170D6b11dBD7d5c0Cad2dBE4fD5Ab 0x0000000000000000000000000000000000000000 w3ld.eth
+19 0x3Ede3eCa2a72B3aeCC820E955B36f38437D01395 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 sub.w3ld.eth
+20 0x952687863142ce6f9cFE7D264C5AF405642F6AA8 0x0000000000000000000000000000000000000000 reverse
+21 0x379FBE1FA7fe87BaBa8eFC349a907790C49b3D23 0x0000000000000000000000000000000000000000 addr.reverse
+22 0xaA10a84CE7d9AE517a52c6d5cA153b369Af99ecF 0x0000000000000000000000000000000000000000 3ede3eca2a72b3aecc820e955b36f38437d01395.addr.reverse
+23 0x0Bb945acd4C5944e6172dff3aB84bccf9f67AdC0 0x0000000000000000000000000000000000000000 5cd21a425cdbd673f9963c7cb03b371456c6a330.addr.reverse
+24 0x3EFe17C21BF1F5788D24B7de3908f8041D043472 0xdFeb428246Ff2013Ae1BC611ae271ada031E7104 dfeb428246ff2013ae1bc611ae271ada031e7104.addr.reverse
+
+*****[ Results ]****************************************************************
+[32m▶ [39mTOR [90m(3699.71521ms)[39m
+STOP 3593ms
+[34mℹ tests 60[39m
+[34mℹ suites 0[39m
+[34mℹ pass 60[39m
+[34mℹ fail 0[39m
+[34mℹ cancelled 0[39m
+[34mℹ skipped 0[39m
+[34mℹ todo 0[39m
+[34mℹ duration_ms 3705.396686[39m

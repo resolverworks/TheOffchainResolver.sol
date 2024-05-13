@@ -2,7 +2,7 @@
 	"name": "TheOffchainResolver",
 	"scripts": {
 		"build": "forge build --force",
-		"test": "node test/test.js"
+		"test": "node test/test.js silent"
 	},
 	"type": "module",
 	"devDependencies": {
