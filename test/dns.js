@@ -2,11 +2,13 @@ import {Foundry, Node, Resolver, to_address} from '@adraffy/blocksmith';
 import {EZCCIP, serve} from '@resolverworks/ezccip';
 import {get_offchain_record, test_resolver_is_offchain} from './offchain-help.js';
 import {ethers} from 'ethers';
-import {test, before, after} from 'node:test';
+import {test, after} from 'node:test';
 import assert from 'node:assert/strict';
 
-run('TOR');
-run('DNSTOR')
+const LOG = false;
+
+test('TOR', run);
+test('DNSTOR', run);
 
 function create_rrset(node, ens1) {
 	const TYPE_TXT = 16;
@@ -27,43 +29,40 @@ function create_rrset(node, ens1) {
 	return buf.subarray(0, pos);
 }
 
-function run(style) {
+async function run(T) {
 
-	let foundry, root, ens, tor, ccip, ens1;
-
-	before(async () => {
-		foundry = await Foundry.launch({infoLog: false});
-		root = Node.root();
-		ens = await foundry.deploy({file: 'ENSRegistry'});
-		Object.assign(ens, {
-			async $register(node, {owner, resolver} = {}) {
-				let w = foundry.requireWallet(await this.owner(node.parent.namehash));
-				owner = foundry.requireWallet(owner, w);
-				await foundry.confirm(this.connect(w).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, resolver ?? ethers.ZeroAddress, 0), {name: node.name});
-				return node;
-			}
-		});
-		switch (style) {
-			case 'TOR': {
-				tor = await foundry.deploy({file: 'TOR', args: [ens, ethers.ZeroAddress]});
-				ccip = await serve(get_offchain_record, {protocol: 'tor', resolvers: {'': to_address(tor)}});
-				break;
-			}
-			case 'DNSTOR': {
-				tor = await foundry.deploy({file: 'DNSTORWithENSProtocol'});
-				ccip = await serve(get_offchain_record, {protocol: 'ens', resolvers: {'': to_address(tor)}});
-				break;
-			}
+	let foundry = await Foundry.launch({infoLog: LOG});
+	let root = Node.root();
+	let ens = await foundry.deploy({file: 'ENSRegistry'});
+	Object.assign(ens, {
+		async $register(node, {owner, resolver} = {}) {
+			let w = foundry.requireWallet(await this.owner(node.parent.namehash));
+			owner = foundry.requireWallet(owner, w);
+			await foundry.confirm(this.connect(w).setSubnodeRecord(node.parent.namehash, node.labelhash, owner, resolver ?? ethers.ZeroAddress, 0), {name: node.name});
+			return node;
 		}
-		ens1 = `ENS1 ${to_address(tor)} ${ccip.context}`;
 	});
+	let tor, ccip;
+	switch (T.name) {
+		case 'TOR': {
+			tor = await foundry.deploy({file: 'TOR', args: [ens, ethers.ZeroAddress]});
+			ccip = await serve(get_offchain_record, {protocol: 'tor', resolvers: {'': to_address(tor)}, log: LOG});
+			break;
+		}
+		case 'DNSTOR': {
+			tor = await foundry.deploy({file: 'DNSTORWithENSProtocol'});
+			ccip = await serve(get_offchain_record, {protocol: 'ens', resolvers: {'': to_address(tor)}, log: LOG});
+			break;
+		}
+	}
+	let ens1 = `ENS1 ${to_address(tor)} ${ccip.context}`;
 
-	after(async () => {
+	after(() => {
 		foundry.shutdown();
 		ccip.http.close();
 	});
 
-	test('direct resolve', async () => {
+	await T.test('direct resolve', async () => {
 		let abi = new ethers.Interface([
 			'function text(bytes32 node, string key) returns (string)'
 		]);
@@ -74,7 +73,7 @@ function run(style) {
 		assert.equal(value, get_offchain_record(node.name).text(key));
 	});
 
-	test('rr parse', async () => {
+	await T.test('rr parse', async () => {
 
 		// create a contract to verify that our synthetic rrset
 		let checker = await foundry.deploy({sol: `
@@ -102,7 +101,7 @@ function run(style) {
 		assert.equal(txt, ens1);
 	});
 
-	test('fake oracle', async T => {
+	await T.test('fake oracle', async T => {
 
 		// create an oracle that provides a fixed rrset
 		let oracle = await foundry.deploy({sol: `
@@ -124,7 +123,7 @@ function run(style) {
 		// create a DNSGateway that provides empty responses (since the oracle ignores it)
 		let ezccip = new EZCCIP();
 		ezccip.register('resolve(bytes memory name, uint16 qtype) returns (tuple(bytes, bytes)[])', () => [[]]);
-		let dns_gateway = await serve(ezccip, {protocol: 'raw'});
+		let dns_gateway = await serve(ezccip, {protocol: 'raw', log: LOG});
 		after(() => dns_gateway.http.close());
 
 		// create an OffchainDNSResolver using our fake oracle and gateway

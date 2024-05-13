@@ -43,13 +43,13 @@ contract DNSTORWithENSProtocol is IERC165, IExtendedDNSResolver {
 		urls = new string[](1); // TODO: support multiple URLs
 		urls[0] = string(v);
 	}
-	function verifyOffchain(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory request, bytes memory response, bool replace) {
+	function verifyOffchain(bytes calldata ccip, bytes memory carry) internal view returns (bytes memory request, bytes memory response) {
 		bytes memory sig;
 		uint64 expires;
 		(response, expires, sig) = abi.decode(ccip, (bytes, uint64, bytes));
 		if (expires < block.timestamp) revert CCIPReadExpired(expires);
 		address signer;
-		(request, signer, replace) = abi.decode(carry, (bytes, address, bool));
+		(request, signer) = abi.decode(carry, (bytes, address));
 		bytes32 hash = keccak256(abi.encodePacked(hex"1900", address(this), expires, keccak256(request), keccak256(response)));
 		address signed = ECDSA.recover(hash, sig);
 		if (signed != signer) revert CCIPReadUntrusted(signed, signer);
@@ -59,10 +59,10 @@ contract DNSTORWithENSProtocol is IERC165, IExtendedDNSResolver {
 	function resolve(bytes calldata dnsname, bytes calldata data, bytes calldata context) external view returns (bytes memory) {
 		(string[] memory urls, address signer) = parseContext(context);
 		bytes memory request = abi.encodeWithSelector(IExtendedResolver.resolve.selector, dnsname, data);
-		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer, false), address(this)));
+		revert OffchainLookup(address(this), urls, request, this.buggedCallback.selector, abi.encode(abi.encode(request, signer), address(this)));
 	}
 	function buggedCallback(bytes calldata response, bytes calldata buggedExtraData) external view returns (bytes memory v) {
-		(, v, ) = verifyOffchain(response, abi.decode(buggedExtraData, (bytes)));
+		(, v) = verifyOffchain(response, abi.decode(buggedExtraData, (bytes)));
 	}
 
 }
