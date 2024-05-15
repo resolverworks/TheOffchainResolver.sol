@@ -127,7 +127,7 @@ async function run(T) {
 		after(() => dns_gateway.http.close());
 
 		// create an OffchainDNSResolver using our fake oracle and gateway
-		let dns_resolver = await foundry.deploy({file: 'OffchainDNSResolver', args: [ens, oracle, dns_gateway.endpoint]});
+		let dns_resolver = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/dnsregistrar/OffchainDNSResolver.sol', args: [ens, oracle, dns_gateway.endpoint]});
 
 		// make "xyz" use the OffchainDNSResolver
 		let xyz = await ens.$register(root.create('xyz'), {resolver: dns_resolver});

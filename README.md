@@ -1,4 +1,5 @@
 # TheOffchainResolver.sol
+
 **TOR**  — a trustless universal hybrid off-chain ENS and DNS resolver contract and protocol.
 
 * [**TheOffchainResolver.sol**](./src/TOR.sol)
@@ -60,7 +61,7 @@ DNS part of TOR but uses standard ENS signing protocol that is compatible with o
 
 # eXclusivelyOnchainResolver.sol
 
-**XOR**  — a trustless on-chain wildcard resolver contract that translates ENSIP-10 calls into non-ENSIP-10 calls.
+**XOR** — a trustless on-chain wildcard resolver contract that translates ENSIP-10 calls into non-ENSIP-10 calls.
 
 * [**eXclusivelyOnchainResolver.sol**](./src/XOR.sol)
 	* Test: merged with **TOR**
@@ -81,11 +82,11 @@ Append `.onchain.eth` to any ENS name and resolve!
 
 # OffchainTunnel.sol
 
+An on-chain function registry for arbitrary CCIP-Read functions.
+
 * [**OffchainTunnel.sol**](./src/OffchainTunnel.sol)
 	* `node test/tunnel.js`
 	* Sepolia: [`0xCa71342cB02714374e61e400f172FF003497B2c2`](https://sepolia.etherscan.io/address/0xCa71342cB02714374e61e400f172FF003497B2c2#code)
-
-An on-chain function registry for arbitrary CCIP-Read functions.
 
 ### Function Registry
 

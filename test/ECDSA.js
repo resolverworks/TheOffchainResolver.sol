@@ -1,7 +1,6 @@
 import {Foundry} from '@adraffy/blocksmith';
 import {ethers} from 'ethers';
 import {test, after} from 'node:test';
-import assert from 'node:assert/strict';
 
 test('ECDSA', async T => {
 
@@ -33,14 +32,4 @@ test('ECDSA', async T => {
 		}
 	});
 
-
-	// for (let i = 0; i < 1000; i++) {
-	// 	let key = new ethers.SigningKey(ethers.randomBytes(32));
-	// 	let signer = ethers.computeAddress(key);
-	// 	let hash = ethers.randomBytes(32);
-	// 	let sig = key.sign(hash).serialized;
-	// 	let [o, r] = await Promise.all([openz, raffy].map(c => c.recover(hash, sig)));
-	// 	assert.equal(signer, o);
-	// 	assert.equal(signer, r);
-	// }
 });

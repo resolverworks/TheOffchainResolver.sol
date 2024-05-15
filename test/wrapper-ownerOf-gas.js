@@ -2,6 +2,8 @@ import {ethers} from 'ethers';
 
 let provider = new ethers.CloudflareProvider();
 
+
+// [NameWrapper] https://etherscan.io/address/0xD4416b13d2b3a9aBae7AcD5D6C2BbDBE25686401
 let contract = new ethers.Contract('0xD4416b13d2b3a9aBae7AcD5D6C2BbDBE25686401', [
 	'function ownerOf(uint256) view returns (address)',
 	'function canModifyName(bytes32, address) view returns (bool)',

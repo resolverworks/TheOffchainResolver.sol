@@ -28,7 +28,7 @@ test('TOR', async T => {
 	// create the registry using the dao wallet
 	let root = Node.root();
 	let ens_dao = await foundry.ensureWallet('dao');
-	let ens = await foundry.deploy({file: 'ENSRegistry', from: ens_dao});
+	let ens = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/registry/ENSRegistry.sol', from: ens_dao});
 
 	// automatic registration (ETH2LD uses nft)
 	Object.assign(ens, {
@@ -65,12 +65,12 @@ test('TOR', async T => {
 	
 	// create the ETH2LD registrar
 	let eth = await ens.$register(root.create('eth'));
-	let eth_nft = await foundry.deploy({file: 'BaseRegistrarImplementation', args: [ens, eth.namehash], from: ens_dao});
+	let eth_nft = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/ethregistrar/BaseRegistrarImplementation.sol', args: [ens, eth.namehash], from: ens_dao});
 	await ens.$set('setOwner', eth, eth_nft);
 	await foundry.confirm(eth_nft.addController(ens_dao)); // TODO: change EOA controller to eth controller
 
 	// create the reverse registrar
-	let reverse_registrar = await foundry.deploy({file: 'ReverseRegistrar', args: [ens], from: ens_dao});
+	let reverse_registrar = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/reverseRegistrar/ReverseRegistrar.sol', args: [ens], from: ens_dao});
 
 	// setup the addr.reverse namespace
 	let reverse = await ens.$register(root.create('reverse'));
@@ -80,8 +80,8 @@ test('TOR', async T => {
 	reverse_registrar.on('ReverseClaimed', a => addr_reverse.create(a.slice(2).toLowerCase()));
 
 	// create the name wrapper
-	let metadata_service = await foundry.deploy({file: 'StaticMetadataService', args: ['http://localhost'], from: ens_dao});
-	wrapper = await foundry.deploy({file: 'NameWrapper', args: [ens, eth_nft, metadata_service]});
+	let metadata_service = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/wrapper/StaticMetadataService.sol', args: ['http://localhost'], from: ens_dao});
+	wrapper = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/wrapper/NameWrapper.sol', args: [ens, eth_nft, metadata_service]});
 	Object.assign(wrapper, $setter, {
 		async $wrap(node) {
 			let w = foundry.requireWallet(await ens.owner(node.namehash));
@@ -105,7 +105,7 @@ test('TOR', async T => {
 	});
 
 	// create public resolver
-	let pr = await foundry.deploy({file: 'PublicResolver', args: [ens, wrapper, /*controller*/ethers.ZeroAddress, reverse_registrar], from: 'deployer:pr'});
+	let pr = await foundry.deploy({import: '@ensdomains/ens-contracts/contracts/resolvers/PublicResolver.sol', args: [ens, wrapper, /*controller*/ethers.ZeroAddress, reverse_registrar], from: 'deployer:pr'});
 	Object.assign(pr, $setter);
 	
 	// create unwrapped name using PR
