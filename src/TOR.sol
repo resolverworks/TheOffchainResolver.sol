@@ -102,21 +102,19 @@ contract TOR is IERC165, ITextResolver, IAddrResolver, IAddressResolver, IPubkey
 	// getters (structured)
 	function addr(bytes32 node) external view returns (address payable a) {
 		(bytes32 extnode, address resolver) = determineExternalFallback(node);
-		if (resolver != address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IAddrResolver).interfaceId)) {
+		a = payable(address(bytes20(getTiny(slotForCoin(node, COIN_TYPE_ETH)))));
+		if (a == address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IAddrResolver).interfaceId)) {
 			a = IAddrResolver(resolver).addr(extnode);
-		}
-		if (a == address(0)) {
-			a = payable(address(bytes20(getTiny(slotForCoin(node, COIN_TYPE_ETH)))));
 		}
 	}
 	function pubkey(bytes32 node) external view returns (bytes32 x, bytes32 y) {
 		(bytes32 extnode, address resolver) = determineExternalFallback(node);
-		if (resolver != address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IPubkeyResolver).interfaceId)) {
-			(x, y) = IPubkeyResolver(resolver).pubkey(extnode);
+		bytes memory v = getTiny(slotForSelector(IPubkeyResolver.pubkey.selector, node));
+		if (v.length == 64) {
+			(x, y) = abi.decode(v, (bytes32, bytes32));
 		}
-		if (x == 0 && y == 0) {
-			bytes memory v = getTiny(slotForSelector(IPubkeyResolver.pubkey.selector, node));
-			if (v.length == 64) (x, y) = abi.decode(v, (bytes32, bytes32));
+		if (x == 0 && y == 0 && resolver != address(0) && IERC165(resolver).supportsInterface{gas: ERC165_GAS_LIMIT}(type(IPubkeyResolver).interfaceId)) {
+			(x, y) = IPubkeyResolver(resolver).pubkey(extnode);
 		}
 	}
 

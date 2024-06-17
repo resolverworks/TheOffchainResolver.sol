@@ -14,16 +14,30 @@ if (SAVE) {
 }
 
 const TEST_NAME = 'Raffy';
+const TEST_NAME2 = 'Raffy2';
 const TEST_ADDR = '0x51050ec063d393217b436747617ad1c2285aeeee';
 
 const TOR_CONTEXT = 'ccip.context';
-const TOR_FALLBACK = '0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010';
+const TOR_FALLBACK = ethers.id('fallback'); //'0xb32cdf4d3c016cb0f079f205ad61c36b1a837fb3e95c70a94bdedfca0518a010';
+
+const SET_ADDR = 'setAddr(bytes32,uint256,bytes)';
+const SET_ADDR0 = 'setAddr(bytes32,address)';
 
 test('TOR', async T => {
+	const AFTERS = [];
+	
+	// execute these in reverse order
+	after(async () => {
+		await new Promise(f => setTimeout(f, 50));
+		for (let fn of AFTERS.reverse()) {
+			await fn();
+		}
+	});
 
-	print_header('Init');
+	print_header('Initial State');
 
 	let foundry = await Foundry.launch({procLog: SAVE, infoLog: SAVE || LOG});
+	AFTERS.push(() => foundry.shutdown());
 
 	// create the registry using the dao wallet
 	let root = Node.root();
@@ -112,7 +126,7 @@ test('TOR', async T => {
 	let raffy = await foundry.ensureWallet('raffy');
 	let raffy_eth = await ens.$register(eth.create('raffy'), {resolver: pr, owner: raffy});
 	await pr.$set('setText', raffy_eth, 'name', TEST_NAME);
-	await pr.$set('setAddr(bytes32,address)', raffy_eth, TEST_ADDR);
+	await pr.$set(SET_ADDR0, raffy_eth, TEST_ADDR);
 
 	// create tor
 	let deployer = await foundry.ensureWallet('deployer:tor');
@@ -122,6 +136,7 @@ test('TOR', async T => {
 	// setup tog
 	let tog_eth = await ens.$register(eth.create('tog'), {resolver: tor, owner: deployer});
 	let ccip = await serve(get_offchain_record, {resolvers: {'': to_address(tor)}, log: LOG});
+	AFTERS.push(() => ccip.http.close());
 	await tor.$set('setText', tog_eth, TOR_CONTEXT, ccip.context);
 
 	// setup xor
@@ -131,15 +146,6 @@ test('TOR', async T => {
 	// dump registry
 	await Resolver.dump(ens, root);
 	print_header('Tests');
-
-	after(async () => {
-		await new Promise(f => setTimeout(f, 50)); // go after 
-		print_header('Shutdown');
-		await Resolver.dump(ens, root).catch(console.log);
-		foundry.shutdown();
-		ccip.http.close();
-		print_header('Results');
-	});
 
 	await T.test('tor is tor', async () => assert(await tor.supportsInterface('0x73302a25')));
 	await T.test('xor is xor', async () => assert(await xor.supportsInterface('0xc3fdc0c5')));
@@ -208,7 +214,7 @@ test('TOR', async T => {
 		// create name with fallback to raffy.eth
 		let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 		let resolver = await Resolver.get(ens, node);
-		await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, raffy_eth.namehash);
+		await tor.$set(SET_ADDR, node, TOR_FALLBACK, raffy_eth.namehash);
 		// resolve unset record that exists fallback
 		await TT.test('expect fallback', async () => assert.equal(await resolver.text('name'), TEST_NAME));
 		// set an onchain record which should override fallback
@@ -226,7 +232,7 @@ test('TOR', async T => {
 		let node = await ens.$register(tog_eth.unique(), {resolver: tor});
 		let resolver = await Resolver.get(ens, node);
 		await tor.$set('toggleOnchain', node);
-		await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, raffy_eth.namehash);
+		await tor.$set(SET_ADDR, node, TOR_FALLBACK, raffy_eth.namehash);
 		// resolve unset record that exists in fallback
 		await TT.test('expect fallback', async () => assert.equal(await resolver.text('name'), TEST_NAME));
 		// resolve unset record that exists nowhere
@@ -246,9 +252,13 @@ test('TOR', async T => {
 		// confirm name is offchain
 		await test_resolver_is_offchain(TT, resolver1);
 		// set alias to old resolver
-		await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, to_address(pr));
+		await tor.$set(SET_ADDR, node, TOR_FALLBACK, to_address(pr));
 		// confirm name is fallback
 		await TT.test('name is fallback', async () => assert.equal(await resolver1.text('name'), TEST_NAME));
+		// set the name in tor
+		await tor.$set('setText', node, 'name', TEST_NAME2);
+		// confirm tor > fallback
+		await TT.test('tor > fallback', async () => assert.equal(await resolver1.text('name'), TEST_NAME2));
 	});
 
 	await T.test('fallback: underscore', async TT => {
@@ -264,7 +274,7 @@ test('TOR', async T => {
 		// read the name from parent
 		await TT.test('name is fallback', async () => assert.equal(await resolver.text('name'), TEST_NAME));
 		// disable the fallback
-		await tor.$set('setAddr(bytes32,uint256,bytes)', node, TOR_FALLBACK, '0xFF');
+		await tor.$set(SET_ADDR, node, TOR_FALLBACK, '0xFF');
 		// read the name from parent again
 		await TT.test('name is fallback', async () => assert.equal(await resolver.text('name'), get_offchain_record(resolver.node.name).text('name')));
 	});
@@ -283,4 +293,9 @@ test('TOR', async T => {
 		await TT.test(`${key} is now empty`, async () => assert.equal(await xor_resolver.text(key), ''));
 	});
 
+	AFTERS.push(async () => {
+		print_header('Final State');
+		await Resolver.dump(ens, root).catch(console.log);
+	});
+	
 });
