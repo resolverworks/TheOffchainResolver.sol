@@ -48,6 +48,31 @@
 
 #### That's it! 🎉️
 
+### Features
+
+* If all requested records are available on-chain, the off-chain server is not invoked.
+* Supports `resolve(multicall([...]))`
+* Supports **TOR Lensing**
+	* Prefix calldata with `0x000000FF` to only get off-chain values (no on-chain values are accessed)
+	* Prefix calldata with `0xFFFFFF00` to only get on-chain values (off-chain server is not invoked)
+* Supports `text()`, `addr()`, `contenthash()`, `pubkey()`
+* Uses [adraffy/**TinyKV.sol**](https://github.com/adraffy/TinyKV.sol) to minimize storage costs.
+
+#### Fallbacks
+
+* Set `addr(C)` where [`C = keccak256("fallback")`](https://adraffy.github.io/keccak.js/test/demo.html#algo=keccak-256&s=fallback&escape=1&encoding=utf8)
+	* `20 bytes` — use another Resolver (on-chain)
+	* `32 bytes` — use another Namehash (on-chain)
+	* `0 bytes` **Default**  — use `_.[name]`
+	* Anything else — disabled
+* Priority: TOR > Fallback > Off-chain
+
+#### On-chain Only
+
+* Use `toggleOnchain(bytes32 node)` to enable
+* When `onchain(bytes32 node)` is true, the name will never query the off-chain server for additional records and treat unset records as null.
+* [Fallbacks](#fallbacks) still functional
+
 ---
 
 # DNSTORWithENSProtocol.sol
