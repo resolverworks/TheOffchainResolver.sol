@@ -5,7 +5,7 @@
 * [**TheOffchainResolver.sol**](./src/TOR.sol)
 	* Test: `node test/test.js`
 	* Mainnet: [`0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD`](https://etherscan.io/address/0x7CE6Cf740075B5AF6b1681d67136B84431B43AbD#code)
-	* Sepolia: [`0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3`](https://sepolia.etherscan.io/address/0x3c187BAb6dC2C94790d4dA5308672e6F799DcEC3#code)
+	* Sepolia: [`0x4E7BE27c494a57b4D84eb138F03bE9f43A03604E`](https://sepolia.etherscan.io/address/0x4E7BE27c494a57b4D84eb138F03bE9f43A03604E#code)
 
 ## TOR Protocol
 * `bytes requestData` = calldata from CCIP-Read
